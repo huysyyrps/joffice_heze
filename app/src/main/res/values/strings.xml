@@ -1,0 +1,117 @@
+<resources>
+    <string name="app_name">菏泽ERP办公系统</string>
+    <string name="title_tips">提示</string>
+    <string name="title_tips_confim">确定</string>
+    <string name="title_tips_cancel">取消</string>
+    <string name="welcome_text1">为内部员工办公提供有力的保障</string>
+    <string name="company_name">菏泽公交集团有限公司</string>
+    <string name="department_list">部门列表</string>
+    <string name="person_list">人员列表</string>
+
+    <!--timeselect-->
+    <string name="cancle">取消</string>
+    <string name="title">请选择时间</string>
+    <string name="commit">提交</string>
+    <string name="year">年</string>
+    <string name="month">月</string>
+    <string name="day">日</string>
+    <string name="hour">时</string>
+    <string name="minute">分</string>
+
+    <!--登录-->
+    <string name="login">登录</string>
+    <string name="welcome_user_app">欢迎使用菏泽ERP办公系统</string>
+    <string name="login_username">请输入用户名</string>
+    <string name="login_password">请输入用户密码</string>
+    <string name="forgrt_password">忘记密码</string>
+    <string name="login_register">注册账号</string>
+    <string name="no_content">暂无对应数据</string>
+
+    <!--首页-->
+    <string name="first_page">首页</string>
+    <string name="first_notice">公告</string>
+    <string name="new_notice">最新公告</string>
+    <string name="first_oa">OA传递单</string>
+    <string name="first_file">文件审批</string>
+    <string name="first_process">审批流程</string>
+    <string name="jianzi_yp">兼职应聘</string>
+    <string name="first_xunjian">车辆巡检</string>
+    <string name="xunjian_history">记录</string>
+    <string name="first_anquan">安全检查</string>
+    <string name="first_shigu">事故处理</string>
+    <string name="first_richang">日常稽查</string>
+    <string name="first_yuangong">员工专区</string>
+    <string name="first_dianjian">卫生检查</string>
+    <string name="first_qita">其他</string>
+    <string name="my_name">用户名</string>
+    <string name="my_status">用户身份</string>
+    <string name="quit_app">退出程序</string>
+    <string name="current_version">当前版本</string>
+
+    <!--待办-->
+    <string name="will_do">待办</string>
+
+    <!--oa待办-->
+    <string name="oa_will_do">OA待办</string>
+
+    <!--个人中心-->
+    <string name="my_person">个人中心</string>
+
+    <!--文件审批-->
+    <string name="department_budget">部门预算单</string>
+    <string name="borrow_accident">事故借款单</string>
+    <string name="department_accident">部门通用借款单</string>
+    <string name="department_file_huiqian">部门文件会签单</string>
+    <string name="department_file_chuanyue">部门文件传阅</string>
+    <string name="decoment_liuzhuan">公文流转表单</string>
+
+
+    <!--流程审批-->
+    <string name="userd_leave">通用请假单</string>
+    <string name="add_work">加班登记单</string>
+    <string name="old_work">补勤登记单</string>
+    <string name="at_work">值班登记单</string>
+    <string name="change_work">调休登记单</string>
+
+    <!--稽查-->
+    <string name="line_code">线路编号</string>
+    <string name="user_code">员工编号</string>
+    <string name="user_name">员工姓名</string>
+    <string name="car_code">车辆编号</string>
+    <string name="check_person">检查人员</string>
+    <string name="car_no">车牌号</string>
+    <string name="car_code1">车号</string>
+
+
+    <!--oa传递单-->
+    <string name="oa_publish">OA传递单</string>
+
+    <!--考试模块-->
+    <string name="exam_list">考试模块</string>
+    <string name="learn_data">学习资料</string>
+    <string name="online_exam">在线考试</string>
+    <string name="found_exam">成绩查询</string>
+    <string name="simulate_exam">模拟考试</string>
+    <string name="income_rank">收入排名</string>
+    <string name="class_mileage">班次里程</string>
+    <string name="rewards_penalties">奖罚情况</string>
+    <string name="oil_consumption">油耗排名</string>
+    <string name="maintain">维修情况</string>
+    <string name="safe_mileage">安全里程</string>
+    <string name="complaint_fines">投诉罚款</string>
+    <string name="send_num">发送量</string>
+    <string name="start_content">星级动态</string>
+    <string name="start_driver">星级驾驶员</string>
+    <string name="gps_mileage">GPS里程</string>
+    <string name="carvehicle">行驶违规</string>
+    <string name="day_compar">日常点检</string>
+    <string name="compar_list">点检明细</string>
+
+    <!--其他-->
+    <string name="other_list">功能列表</string>
+    <string name="ic_moshou">没收IC卡</string>
+    <string name="sw_shangbao">失物上报</string>
+    <string name="ab_shijian">安保事件</string>
+    <string name="gg_kehu">广告客户</string>
+    <string name="jianzi_yp1">城乡点检统计</string>
+</resources>
