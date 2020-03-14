@@ -44,6 +44,8 @@ import com.smartbus.heze.fileapprove.bean.AccidentLRData;
 import com.smartbus.heze.fileapprove.bean.BackData;
 import com.smartbus.heze.fileapprove.bean.BorrowAccidentLRData;
 import com.smartbus.heze.fileapprove.bean.BorrowAccidentWill;
+import com.smartbus.heze.fileapprove.bean.CapitalApprovalCheckType;
+import com.smartbus.heze.fileapprove.bean.CapitalApprovalWill;
 import com.smartbus.heze.fileapprove.bean.CurrencyAccidentWill;
 import com.smartbus.heze.fileapprove.bean.DepartBudgetWill;
 import com.smartbus.heze.fileapprove.bean.Department;
@@ -64,6 +66,7 @@ import com.smartbus.heze.fileapprove.bean.WorkPerson;
 import com.smartbus.heze.main.bean.Banner;
 import com.smartbus.heze.main.bean.OaWillDo;
 import com.smartbus.heze.main.bean.WillDoList;
+import com.smartbus.heze.main.bean.WillDoListType;
 import com.smartbus.heze.oaflow.bean.AddWorkWill;
 import com.smartbus.heze.oaflow.bean.AtWorkWill;
 import com.smartbus.heze.oaflow.bean.CheckType;
@@ -122,6 +125,12 @@ public interface AllApi {
     Observable<Banner> getBanner();
 
     /**
+     * 获取待办类型
+     */
+    @GET(ApiAddress.willdolistType)
+    Observable<WillDoListType> getWillDoListType(@Query("userId") String userId, @Query("catKey") String catKey);
+
+    /**
      * 获取部门列表
      */
     @GET(ApiAddress.department)
@@ -162,7 +171,13 @@ public interface AllApi {
      * 获取待办列表
      */
     @GET(ApiAddress.willdolist)
-    Observable<WillDoList> getWillDoList();
+    Observable<WillDoList> getWillDoList(@Query("typeId") String proTypeId);
+
+//    /**
+//     * 点击待办列表获取formDefId
+//     */
+//    @GET(ApiAddress.willdoformdefid)
+//    Observable<WillDoFormDefId> getWillDoFormDefId(@Query("defId") String proTypeId);
 
     /**
      * 获取公文待办列表
@@ -210,6 +225,23 @@ public interface AllApi {
      */
     @GET(ApiAddress.willdodetail)
     Observable<BorrowAccidentWill> getWillBorrowAccident(@Query("activityName") String activityName
+            , @Query("taskId") String taskId, @Query("defId") String defId);
+
+    /**
+     * 资金审批单录入
+     */
+    @POST(ApiAddress.capitalapprovallr)
+    Observable<CapitalApprovalCheckType> getCapitalApprovalLR(@QueryMap Map<String, String> params);
+    /**
+     * 修改资金审批发布状态
+     */
+    @GET(ApiAddress.capitalapprovalchange)
+    Observable<CheckType> getCapitalApprovalCheckType(@Query("runId") String runId, @Query("id") String vocationId);
+    /**
+     * 资金审批待办详情
+     */
+    @GET(ApiAddress.willdodetail)
+    Observable<CapitalApprovalWill> getCapitalApproval(@Query("activityName") String activityName
             , @Query("taskId") String taskId, @Query("defId") String defId);
 
     /**

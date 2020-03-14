@@ -12,7 +12,7 @@ import java.util.Map;
 
 public interface BorrowAccidentLRContract {
     interface View extends BaseDFourView<presenter> {
-        //通用借款录入
+        //资金审批录入
         void setBorrowAccidentLR(BorrowAccidentLRData s);
         void setBorrowAccidentLRMessage(String s);
     }

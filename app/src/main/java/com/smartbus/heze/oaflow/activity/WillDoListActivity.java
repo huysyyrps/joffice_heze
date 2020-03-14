@@ -10,7 +10,9 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.smartbus.heze.R;
+import com.smartbus.heze.SharedPreferencesHelper;
 import com.smartbus.heze.fileapprove.activity.BorrowAccidentWillActivity;
+import com.smartbus.heze.fileapprove.activity.CapitalApprovalWillActivity;
 import com.smartbus.heze.fileapprove.activity.CurrencyAccidentWillActivity;
 import com.smartbus.heze.fileapprove.activity.DepartBudgetWillActivity;
 import com.smartbus.heze.fileapprove.activity.DocumentLZWillActivity;
@@ -47,6 +49,8 @@ public class WillDoListActivity extends BaseActivity implements WillDoListContra
     float mPosX = 0;
     float mCurPosY = 0;
     float mCurPosX = 0;
+    String userId = "";
+    String proTypeId = "";
     BaseRecyclerAdapter adapter;
     List<WillDoList.ResultBean> beanList = new ArrayList<>();
     WillDoListPresenter willDoListPresenter;
@@ -55,10 +59,12 @@ public class WillDoListActivity extends BaseActivity implements WillDoListContra
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        proTypeId = getIntent().getStringExtra("proTypeId");
         willDoListPresenter = new WillDoListPresenter(this, this);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
-        willDoListPresenter.getWillDoList();
+        userId = new SharedPreferencesHelper(this,"login").getData(this,"userId","");
+        willDoListPresenter.getWillDoList(proTypeId);
         setGestureListener();
     }
 
@@ -86,7 +92,7 @@ public class WillDoListActivity extends BaseActivity implements WillDoListContra
     protected void onRestart() {
         super.onRestart();
         beanList.clear();
-        willDoListPresenter.getWillDoList();
+        willDoListPresenter.getWillDoList(proTypeId);
     }
 
     /**
@@ -111,7 +117,7 @@ public class WillDoListActivity extends BaseActivity implements WillDoListContra
                     case MotionEvent.ACTION_UP:
                         if (mCurPosY - mPosY > 0 && (Math.abs(mCurPosY - mPosY) > 25)) {
                             beanList.clear();
-                            willDoListPresenter.getWillDoList();
+                            willDoListPresenter.getWillDoList(proTypeId);
                         } else if (mCurPosY - mPosY < 0
                                 && (Math.abs(mCurPosY - mPosY) > 25)) {
                             //向上滑动
@@ -125,7 +131,7 @@ public class WillDoListActivity extends BaseActivity implements WillDoListContra
 
     @Override
     public void setWillDoList(WillDoList willDoList) {
-        if (willDoList.getResult().size() == 0) {
+        if (willDoList.getTotalCounts()==0) {
             recyclerView.setVisibility(View.GONE);
             llNoContent.setVisibility(View.VISIBLE);
         } else {
@@ -203,6 +209,12 @@ public class WillDoListActivity extends BaseActivity implements WillDoListContra
                             }
                             if (o.getFormDefId().equals(Constant.CHECKWORK_FORMDEFIS)) {
                                 Intent intent = new Intent(WillDoListActivity.this, CheckWorkWillActivity.class);
+                                intent.putExtra("activityName", o.getActivityName());
+                                intent.putExtra("taskId", o.getTaskId());
+                                startActivity(intent);
+                            }
+                            if (o.getFormDefId().equals(Constant.CAPITALAPPROVAL_FORMDEFIS)) {
+                                Intent intent = new Intent(WillDoListActivity.this, CapitalApprovalWillActivity.class);
                                 intent.putExtra("activityName", o.getActivityName());
                                 intent.putExtra("taskId", o.getTaskId());
                                 startActivity(intent);

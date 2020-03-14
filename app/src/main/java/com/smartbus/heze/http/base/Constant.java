@@ -19,6 +19,9 @@ public class Constant {
     //预算单
     public final static String YSD_DEFID = "100" ;
     public final static String YSD_FORMDEFIS = "37" ;
+    //资金审批单
+    public final static String CAPITALAPPROVAL_DEFID = "159" ;
+    public final static String CAPITALAPPROVAL_FORMDEFIS = "54" ;
     //事故借款单
     public final static String BORROWACCIDENT_DEFID = "87" ;
     public final static String BORROWACCIDENT_FORMDEFIS = "30" ;

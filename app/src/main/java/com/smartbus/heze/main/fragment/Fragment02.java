@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 
 import com.smartbus.heze.R;
 import com.smartbus.heze.http.views.Header;
-import com.smartbus.heze.oaflow.activity.WillDoListActivity;
+import com.smartbus.heze.main.activity.WillDoListTypeActivity;
 import com.smartbus.heze.oaflow.activity.WillDoListActivity2;
 
 import butterknife.BindView;
@@ -59,7 +59,9 @@ public class Fragment02 extends Fragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll1:
-                intent = new Intent(getActivity(), WillDoListActivity.class);
+//                intent = new Intent(getActivity(), WillDoListActivity.class);
+//                startActivity(intent);
+                intent = new Intent(getActivity(), WillDoListTypeActivity.class);
                 startActivity(intent);
                 break;
             case R.id.ll2:

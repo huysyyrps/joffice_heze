@@ -10,7 +10,6 @@ import com.smartbus.heze.http.base.BasePresenter;
 
 public interface TwoContract {
     interface View extends BaseDSecondView<presenter> {
-        //预算单
         void setTwoPerson(TwoPerson s);
         void setTwoPersonMessage(String s);
     }

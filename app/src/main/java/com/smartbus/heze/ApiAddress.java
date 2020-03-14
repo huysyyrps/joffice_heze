@@ -10,7 +10,7 @@ public class ApiAddress {
     //川川
 //    public final static String mainApi = "http://192.168.2.137:8080/joffice/" ;
     //孙琦
-//    public final static String mainApi = "http://192.168.2.124:8080/joffice/" ;
+//    public final static String mainApi = "http://192.168.2.159:8080/joffice/" ;
     //正式库
     public final static String mainApi = "http://120.192.74.58:8080/joffice/" ;
     //柱子
@@ -41,6 +41,10 @@ public class ApiAddress {
     public final static String dataup = "flow/upLoadImageProcessActivity.do";
     //待办列表
     public final static String willdolist = "flow/listTask.do";
+    //点击待办列表获取formDefId
+    public final static String willdoformdefid = "flow/getFormDefIdByDefIdProDefinition.do";
+    //待办类型
+    public final static String willdolistType = "system/appFlowTreeGlobalType.do";
     //公文待办列表
     public final static String willdolist2 = "flow/list2Task.do";
     //待办详情
@@ -149,6 +153,10 @@ public class ApiAddress {
     public static final String  borrowaccidentchange = "busmanager/updateAccidentLoan.do";
     //日常点检明细
     public static final String  comparlist = "starkh/listDcdjAppDianchedianjianJc.do";
+    //资金审批录入
+    public static final String  capitalapprovallr = "hrm/mobileSaveFinanceAmount.do";
+    //资金审批发布状态修改
+    public static final String  capitalapprovalchange = "hrm/updateFinanceAmount.do";
 
 
     //考试资料左侧

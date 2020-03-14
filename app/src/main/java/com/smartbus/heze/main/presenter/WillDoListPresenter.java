@@ -28,8 +28,8 @@ public class WillDoListPresenter implements WillDoListContract.presenter {
     }
 
     @Override
-    public void getWillDoList() {
-        RetrofitUtil.getInstance().initRetrofitSetSession().getWillDoList().subscribeOn(Schedulers.io())
+    public void getWillDoList(String proTypeId) {
+        RetrofitUtil.getInstance().initRetrofitSetSession().getWillDoList(proTypeId).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseObserverNoEntry<WillDoList>(context, MainUtil.getData) {
                     @Override
@@ -43,4 +43,21 @@ public class WillDoListPresenter implements WillDoListContract.presenter {
                     }
                 });
     }
+
+//    @Override
+//    public void getWillDoFormDefId(String defId) {
+//        RetrofitUtil.getInstance().initRetrofitSetSession().getWillDoFormDefId(defId).subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new BaseObserverNoEntry<WillDoFormDefId>(context, MainUtil.getData) {
+//                    @Override
+//                    protected void onSuccees(WillDoFormDefId t) throws Exception {
+//                        view.setWillDoFormDefId(t);
+//                    }
+//
+//                    @Override
+//                    protected void onFailure(Throwable e, boolean isNetWorkError) throws Exception {
+//                        view.setWillDoFormDefIdMessage("失败了----->" + e.getMessage());
+//                    }
+//                });
+//    }
 }

@@ -67,7 +67,7 @@ public class WillDoList implements Serializable {
         private String assignee;
         private String createTime;
         private String executionId;
-        private int isDue;
+        private String isDue;
         private String piId;
         private String taskId;
         private String formDefId;
@@ -116,11 +116,11 @@ public class WillDoList implements Serializable {
             this.executionId = executionId;
         }
 
-        public int getIsDue() {
+        public String getIsDue() {
             return isDue;
         }
 
-        public void setIsDue(int isDue) {
+        public void setIsDue(String isDue) {
             this.isDue = isDue;
         }
 

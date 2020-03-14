@@ -64,6 +64,7 @@
     <string name="department_file_huiqian">部门文件会签单</string>
     <string name="department_file_chuanyue">部门文件传阅</string>
     <string name="decoment_liuzhuan">公文流转表单</string>
+    <string name="zhijin_shenpi">财务资金审批单</string>
 
 
     <!--流程审批-->

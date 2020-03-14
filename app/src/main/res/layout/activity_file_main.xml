@@ -102,6 +102,21 @@
                 android:text="@string/decoment_liuzhuan" />
         </LinearLayout>
         <View style="@style/HourLine"/>
+
+        <LinearLayout
+            android:id="@+id/ll7"
+            style="@style/ycLinearLayout">
+
+            <ImageView
+                style="@style/ycImageView"
+                android:layout_gravity="center"
+                android:src="@drawable/flow_item12" />
+
+            <TextView
+                style="@style/ycTextView"
+                android:text="@string/zhijin_shenpi" />
+        </LinearLayout>
+        <View style="@style/HourLine"/>
     </LinearLayout>
 
 </LinearLayout>

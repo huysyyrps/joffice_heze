@@ -13,10 +13,14 @@ public interface WillDoListContract {
         //设置banner
         void setWillDoList(WillDoList willDoList);
         void setWillDoListMessage(String s);
+
+//        void setWillDoFormDefId(WillDoFormDefId willDoFormDefId);
+//        void setWillDoFormDefIdMessage(String s);
     }
 
     interface presenter extends BasePresenter {
         //banner回调
-        void getWillDoList();
+        void getWillDoList(String proTypeId);
+//        void getWillDoFormDefId(String defId);
     }
 }
