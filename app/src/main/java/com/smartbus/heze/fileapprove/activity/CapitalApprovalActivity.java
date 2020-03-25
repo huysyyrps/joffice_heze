@@ -118,6 +118,7 @@ public class CapitalApprovalActivity extends BaseActivity implements OneContract
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        header.setRightTv(false);
         btnLR.setVisibility(View.VISIBLE);
         capitalApprovalLRPresenter = new CapitalApprovalLRPresenter(this, this);
         capitalApprovalCheckTypePresenter = new CapitalApprovalCheckTypePresenter(this,this);

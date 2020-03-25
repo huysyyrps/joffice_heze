@@ -14,7 +14,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.smartbus.heze.R;
-import com.smartbus.heze.SharedPreferencesHelper;
 import com.smartbus.heze.fileapprove.bean.DepartBudgetWill;
 import com.smartbus.heze.fileapprove.bean.NoEndPerson;
 import com.smartbus.heze.fileapprove.bean.NoHandlerPerson;
@@ -30,7 +29,6 @@ import com.smartbus.heze.fileapprove.presenter.NoEndPresenter;
 import com.smartbus.heze.fileapprove.presenter.NoHandlerPresenter;
 import com.smartbus.heze.fileapprove.presenter.NormalPresenter;
 import com.smartbus.heze.fileapprove.presenter.WillDoPresenter;
-import com.smartbus.heze.fileapprove.util.SplitData;
 import com.smartbus.heze.http.base.AlertDialogCallBackP;
 import com.smartbus.heze.http.base.BaseActivity;
 import com.smartbus.heze.http.base.Constant;
@@ -136,6 +134,7 @@ public class DepartBudgetWillActivity extends BaseActivity implements DepartBudg
     String destType = "";
     String leaderCode = "";
     String leaderName = "";
+    String zhibiao;
     String destName, uId, signaName;
     String activityName, taskId;
     String[] bigNametemp = null;
@@ -153,6 +152,12 @@ public class DepartBudgetWillActivity extends BaseActivity implements DepartBudg
     int allNum1 = 0, allNum2 = 0, allNum3 = 0, allNum4 = 0, allNum5 = 0;
     double moneyS1 = 0.0, moneyS2 = 0.0, moneyS3 = 0.0, moneyS4 = 0.0, moneyS5 = 0.0;
     double AllMoney1 = 0.0, AllMoney2 = 0.0, AllMoney3 = 0.0, AllMoney4 = 0.0, AllMoney5 = 0.0;
+    @BindView(R.id.etName)
+    EditText etName;
+    @BindView(R.id.textView8)
+    TextView textView8;
+    @BindView(R.id.btnLR)
+    Button btnLR;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -171,6 +176,16 @@ public class DepartBudgetWillActivity extends BaseActivity implements DepartBudg
 
             @Override
             public void afterTextChanged(Editable s) {
+                String editStr = s.toString().trim();
+                int posDot = editStr.indexOf(".");
+                //不允许输入3位小数,超过三位就删掉
+                if (posDot > 0) {
+                    if (editStr.length() - posDot - 1 > 2) {
+                        s.delete(posDot + 2, posDot + 3);
+                    } else {
+                        //TODO...在这里写逻辑
+                    }
+                }
                 if (!s.toString().equals("")) {
                     AllMoney1 = (Double.valueOf(s.toString()));
                     tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
@@ -193,6 +208,16 @@ public class DepartBudgetWillActivity extends BaseActivity implements DepartBudg
 
             @Override
             public void afterTextChanged(Editable s) {
+                String editStr = s.toString().trim();
+                int posDot = editStr.indexOf(".");
+                //不允许输入3位小数,超过三位就删掉
+                if (posDot > 0) {
+                    if (editStr.length() - posDot - 1 > 2) {
+                        s.delete(posDot + 2, posDot + 3);
+                    } else {
+                        //TODO...在这里写逻辑
+                    }
+                }
                 if (!s.toString().equals("")) {
                     AllMoney2 = (Double.valueOf(s.toString()));
                     tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
@@ -215,6 +240,16 @@ public class DepartBudgetWillActivity extends BaseActivity implements DepartBudg
 
             @Override
             public void afterTextChanged(Editable s) {
+                String editStr = s.toString().trim();
+                int posDot = editStr.indexOf(".");
+                //不允许输入3位小数,超过三位就删掉
+                if (posDot > 0) {
+                    if (editStr.length() - posDot - 1 > 2) {
+                        s.delete(posDot + 2, posDot + 3);
+                    } else {
+                        //TODO...在这里写逻辑
+                    }
+                }
                 if (!s.toString().equals("")) {
                     AllMoney3 = (Double.valueOf(s.toString()));
                     tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
@@ -237,6 +272,16 @@ public class DepartBudgetWillActivity extends BaseActivity implements DepartBudg
 
             @Override
             public void afterTextChanged(Editable s) {
+                String editStr = s.toString().trim();
+                int posDot = editStr.indexOf(".");
+                //不允许输入3位小数,超过三位就删掉
+                if (posDot > 0) {
+                    if (editStr.length() - posDot - 1 > 2) {
+                        s.delete(posDot + 2, posDot + 3);
+                    } else {
+                        //TODO...在这里写逻辑
+                    }
+                }
                 if (!s.toString().equals("")) {
                     AllMoney4 = (Double.valueOf(s.toString()));
                     tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
@@ -259,6 +304,16 @@ public class DepartBudgetWillActivity extends BaseActivity implements DepartBudg
 
             @Override
             public void afterTextChanged(Editable s) {
+                String editStr = s.toString().trim();
+                int posDot = editStr.indexOf(".");
+                //不允许输入3位小数,超过三位就删掉
+                if (posDot > 0) {
+                    if (editStr.length() - posDot - 1 > 2) {
+                        s.delete(posDot + 2, posDot + 3);
+                    } else {
+                        //TODO...在这里写逻辑
+                    }
+                }
                 if (!s.toString().equals("")) {
                     AllMoney5 = (Double.valueOf(s.toString()));
                     tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
@@ -423,6 +478,16 @@ public class DepartBudgetWillActivity extends BaseActivity implements DepartBudg
 
             @Override
             public void afterTextChanged(Editable s) {
+                String editStr = s.toString().trim();
+                int posDot = editStr.indexOf(".");
+                //不允许输入3位小数,超过三位就删掉
+                if (posDot > 0) {
+                    if (editStr.length() - posDot - 1 > 2) {
+                        s.delete(posDot + 2, posDot + 3);
+                    } else {
+                        //TODO...在这里写逻辑
+                    }
+                }
                 if (!s.toString().equals("")) {
                     moneyS1 = (Double.valueOf(s.toString()));
                     if (!etNum1.getText().toString().equals("")) {
@@ -448,6 +513,16 @@ public class DepartBudgetWillActivity extends BaseActivity implements DepartBudg
 
             @Override
             public void afterTextChanged(Editable s) {
+                String editStr = s.toString().trim();
+                int posDot = editStr.indexOf(".");
+                //不允许输入3位小数,超过三位就删掉
+                if (posDot > 0) {
+                    if (editStr.length() - posDot - 1 > 2) {
+                        s.delete(posDot + 2, posDot + 3);
+                    } else {
+                        //TODO...在这里写逻辑
+                    }
+                }
                 if (!s.toString().equals("")) {
                     moneyS2 = (Double.valueOf(s.toString()));
                     if (!etNum2.getText().toString().equals("")) {
@@ -473,6 +548,16 @@ public class DepartBudgetWillActivity extends BaseActivity implements DepartBudg
 
             @Override
             public void afterTextChanged(Editable s) {
+                String editStr = s.toString().trim();
+                int posDot = editStr.indexOf(".");
+                //不允许输入3位小数,超过三位就删掉
+                if (posDot > 0) {
+                    if (editStr.length() - posDot - 1 > 2) {
+                        s.delete(posDot + 2, posDot + 3);
+                    } else {
+                        //TODO...在这里写逻辑
+                    }
+                }
                 if (!s.toString().equals("")) {
                     moneyS3 = (Double.valueOf(s.toString()));
                     if (!etNum3.getText().toString().equals("")) {
@@ -498,6 +583,16 @@ public class DepartBudgetWillActivity extends BaseActivity implements DepartBudg
 
             @Override
             public void afterTextChanged(Editable s) {
+                String editStr = s.toString().trim();
+                int posDot = editStr.indexOf(".");
+                //不允许输入3位小数,超过三位就删掉
+                if (posDot > 0) {
+                    if (editStr.length() - posDot - 1 > 2) {
+                        s.delete(posDot + 2, posDot + 3);
+                    } else {
+                        //TODO...在这里写逻辑
+                    }
+                }
                 if (!s.toString().equals("")) {
                     moneyS4 = (Double.valueOf(s.toString()));
                     if (!etNum4.getText().toString().equals("")) {
@@ -523,6 +618,16 @@ public class DepartBudgetWillActivity extends BaseActivity implements DepartBudg
 
             @Override
             public void afterTextChanged(Editable s) {
+                String editStr = s.toString().trim();
+                int posDot = editStr.indexOf(".");
+                //不允许输入3位小数,超过三位就删掉
+                if (posDot > 0) {
+                    if (editStr.length() - posDot - 1 > 2) {
+                        s.delete(posDot + 2, posDot + 3);
+                    } else {
+                        //TODO...在这里写逻辑
+                    }
+                }
                 if (!s.toString().equals("")) {
                     moneyS5 = (Double.valueOf(s.toString()));
                     if (!etNum5.getText().toString().equals("")) {
@@ -545,7 +650,7 @@ public class DepartBudgetWillActivity extends BaseActivity implements DepartBudg
         willDoPresenter = new WillDoPresenter(this, this);
         Log.e("sessionLogin ", taskId + "-" + activityName);
         departBudgetWillPresenter = new DepartBudgetWillPresenter(this, this);
-        departBudgetWillPresenter.getDepartBudgetWill(activityName, taskId, Constant.HUIQIAN_DEFID);
+        departBudgetWillPresenter.getDepartBudgetWill(activityName, taskId, Constant.YSD_DEFID);
     }
 
     @Override
@@ -560,7 +665,10 @@ public class DepartBudgetWillActivity extends BaseActivity implements DepartBudg
 
     @Override
     protected void rightClient() {
-
+        setDataBack();
+        map.put("back", "true");
+        map.put("useTemplate", "");
+        willDoPresenter.getWillDo(map);
     }
 
     @OnClick({R.id.btnUp})
@@ -675,6 +783,7 @@ public class DepartBudgetWillActivity extends BaseActivity implements DepartBudg
         map.put("je4", etAllMoney4.getText().toString());
         map.put("je5", etAllMoney5.getText().toString());
         map.put("hjsl1", tvAllNum.getText().toString());
+        map.put("project", etName.getText().toString());
         map.put("mainId", mainId);
         map.put("taskId", taskId);
         map.put("hjsl2", "");
@@ -682,8 +791,7 @@ public class DepartBudgetWillActivity extends BaseActivity implements DepartBudg
         map.put("hjje2", "");
         map.put("signalName", signaName);
         map.put("destName", destName);
-        String zbr = new SharedPreferencesHelper(this, "login").getData(this, "userName", "");
-        map.put("zhibiao", zbr);
+        map.put("zhibiao", zhibiao);
         if (tvLeader.getVisibility() == View.VISIBLE) {
             if (!tvLeader.getText().toString().equals("")) {
                 map.put("cwk", tvLeader.getText().toString());
@@ -694,24 +802,68 @@ public class DepartBudgetWillActivity extends BaseActivity implements DepartBudg
         }
         if (tvLeader1.getVisibility() == View.VISIBLE) {
             if (!tvLeader1.getText().toString().equals("")) {
-                map.put("fgyj", new SplitData().SplitUpData(tvLeader1.getText().toString()));
+                map.put("fgyj", tvLeader1.getText().toString());
             }
         } else {
-            map.put("fgyj", new SplitData().SplitUpData(etLeader1.getText().toString()));
+            map.put("fgyj", etLeader1.getText().toString());
             map.put("comments", etLeader1.getText().toString());
         }
         if (tvLeader2.getVisibility() == View.VISIBLE) {
             if (!tvLeader2.getText().toString().equals("")) {
-                map.put("jlyj", new SplitData().SplitUpData(tvLeader2.getText().toString()));
+                map.put("jlyj", tvLeader2.getText().toString());
             }
         } else {
-            map.put("jlyj", new SplitData().SplitUpData(etLeader2.getText().toString()));
+            map.put("jlyj", etLeader2.getText().toString());
             map.put("comments", etLeader2.getText().toString());
         }
     }
 
+    private void setDataBack() {
+        map.put("defId", Constant.YSD_DEFID);
+        map.put("startFlow", "true");
+        map.put("formDefId", Constant.YSD_FORMDEFIS);
+        map.put("depName", tvDepartment.getText().toString());
+        map.put("createDate", tvTime.getText().toString());
+        map.put("bzly", etUse.getText().toString());
+        map.put("xm1", etName1.getText().toString());
+        map.put("xm2", etName2.getText().toString());
+        map.put("xm3", etName3.getText().toString());
+        map.put("xm4", etName4.getText().toString());
+        map.put("xm5", etName5.getText().toString());
+        map.put("dw1", etDepartment1.getText().toString());
+        map.put("dw2", etDepartment2.getText().toString());
+        map.put("dw3", etDepartment3.getText().toString());
+        map.put("dw4", etDepartment4.getText().toString());
+        map.put("dw5", etDepartment5.getText().toString());
+        map.put("dj1", etMoney1.getText().toString());
+        map.put("dj2", etMoney2.getText().toString());
+        map.put("dj3", etMoney3.getText().toString());
+        map.put("dj4", etMoney4.getText().toString());
+        map.put("dj5", etMoney5.getText().toString());
+        map.put("sl1", etNum1.getText().toString());
+        map.put("sl2", etNum2.getText().toString());
+        map.put("sl3", etNum3.getText().toString());
+        map.put("sl4", etNum4.getText().toString());
+        map.put("sl5", etNum5.getText().toString());
+        map.put("je1", etAllMoney1.getText().toString());
+        map.put("je2", etAllMoney2.getText().toString());
+        map.put("je3", etAllMoney3.getText().toString());
+        map.put("je4", etAllMoney4.getText().toString());
+        map.put("je5", etAllMoney5.getText().toString());
+        map.put("hjsl1", tvAllNum.getText().toString());
+        map.put("project", etName.getText().toString());
+        map.put("mainId", mainId);
+        map.put("taskId", taskId);
+        map.put("hjsl2", "");
+        map.put("hjje1", tvAllMoney.getText().toString());
+        map.put("hjje2", "");
+        map.put("destName", destTypeList.get(0).getDestination());
+        map.put("zhibiao", zhibiao);
+    }
+
     @Override
     public void setDepartBudgetWill(DepartBudgetWill s) {
+        zhibiao = s.getMainform().get(0).getZhibiao().toString();
         etUse.setText(s.getMainform().get(0).getBzly().toString());
         etName1.setText(s.getMainform().get(0).getXm1().toString());
         etName2.setText(s.getMainform().get(0).getXm2().toString());
@@ -742,6 +894,7 @@ public class DepartBudgetWillActivity extends BaseActivity implements DepartBudg
         etAllMoney3.setText(s.getMainform().get(0).getJe3().toString());
         etAllMoney4.setText(s.getMainform().get(0).getJe4().toString());
         etAllMoney5.setText(s.getMainform().get(0).getJe5().toString());
+        etName.setText(s.getMainform().get(0).getProject().toString());
 
         tvAllNum.setText(s.getMainform().get(0).getHjsl1());
         tvAllMoney.setText(s.getMainform().get(0).getHjje1());
@@ -761,7 +914,7 @@ public class DepartBudgetWillActivity extends BaseActivity implements DepartBudg
                 tvLeader.setVisibility(View.GONE);
                 etLeader.setVisibility(View.VISIBLE);
                 if (leader != null && leader.length() != 0) {
-                    etLeader.setText(new SplitData().getStringData(leader));
+                    etLeader.setText(leader);
                 }
             } else {
                 tvLeader.setVisibility(View.VISIBLE);
@@ -775,13 +928,13 @@ public class DepartBudgetWillActivity extends BaseActivity implements DepartBudg
                 tvLeader1.setVisibility(View.GONE);
                 etLeader1.setVisibility(View.VISIBLE);
                 if (leader1 != null && leader1.length() != 0) {
-                    etLeader1.setText(new SplitData().getStringData(leader1));
+                    etLeader1.setText(leader1);
                 }
             } else {
                 tvLeader1.setVisibility(View.VISIBLE);
                 etLeader1.setVisibility(View.GONE);
                 if (leader1 != null && leader1.length() != 0) {
-                    tvLeader1.setText(new SplitData().getStringData(leader1));
+                    tvLeader1.setText(leader1);
                 }
             }
 
@@ -789,13 +942,13 @@ public class DepartBudgetWillActivity extends BaseActivity implements DepartBudg
                 tvLeader2.setVisibility(View.GONE);
                 etLeader2.setVisibility(View.VISIBLE);
                 if (leader2 != null && leader2.length() != 0) {
-                    etLeader2.setText(new SplitData().getStringData(leader2));
+                    etLeader2.setText(leader2);
                 }
             } else {
                 tvLeader2.setVisibility(View.VISIBLE);
                 etLeader2.setVisibility(View.GONE);
                 if (leader2 != null && leader2.length() != 0) {
-                    tvLeader2.setText(new SplitData().getStringData(leader2));
+                    tvLeader2.setText(leader2);
                 }
             }
 
@@ -861,6 +1014,8 @@ public class DepartBudgetWillActivity extends BaseActivity implements DepartBudg
         if (s.isSuccess()) {
             Toast.makeText(this, "数据提交成功", Toast.LENGTH_SHORT).show();
             finish();
+        }else {
+            Toast.makeText(this, s.getMsg(), Toast.LENGTH_SHORT).show();
         }
     }
 

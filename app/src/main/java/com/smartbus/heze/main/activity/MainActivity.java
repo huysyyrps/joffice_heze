@@ -24,10 +24,13 @@ import com.smartbus.heze.http.base.AlertDialogCallBack;
 import com.smartbus.heze.http.base.AlertDialogUtil;
 import com.smartbus.heze.http.base.BaseActivity;
 import com.smartbus.heze.http.views.Header;
+import com.smartbus.heze.main.bean.WillDoNum;
 import com.smartbus.heze.main.fragment.Fragment01;
 import com.smartbus.heze.main.fragment.Fragment02;
 import com.smartbus.heze.main.fragment.Fragment03;
 import com.smartbus.heze.main.fragment.Fragment04;
+import com.smartbus.heze.main.module.WillDoNumContract;
+import com.smartbus.heze.main.presenter.WillDoNumPresenter;
 import com.smartbus.heze.welcome.bean.Version;
 import com.smartbus.heze.welcome.module.VersionContract;
 import com.smartbus.heze.welcome.presenter.VersionPresenter;
@@ -37,7 +40,7 @@ import org.greenrobot.eventbus.EventBus;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener, VersionContract.View{
+public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener, VersionContract.View, WillDoNumContract.View {
 
     @BindView(R.id.header)
     Header header;
@@ -53,6 +56,8 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     RadioButton rb4;
     @BindView(R.id.radio_group)
     RadioGroup radioGroup;
+    @BindView(R.id.rb22)
+    RadioButton rb22;
 
     private Fragment01 fragment01;
     private Fragment02 fragment02;
@@ -61,11 +66,12 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     private FragmentManager manager;
 
     VersionPresenter versionPresenter;
+    WillDoNumPresenter willDoNumPresenter;
     AlertDialogUtil alertDialogUtil;
     private static boolean isExit = false;
 
     String downData = "";
-    String downUrl = "" ;
+    String downUrl = "";
     String data = "";
     //推出程序
     Handler mHandler = new Handler() {
@@ -118,8 +124,8 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-        String positionStatus = new SharedPreferencesHelper(this,"login").getData(this,"positionStatus","");
-        if (positionStatus.equals("1")){
+        String positionStatus = new SharedPreferencesHelper(this, "login").getData(this, "positionStatus", "");
+        if (positionStatus.equals("1")) {
             rb2.setVisibility(View.GONE);
             rb3.setVisibility(View.GONE);
         }
@@ -129,8 +135,16 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         btn.setChecked(true);
         initFragment();
         radioGroup.setOnCheckedChangeListener(MainActivity.this);
-        versionPresenter = new VersionPresenter(this,this);
+        versionPresenter = new VersionPresenter(this, this);
+        willDoNumPresenter = new WillDoNumPresenter(this, this);
         versionPresenter.getVersion();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        String userId = new SharedPreferencesHelper(this, "login").getData(this, "userId", "");
+        willDoNumPresenter.getWillDoNum(userId);
     }
 
     /**
@@ -164,14 +178,15 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 
     @Override
     public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-        switch (checkedId){
+        switch (checkedId) {
             case R.id.rb1:
+                rb2.setChecked(false);
                 FragmentTransaction ft1 = manager.beginTransaction();
                 hideAll(ft1);
-                if (fragment01 ==null){
+                if (fragment01 == null) {
                     fragment01 = new Fragment01();
                     ft1.add(R.id.frame_layout, fragment01);
-                }else {
+                } else {
                     ft1.show(fragment01);
                 }
                 ft1.commit();
@@ -179,32 +194,45 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
             case R.id.rb2:
                 FragmentTransaction ft2 = manager.beginTransaction();
                 hideAll(ft2);
-                if (fragment02 ==null){
+                if (fragment02 == null) {
                     fragment02 = new Fragment02();
                     ft2.add(R.id.frame_layout, fragment02);
-                }else {
+                } else {
                     ft2.show(fragment02);
                 }
                 ft2.commit();
                 break;
+            case R.id.rb22:
+                FragmentTransaction ft22 = manager.beginTransaction();
+                hideAll(ft22);
+                if (fragment02 == null) {
+                    fragment02 = new Fragment02();
+                    ft22.add(R.id.frame_layout, fragment02);
+                } else {
+                    ft22.show(fragment02);
+                }
+                ft22.commit();
+                break;
             case R.id.rb3:
+                rb2.setChecked(false);
                 FragmentTransaction ft3 = manager.beginTransaction();
                 hideAll(ft3);
-                if (fragment03 ==null){
+                if (fragment03 == null) {
                     fragment03 = new Fragment03();
                     ft3.add(R.id.frame_layout, fragment03);
-                }else {
+                } else {
                     ft3.show(fragment03);
                 }
                 ft3.commit();
                 break;
             case R.id.rb4:
+                rb2.setChecked(false);
                 FragmentTransaction ft4 = manager.beginTransaction();
                 hideAll(ft4);
-                if (fragment04 ==null){
+                if (fragment04 == null) {
                     fragment04 = new Fragment04();
                     ft4.add(R.id.frame_layout, fragment04);
-                }else {
+                } else {
                     ft4.show(fragment04);
                 }
                 ft4.commit();
@@ -214,22 +242,23 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 
     /**
      * 隐藏所有fragment
+     *
      * @param ft
      */
-    private void hideAll(FragmentTransaction ft){
-        if (ft==null){
+    private void hideAll(FragmentTransaction ft) {
+        if (ft == null) {
             return;
         }
-        if (fragment01 !=null){
+        if (fragment01 != null) {
             ft.hide(fragment01);
         }
-        if (fragment02 !=null){
+        if (fragment02 != null) {
             ft.hide(fragment02);
         }
-        if (fragment03 !=null){
+        if (fragment03 != null) {
             ft.hide(fragment03);
         }
-        if (fragment04 !=null){
+        if (fragment04 != null) {
             ft.hide(fragment04);
         }
     }
@@ -252,10 +281,10 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if (!versionNo.equals(versionName)&&Double.valueOf(versionNo)>Double.valueOf(versionName)){
+        if (!versionNo.equals(versionName) && Double.valueOf(versionNo) > Double.valueOf(versionName)) {
             downData = bean.getData().getSubstance();
-            downUrl = ApiAddress.mainApi +"attachFiles/" + bean.getData().getDownurl();
-            new AlertDialogUtil(MainActivity.this).showDialog("检测到服务器上有新的版本，是否立即更新。\n"+downData, new AlertDialogCallBack() {
+            downUrl = ApiAddress.mainApi + "attachFiles/" + bean.getData().getDownurl();
+            new AlertDialogUtil(MainActivity.this).showDialog("检测到服务器上有新的版本，是否立即更新。\n" + downData, new AlertDialogCallBack() {
                 @Override
                 public int getData(int s) {
                     return 0;
@@ -282,4 +311,19 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void setWillDoNum(WillDoNum willDoNum) {
+        if (willDoNum.isSuccess()) {
+            rb22.setVisibility(View.VISIBLE);
+            rb2.setVisibility(View.GONE);
+        } else {
+            rb22.setVisibility(View.GONE);
+            rb2.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void setWillDoNumMessage(String s) {
+        Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
+    }
 }

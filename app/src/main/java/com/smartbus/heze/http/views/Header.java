@@ -81,6 +81,11 @@ public class Header extends LinearLayout {
 
     public void setRightTv(boolean rightTv) {
         isRightTv = rightTv;
+        if(isRightTv){
+            tviewRight.setVisibility(VISIBLE);
+        }else {
+            tviewRight.setVisibility(GONE);
+        }
     }
 
     public void setRightIv(boolean rightIv) {

@@ -166,8 +166,11 @@
     <style name="ycTextView">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">1</item>
-        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
         <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_gravity">center_vertical</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">18dp</item>
     </style>
@@ -176,10 +179,13 @@
     <style name="oaTextView">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">1.2</item>
-        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">15dp</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
         <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_gravity">center_vertical</item>
         <item name="android:paddingLeft">8dp</item>
     </style>
 
@@ -187,9 +193,11 @@
     <style name="oaEditText">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">2.5</item>
-        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">15dp</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:paddingLeft">8dp</item>
         <item name="android:background">@null</item>
@@ -197,9 +205,11 @@
     <style name="oaTextView1">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">1.2</item>
-        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">15dp</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
         <item name="android:gravity">center</item>
         <item name="android:paddingLeft">8dp</item>
     </style>
@@ -208,9 +218,11 @@
     <style name="oaEditText1">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">2.5</item>
-        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">15dp</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
         <item name="android:gravity">center</item>
         <item name="android:paddingLeft">8dp</item>
         <item name="android:background">@null</item>

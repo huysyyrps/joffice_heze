@@ -12,12 +12,12 @@
         app:header_title="@string/app_name">
     </com.smartbus.heze.http.views.Header>
 
-    <android.support.v7.widget.RecyclerView
+    <com.example.refreshview.CustomRefreshView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone">
-    </android.support.v7.widget.RecyclerView>
+    </com.example.refreshview.CustomRefreshView>
 
     <include
         android:id="@+id/noContent"

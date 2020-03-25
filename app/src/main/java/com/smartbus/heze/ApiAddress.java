@@ -10,11 +10,11 @@ public class ApiAddress {
     //川川
 //    public final static String mainApi = "http://192.168.2.137:8080/joffice/" ;
     //孙琦
-//    public final static String mainApi = "http://192.168.2.159:8080/joffice/" ;
+    public final static String mainApi = "http://192.168.2.127:8080/joffice/" ;
     //正式库
-    public final static String mainApi = "http://120.192.74.58:8080/joffice/" ;
+//    public final static String mainApi = "http://120.192.74.58:8080/joffice/" ;
     //柱子
-//    public final static String mainApi = "http://192.168.2.125:8070/joffice/" ;
+//    public final static String mainApi = "http://192.168.2.155:8070/joffice/" ;
 
     /***********************首页*******************************/
     //登录
@@ -45,6 +45,8 @@ public class ApiAddress {
     public final static String willdoformdefid = "flow/getFormDefIdByDefIdProDefinition.do";
     //待办类型
     public final static String willdolistType = "system/appFlowTreeGlobalType.do";
+    //是否有待办
+    public final static String willdonum = "flow/findTask.do";
     //公文待办列表
     public final static String willdolist2 = "flow/list2Task.do";
     //待办详情
@@ -220,6 +222,10 @@ public class ApiAddress {
     public static final String  jianzhi = "starkh/AppSaveCustomizedApplication.do";
     //日常点检部门
     public static final String  djdepartment = "system/getYYDepStoreOrganization.do";
+    //部门预算录入
+    public static final String  departbudge = "hrm/mobileSaveAppDepBudget.do";
+    //部门预算状态修改
+    public static final String  departbudgechecktype = "hrm/updateDepBudget.do";
 
 
 }

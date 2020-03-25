@@ -13,12 +13,17 @@ import android.widget.Toast;
 import com.smartbus.heze.R;
 import com.smartbus.heze.SharedPreferencesHelper;
 import com.smartbus.heze.fileapprove.bean.BackData;
+import com.smartbus.heze.fileapprove.bean.CapitalApprovalCheckType;
 import com.smartbus.heze.fileapprove.bean.DepartmentDataBean;
 import com.smartbus.heze.fileapprove.bean.OnePerson;
 import com.smartbus.heze.fileapprove.bean.TwoPerson;
+import com.smartbus.heze.fileapprove.module.DepartBudgeCheckTypeContract;
+import com.smartbus.heze.fileapprove.module.DepartBudgeLRContract;
 import com.smartbus.heze.fileapprove.module.OneContract;
 import com.smartbus.heze.fileapprove.module.TwoContract;
 import com.smartbus.heze.fileapprove.module.UPYSDContract;
+import com.smartbus.heze.fileapprove.presenter.DepartBudgeCheckTypePresenter;
+import com.smartbus.heze.fileapprove.presenter.DepartBudgetLRPresenter;
 import com.smartbus.heze.fileapprove.presenter.OnePresenter;
 import com.smartbus.heze.fileapprove.presenter.TwoPresenter;
 import com.smartbus.heze.fileapprove.presenter.UPYSDPresenter;
@@ -28,6 +33,7 @@ import com.smartbus.heze.http.base.Constant;
 import com.smartbus.heze.http.utils.time_select.CustomDatePickerDay;
 import com.smartbus.heze.http.views.Header;
 import com.smartbus.heze.http.views.MyAlertDialog;
+import com.smartbus.heze.oaflow.bean.CheckType;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -45,7 +51,7 @@ import butterknife.OnClick;
  * 各部门的预算单
  */
 public class DepartBudgetActivity extends BaseActivity implements OneContract.View
-        , TwoContract.View, UPYSDContract.View {
+        , TwoContract.View, UPYSDContract.View, DepartBudgeLRContract.View, DepartBudgeCheckTypeContract.View {
 
     @BindView(R.id.header)
     Header header;
@@ -136,7 +142,24 @@ public class DepartBudgetActivity extends BaseActivity implements OneContract.Vi
     List<String> selectList = new ArrayList<>();
     List<String> namelist1 = new ArrayList<>();
     List<TwoPerson.DataBean> dataList = new ArrayList<>();
+    @BindView(R.id.textView8)
+    TextView textView8;
+    @BindView(R.id.tvLeader1)
+    TextView tvLeader1;
+    @BindView(R.id.tvLeader)
+    TextView tvLeader;
+    @BindView(R.id.tvLeader2)
+    TextView tvLeader2;
+    @BindView(R.id.btnLR)
+    Button btnLR;
+    String vocationId = "";
+    String selectTag = "1";
+    Map<String, String> firstmap = new HashMap<>();
+    @BindView(R.id.etName)
+    EditText etName;
     private CustomDatePickerDay customDatePicker1;
+    DepartBudgetLRPresenter departBudgetLRPresenter;
+    DepartBudgeCheckTypePresenter departBudgeCheckTypePresenter;
     int allNum1 = 0, allNum2 = 0, allNum3 = 0, allNum4 = 0, allNum5 = 0;
     double moneyS1 = 0.0, moneyS2 = 0.0, moneyS3 = 0.0, moneyS4 = 0.0, moneyS5 = 0.0;
     double AllMoney1 = 0.0, AllMoney2 = 0.0, AllMoney3 = 0.0, AllMoney4 = 0.0, AllMoney5 = 0.0;
@@ -145,7 +168,11 @@ public class DepartBudgetActivity extends BaseActivity implements OneContract.Vi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        header.setRightTv(false);
         initDatePicker();
+        btnLR.setVisibility(View.VISIBLE);
+        departBudgetLRPresenter = new DepartBudgetLRPresenter(this, this);
+        departBudgeCheckTypePresenter = new DepartBudgeCheckTypePresenter(this, this);
         etAllMoney1.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -159,6 +186,16 @@ public class DepartBudgetActivity extends BaseActivity implements OneContract.Vi
 
             @Override
             public void afterTextChanged(Editable s) {
+                String editStr = s.toString().trim();
+                int posDot = editStr.indexOf(".");
+                //不允许输入3位小数,超过三位就删掉
+                if (posDot > 0) {
+                    if (editStr.length() - posDot - 1 > 2) {
+                        s.delete(posDot + 2, posDot + 3);
+                    } else {
+                        //TODO...在这里写逻辑
+                    }
+                }
                 if (!s.toString().equals("")) {
                     AllMoney1 = (Double.valueOf(s.toString()));
                     tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
@@ -181,6 +218,16 @@ public class DepartBudgetActivity extends BaseActivity implements OneContract.Vi
 
             @Override
             public void afterTextChanged(Editable s) {
+                String editStr = s.toString().trim();
+                int posDot = editStr.indexOf(".");
+                //不允许输入3位小数,超过三位就删掉
+                if (posDot > 0) {
+                    if (editStr.length() - posDot - 1 > 2) {
+                        s.delete(posDot + 2, posDot + 3);
+                    } else {
+                        //TODO...在这里写逻辑
+                    }
+                }
                 if (!s.toString().equals("")) {
                     AllMoney2 = (Double.valueOf(s.toString()));
                     tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
@@ -203,6 +250,16 @@ public class DepartBudgetActivity extends BaseActivity implements OneContract.Vi
 
             @Override
             public void afterTextChanged(Editable s) {
+                String editStr = s.toString().trim();
+                int posDot = editStr.indexOf(".");
+                //不允许输入3位小数,超过三位就删掉
+                if (posDot > 0) {
+                    if (editStr.length() - posDot - 1 > 2) {
+                        s.delete(posDot + 2, posDot + 3);
+                    } else {
+                        //TODO...在这里写逻辑
+                    }
+                }
                 if (!s.toString().equals("")) {
                     AllMoney3 = (Double.valueOf(s.toString()));
                     tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
@@ -225,6 +282,16 @@ public class DepartBudgetActivity extends BaseActivity implements OneContract.Vi
 
             @Override
             public void afterTextChanged(Editable s) {
+                String editStr = s.toString().trim();
+                int posDot = editStr.indexOf(".");
+                //不允许输入3位小数,超过三位就删掉
+                if (posDot > 0) {
+                    if (editStr.length() - posDot - 1 > 2) {
+                        s.delete(posDot + 2, posDot + 3);
+                    } else {
+                        //TODO...在这里写逻辑
+                    }
+                }
                 if (!s.toString().equals("")) {
                     AllMoney4 = (Double.valueOf(s.toString()));
                     tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
@@ -247,6 +314,16 @@ public class DepartBudgetActivity extends BaseActivity implements OneContract.Vi
 
             @Override
             public void afterTextChanged(Editable s) {
+                String editStr = s.toString().trim();
+                int posDot = editStr.indexOf(".");
+                //不允许输入3位小数,超过三位就删掉
+                if (posDot > 0) {
+                    if (editStr.length() - posDot - 1 > 2) {
+                        s.delete(posDot + 2, posDot + 3);
+                    } else {
+                        //TODO...在这里写逻辑
+                    }
+                }
                 if (!s.toString().equals("")) {
                     AllMoney5 = (Double.valueOf(s.toString()));
                     tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
@@ -411,6 +488,16 @@ public class DepartBudgetActivity extends BaseActivity implements OneContract.Vi
 
             @Override
             public void afterTextChanged(Editable s) {
+                String editStr = s.toString().trim();
+                int posDot = editStr.indexOf(".");
+                //不允许输入3位小数,超过三位就删掉
+                if (posDot > 0) {
+                    if (editStr.length() - posDot - 1 > 2) {
+                        s.delete(posDot + 2, posDot + 3);
+                    } else {
+                        //TODO...在这里写逻辑
+                    }
+                }
                 if (!s.toString().equals("")) {
                     moneyS1 = (Double.valueOf(s.toString()));
                     if (!etNum1.getText().toString().equals("")) {
@@ -436,6 +523,16 @@ public class DepartBudgetActivity extends BaseActivity implements OneContract.Vi
 
             @Override
             public void afterTextChanged(Editable s) {
+                String editStr = s.toString().trim();
+                int posDot = editStr.indexOf(".");
+                //不允许输入3位小数,超过三位就删掉
+                if (posDot > 0) {
+                    if (editStr.length() - posDot - 1 > 2) {
+                        s.delete(posDot + 2, posDot + 3);
+                    } else {
+                        //TODO...在这里写逻辑
+                    }
+                }
                 if (!s.toString().equals("")) {
                     moneyS2 = (Double.valueOf(s.toString()));
                     if (!etNum2.getText().toString().equals("")) {
@@ -461,6 +558,16 @@ public class DepartBudgetActivity extends BaseActivity implements OneContract.Vi
 
             @Override
             public void afterTextChanged(Editable s) {
+                String editStr = s.toString().trim();
+                int posDot = editStr.indexOf(".");
+                //不允许输入3位小数,超过三位就删掉
+                if (posDot > 0) {
+                    if (editStr.length() - posDot - 1 > 2) {
+                        s.delete(posDot + 2, posDot + 3);
+                    } else {
+                        //TODO...在这里写逻辑
+                    }
+                }
                 if (!s.toString().equals("")) {
                     moneyS3 = (Double.valueOf(s.toString()));
                     if (!etNum3.getText().toString().equals("")) {
@@ -486,6 +593,16 @@ public class DepartBudgetActivity extends BaseActivity implements OneContract.Vi
 
             @Override
             public void afterTextChanged(Editable s) {
+                String editStr = s.toString().trim();
+                int posDot = editStr.indexOf(".");
+                //不允许输入3位小数,超过三位就删掉
+                if (posDot > 0) {
+                    if (editStr.length() - posDot - 1 > 2) {
+                        s.delete(posDot + 2, posDot + 3);
+                    } else {
+                        //TODO...在这里写逻辑
+                    }
+                }
                 if (!s.toString().equals("")) {
                     moneyS4 = (Double.valueOf(s.toString()));
                     if (!etNum4.getText().toString().equals("")) {
@@ -511,6 +628,16 @@ public class DepartBudgetActivity extends BaseActivity implements OneContract.Vi
 
             @Override
             public void afterTextChanged(Editable s) {
+                String editStr = s.toString().trim();
+                int posDot = editStr.indexOf(".");
+                //不允许输入3位小数,超过三位就删掉
+                if (posDot > 0) {
+                    if (editStr.length() - posDot - 1 > 2) {
+                        s.delete(posDot + 2, posDot + 3);
+                    } else {
+                        //TODO...在这里写逻辑
+                    }
+                }
                 if (!s.toString().equals("")) {
                     moneyS5 = (Double.valueOf(s.toString()));
                     if (!etNum5.getText().toString().equals("")) {
@@ -561,25 +688,16 @@ public class DepartBudgetActivity extends BaseActivity implements OneContract.Vi
         customDatePicker1.setIsLoop(false);
     }
 
-    @OnClick({R.id.tvTime, R.id.btnUp, R.id.tvDepartment})
+    @OnClick({R.id.tvTime, R.id.btnUp, R.id.tvDepartment, R.id.btnLR})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.tvDepartment:
-                Intent intent = new Intent(this, DepartmentActivity.class);
-                startActivityForResult(intent, Constant.TAG_ONE);
-                break;
-            case R.id.tvTime:
-                customDatePicker1.show(tvTime.getText().toString());
-                break;
-            case R.id.btnUp:
-                namelist.clear();
-                codeList.clear();
-                nameList.clear();
-                selectList.clear();
-                namelist1.clear();
-                dataList.clear();
+            case R.id.btnLR:
                 if (tvDepartment.getText().toString().equals("")) {
                     Toast.makeText(this, "请选择部门", Toast.LENGTH_SHORT).show();
+                    break;
+                }
+                if (etName.getText().toString().equals("")) {
+                    Toast.makeText(this, "请填写费用项目", Toast.LENGTH_SHORT).show();
                     break;
                 }
                 if (etName1.getText().toString().equals("")) {
@@ -598,53 +716,138 @@ public class DepartBudgetActivity extends BaseActivity implements OneContract.Vi
                     Toast.makeText(this, "请填写数量", Toast.LENGTH_SHORT).show();
                     break;
                 }
-                ysdOnePersenter = new OnePresenter(this, this);
-                ysdOnePersenter.getOnePerson(Constant.YSD_DEFID);
-                ysdTwoPersenter = new TwoPresenter(this, this);
-                upYsdPersenter = new UPYSDPresenter(this,this);
+                setDataFirst();
+                departBudgetLRPresenter.getDepartBudgeLR(firstmap);
+                break;
+            case R.id.tvDepartment:
+                Intent intent = new Intent(this, DepartmentActivity.class);
+                startActivityForResult(intent, Constant.TAG_ONE);
+                break;
+            case R.id.tvTime:
+                customDatePicker1.show(tvTime.getText().toString());
+                break;
+            case R.id.btnUp:
+                if (selectTag.equals("2")) {
+                    namelist.clear();
+                    codeList.clear();
+                    nameList.clear();
+                    selectList.clear();
+                    namelist1.clear();
+                    dataList.clear();
+                    if (tvDepartment.getText().toString().equals("")) {
+                        Toast.makeText(this, "请选择部门", Toast.LENGTH_SHORT).show();
+                        break;
+                    }
+                    if (etName1.getText().toString().equals("")) {
+                        Toast.makeText(this, "请填写项目名称", Toast.LENGTH_SHORT).show();
+                        break;
+                    }
+                    if (etDepartment1.getText().toString().equals("")) {
+                        Toast.makeText(this, "请填写单位", Toast.LENGTH_SHORT).show();
+                        break;
+                    }
+                    if (etMoney1.getText().toString().equals("")) {
+                        Toast.makeText(this, "请填写项目单价", Toast.LENGTH_SHORT).show();
+                        break;
+                    }
+                    if (etName1.getText().toString().equals("")) {
+                        Toast.makeText(this, "请填写数量", Toast.LENGTH_SHORT).show();
+                        break;
+                    }
+                    ysdOnePersenter = new OnePresenter(this, this);
+                    ysdOnePersenter.getOnePerson(Constant.YSD_DEFID);
+                    ysdTwoPersenter = new TwoPresenter(this, this);
+                    upYsdPersenter = new UPYSDPresenter(this, this);
+                } else {
+                    Toast.makeText(this, "请先录入", Toast.LENGTH_SHORT).show();
+                }
                 break;
         }
     }
 
-    private void setData(){
-        map.put("defId",Constant.YSD_DEFID);
-        map.put("startFlow","true");
-        map.put("formDefId",Constant.YSD_FORMDEFIS);
-        map.put("depNameDid",depId);
-        map.put("depName",depName);
-        map.put("createDate",tvTime.getText().toString());
-        map.put("bzly",etUse.getText().toString());
-        map.put("xm1",etName1.getText().toString());
-        map.put("xm2",etName2.getText().toString());
-        map.put("xm3",etName3.getText().toString());
-        map.put("xm4",etName4.getText().toString());
-        map.put("xm5",etName5.getText().toString());
-        map.put("dw1",etDepartment1.getText().toString());
-        map.put("dw2",etDepartment2.getText().toString());
-        map.put("dw3",etDepartment3.getText().toString());
-        map.put("dw4",etDepartment4.getText().toString());
-        map.put("dw5",etDepartment5.getText().toString());
-        map.put("dj1",etMoney1.getText().toString());
-        map.put("dj2",etMoney2.getText().toString());
-        map.put("dj3",etMoney3.getText().toString());
-        map.put("dj4",etMoney4.getText().toString());
-        map.put("dj5",etMoney5.getText().toString());
-        map.put("sl1",etNum1.getText().toString());
-        map.put("sl2",etNum2.getText().toString());
-        map.put("sl3",etNum3.getText().toString());
-        map.put("sl4",etNum4.getText().toString());
-        map.put("sl5",etNum5.getText().toString());
-        map.put("je1",etAllMoney1.getText().toString());
-        map.put("je2",etAllMoney2.getText().toString());
-        map.put("je3",etAllMoney3.getText().toString());
-        map.put("je4",etAllMoney4.getText().toString());
-        map.put("je5",etAllMoney5.getText().toString());
-        map.put("hjsl1",tvAllNum.getText().toString());
-        map.put("hjsl2","");
-        map.put("hjje1",tvAllMoney.getText().toString());
-        map.put("hjje2","");
-        String zbr = new SharedPreferencesHelper(this,"login").getData(this,"userName","");
-        map.put("zhibiao",zbr);
+    private void setDataFirst() {
+        firstmap.put("defId", Constant.YSD_DEFID);
+        firstmap.put("startFlow", "true");
+        firstmap.put("formDefId", Constant.YSD_FORMDEFIS);
+        firstmap.put("depId", depId);
+        firstmap.put("depName", depName);
+        firstmap.put("project", etName.getText().toString());
+        firstmap.put("createDate", tvTime.getText().toString());
+        firstmap.put("bzly", etUse.getText().toString());
+        firstmap.put("xm1", etName1.getText().toString());
+        firstmap.put("xm2", etName2.getText().toString());
+        firstmap.put("xm3", etName3.getText().toString());
+        firstmap.put("xm4", etName4.getText().toString());
+        firstmap.put("xm5", etName5.getText().toString());
+        firstmap.put("dw1", etDepartment1.getText().toString());
+        firstmap.put("dw2", etDepartment2.getText().toString());
+        firstmap.put("dw3", etDepartment3.getText().toString());
+        firstmap.put("dw4", etDepartment4.getText().toString());
+        firstmap.put("dw5", etDepartment5.getText().toString());
+        firstmap.put("dj1", etMoney1.getText().toString());
+        firstmap.put("dj2", etMoney2.getText().toString());
+        firstmap.put("dj3", etMoney3.getText().toString());
+        firstmap.put("dj4", etMoney4.getText().toString());
+        firstmap.put("dj5", etMoney5.getText().toString());
+        firstmap.put("sl1", etNum1.getText().toString());
+        firstmap.put("sl2", etNum2.getText().toString());
+        firstmap.put("sl3", etNum3.getText().toString());
+        firstmap.put("sl4", etNum4.getText().toString());
+        firstmap.put("sl5", etNum5.getText().toString());
+        firstmap.put("je1", etAllMoney1.getText().toString());
+        firstmap.put("je2", etAllMoney2.getText().toString());
+        firstmap.put("je3", etAllMoney3.getText().toString());
+        firstmap.put("je4", etAllMoney4.getText().toString());
+        firstmap.put("je5", etAllMoney5.getText().toString());
+        firstmap.put("hjsl1", tvAllNum.getText().toString());
+        firstmap.put("hjsl2", "");
+        firstmap.put("hjje1", tvAllMoney.getText().toString());
+        firstmap.put("hjje2", "");
+        String zbr = new SharedPreferencesHelper(this, "login").getData(this, "userName1", "");
+        firstmap.put("zhibiao", zbr);
+    }
+
+    private void setData() {
+        map.put("defId", Constant.YSD_DEFID);
+        map.put("startFlow", "true");
+        map.put("formDefId", Constant.YSD_FORMDEFIS);
+        map.put("depNameDid", depId);
+        map.put("depName", depName);
+        map.put("project", etName.getText().toString());
+        map.put("createDate", tvTime.getText().toString());
+        map.put("bzly", etUse.getText().toString());
+        map.put("xm1", etName1.getText().toString());
+        map.put("xm2", etName2.getText().toString());
+        map.put("xm3", etName3.getText().toString());
+        map.put("xm4", etName4.getText().toString());
+        map.put("xm5", etName5.getText().toString());
+        map.put("dw1", etDepartment1.getText().toString());
+        map.put("dw2", etDepartment2.getText().toString());
+        map.put("dw3", etDepartment3.getText().toString());
+        map.put("dw4", etDepartment4.getText().toString());
+        map.put("dw5", etDepartment5.getText().toString());
+        map.put("dj1", etMoney1.getText().toString());
+        map.put("dj2", etMoney2.getText().toString());
+        map.put("dj3", etMoney3.getText().toString());
+        map.put("dj4", etMoney4.getText().toString());
+        map.put("dj5", etMoney5.getText().toString());
+        map.put("sl1", etNum1.getText().toString());
+        map.put("sl2", etNum2.getText().toString());
+        map.put("sl3", etNum3.getText().toString());
+        map.put("sl4", etNum4.getText().toString());
+        map.put("sl5", etNum5.getText().toString());
+        map.put("je1", etAllMoney1.getText().toString());
+        map.put("je2", etAllMoney2.getText().toString());
+        map.put("je3", etAllMoney3.getText().toString());
+        map.put("je4", etAllMoney4.getText().toString());
+        map.put("je5", etAllMoney5.getText().toString());
+        map.put("hjsl1", tvAllNum.getText().toString());
+        map.put("hjsl2", "");
+        map.put("hjje1", tvAllMoney.getText().toString());
+        map.put("hjje2", "");
+        map.put("dataUrl_save", "/joffice/hrm/updateDepBudget.do?id=" + vocationId);
+        String zbr = new SharedPreferencesHelper(this, "login").getData(this, "userName1", "");
+        map.put("zhibiao", zbr);
     }
 
     @Override
@@ -732,7 +935,7 @@ public class DepartBudgetActivity extends BaseActivity implements OneContract.Vi
                 selectList.add(codeList.get(0));
                 getListData();
                 setData();
-                map.put("flowAssignId",userDepart+"|"+uId);
+                map.put("flowAssignId", userDepart + "|" + uId);
                 upYsdPersenter.getUPYSD(map);
             } else {
                 MyAlertDialog.MyListAlertDialog(isShow, codeList, nameList, namelist1, this, new AlertDialogCallBackP() {
@@ -742,7 +945,7 @@ public class DepartBudgetActivity extends BaseActivity implements OneContract.Vi
                         selectList = data;
                         getListData();
                         setData();
-                        map.put("flowAssignId",userDepart+"|"+uId);
+                        map.put("flowAssignId", userDepart + "|" + uId);
                         upYsdPersenter.getUPYSD(map);
                     }
 
@@ -788,17 +991,64 @@ public class DepartBudgetActivity extends BaseActivity implements OneContract.Vi
 
     }
 
+    /**
+     * 提交
+     *
+     * @param s
+     */
     @Override
     public void setUPYSD(BackData s) {
-       if (s.isSuccess()){
-           Toast.makeText(this, "发布成功", Toast.LENGTH_SHORT).show();
-           finish();
-       }
+        if (s.isSuccess()) {
+            departBudgeCheckTypePresenter.getDepartBudgeCheckType(String.valueOf(s.getRunId()), vocationId);
+        }
     }
 
     @Override
     public void setUPYSDMessage(String s) {
-        Toast.makeText(this, "提交数据失败", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * 录入
+     *
+     * @param s
+     */
+    @Override
+    public void setDepartBudgeLR(CapitalApprovalCheckType s) {
+        if (s.isSuccess()) {
+            vocationId = s.getId();
+            selectTag = "2";
+            btnUp.setEnabled(true);
+            btnLR.setEnabled(false);
+            btnLR.setBackgroundColor(getResources().getColor(R.color.shouye));
+            Toast.makeText(this, "录入成功请提交数据", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "录入失败", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void setDepartBudgeLRMessage(String s) {
+        Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * 修改状态
+     *
+     * @param s
+     */
+    @Override
+    public void setDepartBudgeCheckType(CheckType s) {
+        if (s.isSuccess()) {
+            Toast.makeText(this, "发布成功", Toast.LENGTH_SHORT).show();
+            btnUp.setEnabled(false);
+            btnUp.setBackgroundColor(getResources().getColor(R.color.shouye));
+            finish();
+        }
+    }
+
+    @Override
+    public void setDepartBudgeCheckTypeMessage(String s) {
+        Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
+    }
 }

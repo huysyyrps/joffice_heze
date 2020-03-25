@@ -139,10 +139,8 @@ public class OldWorkWillActivity extends BaseActivity implements OldWorkWillCont
 
     @OnClick(R.id.btnUp)
     public void onViewClicked() {
-        if (etLeader.getVisibility() == View.VISIBLE
-                || etLeader1.getVisibility() == View.VISIBLE) {
-            if (etLeader.getText().toString().equals("")
-                    && etLeader1.getText().toString().equals("")) {
+        if (etLeader.getVisibility() == View.VISIBLE || etLeader1.getVisibility() == View.VISIBLE) {
+            if (etLeader.getText().toString().equals("") && etLeader1.getText().toString().equals("")) {
                 Toast.makeText(this, "请填写意见", Toast.LENGTH_SHORT).show();
             } else {
                 getSomeData();

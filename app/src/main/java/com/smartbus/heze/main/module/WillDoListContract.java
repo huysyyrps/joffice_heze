@@ -20,7 +20,7 @@ public interface WillDoListContract {
 
     interface presenter extends BasePresenter {
         //banner回调
-        void getWillDoList(String proTypeId);
+        void getWillDoList(String proTypeId,int start,int limit);
 //        void getWillDoFormDefId(String defId);
     }
 }

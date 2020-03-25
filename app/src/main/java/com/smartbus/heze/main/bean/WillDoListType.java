@@ -59,16 +59,16 @@ public class WillDoListType implements Serializable {
         private String proTypeId;
         private String typeName;
         private String path;
-        private int depth;
-        private int parentId;
+        private String depth;
+        private String parentId;
         private String nodeKey;
         private String catKey;
-        private int sn;
-        private int userId;
+        private String sn;
+        private String userId;
         private Object code;
         private Object useTime;
-        private Object usePrice;
-        private int wxfl;
+        private String usePrice;
+        private String wxfl;
 
         public Object getVersion() {
             return version;
@@ -118,19 +118,19 @@ public class WillDoListType implements Serializable {
             this.path = path;
         }
 
-        public int getDepth() {
+        public String getDepth() {
             return depth;
         }
 
-        public void setDepth(int depth) {
+        public void setDepth(String depth) {
             this.depth = depth;
         }
 
-        public int getParentId() {
+        public String getParentId() {
             return parentId;
         }
 
-        public void setParentId(int parentId) {
+        public void setParentId(String parentId) {
             this.parentId = parentId;
         }
 
@@ -150,19 +150,19 @@ public class WillDoListType implements Serializable {
             this.catKey = catKey;
         }
 
-        public int getSn() {
+        public String getSn() {
             return sn;
         }
 
-        public void setSn(int sn) {
+        public void setSn(String sn) {
             this.sn = sn;
         }
 
-        public int getUserId() {
+        public String getUserId() {
             return userId;
         }
 
-        public void setUserId(int userId) {
+        public void setUserId(String userId) {
             this.userId = userId;
         }
 
@@ -182,19 +182,19 @@ public class WillDoListType implements Serializable {
             this.useTime = useTime;
         }
 
-        public Object getUsePrice() {
+        public String getUsePrice() {
             return usePrice;
         }
 
-        public void setUsePrice(Object usePrice) {
+        public void setUsePrice(String usePrice) {
             this.usePrice = usePrice;
         }
 
-        public int getWxfl() {
+        public String getWxfl() {
             return wxfl;
         }
 
-        public void setWxfl(int wxfl) {
+        public void setWxfl(String wxfl) {
             this.wxfl = wxfl;
         }
     }

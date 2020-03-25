@@ -36,7 +36,7 @@
                 android:id="@+id/rb2"
                 style="@style/RadionButton"
                 android:drawableTop="@drawable/rb2"
-                android:text="@string/first_process" />
+                android:text="@string/first_leaver" />
 
         </LinearLayout>
     </LinearLayout>

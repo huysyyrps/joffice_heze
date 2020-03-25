@@ -136,6 +136,7 @@ public class BorrowAccidentActivity extends BaseActivity implements OneContract.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        header.setRightTv(false);
         btnLR.setVisibility(View.VISIBLE);
         borrowAccidentLRPresenter = new BorrowAccidentLRPresenter(this, this);
         borrowAccidentCheckTypePresenter = new BorrowAccidentCheckTypePresenter(this,this);

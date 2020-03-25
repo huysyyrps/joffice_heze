@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.smartbus.heze.R;
+import com.smartbus.heze.fileapprove.activity.AdverBudgetActivity;
 import com.smartbus.heze.fileapprove.activity.BorrowAccidentActivity;
 import com.smartbus.heze.fileapprove.activity.CapitalApprovalActivity;
 import com.smartbus.heze.fileapprove.activity.CurrencyAccidentActivity;
@@ -40,6 +41,8 @@ public class FileMainActivity extends BaseActivity {
     Intent intent;
     @BindView(R.id.ll7)
     LinearLayout ll7;
+    @BindView(R.id.ll8)
+    LinearLayout ll8;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +65,7 @@ public class FileMainActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.ll1, R.id.ll2, R.id.ll3, R.id.ll4, R.id.ll5, R.id.ll6, R.id.ll7})
+    @OnClick({R.id.ll1, R.id.ll2, R.id.ll3, R.id.ll4, R.id.ll5, R.id.ll6, R.id.ll7, R.id.ll8})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll1:
@@ -91,6 +94,10 @@ public class FileMainActivity extends BaseActivity {
                 break;
             case R.id.ll7:
                 intent = new Intent(this, CapitalApprovalActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.ll8:
+                intent = new Intent(this, AdverBudgetActivity.class);
                 startActivity(intent);
                 break;
         }

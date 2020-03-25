@@ -1,0 +1,782 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.smartbus.heze.fileapprove.activity.DepartBudgetActivity">
+
+    <com.smartbus.heze.http.views.Header
+        android:id="@+id/header"
+        style="@style/Header"
+        app:header_title_right="@string/flow_back"
+        app:header_is_right_tv_visiable="true"
+        app:header_title="@string/notice_budget"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/oaTextView"
+                    android:text="编制单位: *" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/shouye" />
+
+                <TextView
+                    android:id="@+id/tvDepartment"
+                    style="@style/oaEditText"
+                    android:hint="请选择编制单位" />
+            </LinearLayout>
+
+            <View style="@style/HourLine"></View>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/oaTextView"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_vertical"
+                    android:text="费用项目: *" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/shouye" />
+
+                <EditText
+                    android:id="@+id/etName"
+                    style="@style/oaEditText"
+                    android:hint="请填写费用项目" />
+            </LinearLayout>
+            <View style="@style/HourLine"></View>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/oaTextView"
+                    android:text="数量: *" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/shouye" />
+
+                <EditText
+                    android:id="@+id/etNum"
+                    style="@style/oaEditText"
+                    android:hint="请填写数量" />
+            </LinearLayout>
+
+            <View style="@style/HourLine"></View>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/oaTextView"
+                    android:text="编报时间: *" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/shouye" />
+
+                <TextView
+                    android:id="@+id/tvTime"
+                    style="@style/oaEditText"
+                    android:layout_weight="2.5" />
+            </LinearLayout>
+
+            <View style="@style/HourLine"></View>
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="140dp"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:gravity="center"
+                            android:text="项目"
+                            android:textColor="@color/black" />
+
+                        <View style="@style/HourLine"></View>
+
+                        <EditText
+                            android:id="@+id/etName1"
+                            style="@style/oaEditText1"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp" />
+
+                        <View style="@style/HourLine"></View>
+
+                        <EditText
+                            android:id="@+id/etName2"
+                            style="@style/oaEditText1"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp" />
+
+                        <View style="@style/HourLine"></View>
+
+                        <EditText
+                            android:id="@+id/etName3"
+                            style="@style/oaEditText1"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp" />
+
+                        <View style="@style/HourLine"></View>
+
+                        <EditText
+                            android:id="@+id/etName4"
+                            style="@style/oaEditText1"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp" />
+
+                        <View style="@style/HourLine"></View>
+
+                        <EditText
+                            android:id="@+id/etName5"
+                            style="@style/oaEditText1"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/shouye" />
+
+                    <LinearLayout
+                        android:layout_width="60dp"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:gravity="center"
+                            android:text="长"
+                            android:textColor="@color/black" />
+
+                        <View style="@style/HourLine"></View>
+
+                        <EditText
+                            android:id="@+id/etLong1"
+                            style="@style/oaEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp" />
+
+                        <View style="@style/HourLine"></View>
+
+                        <EditText
+                            android:id="@+id/etLong2"
+                            style="@style/oaEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp" />
+
+                        <View style="@style/HourLine"></View>
+
+                        <EditText
+                            android:id="@+id/etLong3"
+                            style="@style/oaEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp" />
+
+                        <View style="@style/HourLine"></View>
+
+                        <EditText
+                            android:id="@+id/etLong4"
+                            style="@style/oaEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp" />
+
+                        <View style="@style/HourLine"></View>
+
+                        <EditText
+                            android:id="@+id/etLong5"
+                            style="@style/oaEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/shouye" />
+
+                    <LinearLayout
+                        android:layout_width="60dp"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:gravity="center"
+                            android:text="宽"
+                            android:textColor="@color/black" />
+
+                        <View style="@style/HourLine"></View>
+
+                        <EditText
+                            android:id="@+id/etWide1"
+                            style="@style/oaEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp" />
+
+                        <View style="@style/HourLine"></View>
+
+                        <EditText
+                            android:id="@+id/etWide2"
+                            style="@style/oaEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp" />
+
+                        <View style="@style/HourLine"></View>
+
+                        <EditText
+                            android:id="@+id/etWide3"
+                            style="@style/oaEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp" />
+
+                        <View style="@style/HourLine"></View>
+
+                        <EditText
+                            android:id="@+id/etWide4"
+                            style="@style/oaEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp" />
+
+                        <View style="@style/HourLine"></View>
+
+                        <EditText
+                            android:id="@+id/etWide5"
+                            style="@style/oaEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/shouye" />
+
+                    <LinearLayout
+                        android:layout_width="60dp"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:gravity="center"
+                            android:text="单位"
+                            android:textColor="@color/black" />
+
+                        <View style="@style/HourLine"></View>
+
+                        <EditText
+                            android:id="@+id/etDepartment1"
+                            style="@style/oaEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp" />
+
+                        <View style="@style/HourLine"></View>
+
+                        <EditText
+                            android:id="@+id/etDepartment2"
+                            style="@style/oaEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp" />
+
+                        <View style="@style/HourLine"></View>
+
+                        <EditText
+                            android:id="@+id/etDepartment3"
+                            style="@style/oaEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp" />
+
+                        <View style="@style/HourLine"></View>
+
+                        <EditText
+                            android:id="@+id/etDepartment4"
+                            style="@style/oaEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp" />
+
+                        <View style="@style/HourLine"></View>
+
+                        <EditText
+                            android:id="@+id/etDepartment5"
+                            style="@style/oaEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/shouye" />
+
+                    <LinearLayout
+                        android:layout_width="60dp"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:gravity="center"
+                            android:text="单价"
+                            android:textColor="@color/black" />
+
+                        <View style="@style/HourLine"></View>
+
+                        <EditText
+                            android:id="@+id/etMoney1"
+                            style="@style/oaEditText1"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:inputType="number|numberDecimal" />
+
+                        <View style="@style/HourLine"></View>
+
+                        <EditText
+                            android:id="@+id/etMoney2"
+                            style="@style/oaEditText1"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:inputType="number|numberDecimal" />
+
+                        <View style="@style/HourLine"></View>
+
+                        <EditText
+                            android:id="@+id/etMoney3"
+                            style="@style/oaEditText1"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:inputType="number|numberDecimal" />
+
+                        <View style="@style/HourLine"></View>
+
+                        <EditText
+                            android:id="@+id/etMoney4"
+                            style="@style/oaEditText1"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:inputType="number|numberDecimal" />
+
+                        <View style="@style/HourLine"></View>
+
+                        <EditText
+                            android:id="@+id/etMoney5"
+                            style="@style/oaEditText1"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:inputType="number|numberDecimal" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/shouye" />
+
+                    <LinearLayout
+                        android:layout_width="60dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:gravity="center"
+                            android:text="数量"
+                            android:textColor="@color/black" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <View style="@style/HourLine"></View>
+
+                            <EditText
+                                android:id="@+id/etNum1"
+                                style="@style/oaEditText1"
+                                android:layout_width="match_parent"
+                                android:layout_height="45dp"
+                                android:inputType="number" />
+
+                            <View style="@style/HourLine"></View>
+
+                            <EditText
+                                android:id="@+id/etNum2"
+                                style="@style/oaEditText1"
+                                android:layout_width="match_parent"
+                                android:layout_height="45dp"
+                                android:inputType="number" />
+
+                            <View style="@style/HourLine"></View>
+
+                            <EditText
+                                android:id="@+id/etNum3"
+                                style="@style/oaEditText1"
+                                android:layout_width="match_parent"
+                                android:layout_height="45dp"
+                                android:inputType="number" />
+
+                            <View style="@style/HourLine"></View>
+
+                            <EditText
+                                android:id="@+id/etNum4"
+                                style="@style/oaEditText1"
+                                android:layout_width="match_parent"
+                                android:layout_height="45dp"
+                                android:inputType="number" />
+
+                            <View style="@style/HourLine"></View>
+
+                            <EditText
+                                android:id="@+id/etNum5"
+                                style="@style/oaEditText1"
+                                android:layout_width="match_parent"
+                                android:layout_height="45dp"
+                                android:inputType="number" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/shouye" />
+
+                    <LinearLayout
+                        android:layout_width="60dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:gravity="center"
+                            android:text="金额"
+                            android:textColor="@color/black" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <View style="@style/HourLine"></View>
+
+                            <EditText
+                                android:id="@+id/etAllMoney1"
+                                style="@style/oaEditText1"
+                                android:layout_width="match_parent"
+                                android:layout_height="45dp"
+                                android:inputType="number|numberDecimal" />
+
+                            <View style="@style/HourLine"></View>
+
+                            <EditText
+                                android:id="@+id/etAllMoney2"
+                                style="@style/oaEditText1"
+                                android:layout_width="match_parent"
+                                android:layout_height="45dp"
+                                android:inputType="number|numberDecimal" />
+
+                            <View style="@style/HourLine"></View>
+
+                            <EditText
+                                android:id="@+id/etAllMoney3"
+                                style="@style/oaEditText1"
+                                android:layout_width="match_parent"
+                                android:layout_height="45dp"
+                                android:inputType="number|numberDecimal" />
+
+                            <View style="@style/HourLine"></View>
+
+                            <EditText
+                                android:id="@+id/etAllMoney4"
+                                style="@style/oaEditText1"
+                                android:layout_width="match_parent"
+                                android:layout_height="45dp"
+                                android:inputType="number|numberDecimal" />
+
+                            <View style="@style/HourLine"></View>
+
+                            <EditText
+                                android:id="@+id/etAllMoney5"
+                                style="@style/oaEditText1"
+                                android:layout_width="match_parent"
+                                android:layout_height="45dp"
+                                android:inputType="number|numberDecimal" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/shouye" />
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <View style="@style/HourLine"></View>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="合计: "
+                    android:textColor="@color/black" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/shouye" />
+
+                <TextView
+                    android:id="@+id/tvAllNum"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:hint="合计数量"
+                    android:textColor="@color/black" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/shouye" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:hint="合计数量: *"
+                    android:textColor="@color/black"
+                    android:visibility="invisible" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/shouye" />
+
+                <TextView
+                    android:id="@+id/tvAllMoney"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:hint="合计金额"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <View style="@style/HourLine"></View>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/oaTextView"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_vertical"
+                    android:text="预算理由: " />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/shouye" />
+
+                <EditText
+                    android:id="@+id/etUse"
+                    style="@style/textWrite"
+                    android:layout_weight="2.5"
+                    android:hint="请填写预算理由" />
+            </LinearLayout>
+
+            <View style="@style/HourLine"></View>
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@color/shouye" />
+
+            <View style="@style/HourLine"></View>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/oaTextView"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_vertical"
+                    android:text="分管领导:" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/shouye" />
+
+                <EditText
+                    android:id="@+id/etLeader1"
+                    style="@style/textWrite"
+                    android:hint="分管领导意见"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/tvLeader1"
+                    style="@style/textWrite"
+                    android:hint="分管领导意见" />
+            </LinearLayout>
+            <View style="@style/HourLine"></View>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/oaTextView"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_vertical"
+                    android:text="财务经理:" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/shouye" />
+
+                <EditText
+                    android:id="@+id/etLeader"
+                    style="@style/textWrite"
+                    android:hint="财务经理意见"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/tvLeader"
+                    style="@style/textWrite"
+                    android:hint="财务经理意见" />
+            </LinearLayout>
+            <View style="@style/HourLine"></View>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/oaTextView"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_vertical"
+                    android:text="总经理:" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/shouye" />
+
+                <EditText
+                    android:id="@+id/etLeader2"
+                    style="@style/textWrite"
+                    android:hint="总经理意见"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/tvLeader2"
+                    style="@style/textWrite"
+                    android:hint="总经理意见" />
+            </LinearLayout>
+
+            <View style="@style/HourLine"></View>
+
+            <View
+                style="@style/HourLine"
+                android:layout_marginBottom="45dp"></View>
+
+            <Button
+                android:id="@+id/btnLR"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_margin="45dp"
+                android:background="@drawable/linearlayout_colore_radius"
+                android:gravity="center"
+                android:text="录入"
+                android:textColor="@color/whith" />
+
+            <Button
+                android:id="@+id/btnUp"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_margin="45dp"
+                android:background="@drawable/linearlayout_colore_radius"
+                android:gravity="center"
+                android:text="提交"
+                android:textColor="@color/whith" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

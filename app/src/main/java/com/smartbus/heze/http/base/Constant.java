@@ -19,6 +19,9 @@ public class Constant {
     //预算单
     public final static String YSD_DEFID = "100" ;
     public final static String YSD_FORMDEFIS = "37" ;
+    //广告预算单
+    public final static String ADVER_DEFID = "173" ;
+    public final static String ADVER_FORMDEFIS = "57" ;
     //资金审批单
     public final static String CAPITALAPPROVAL_DEFID = "159" ;
     public final static String CAPITALAPPROVAL_FORMDEFIS = "54" ;

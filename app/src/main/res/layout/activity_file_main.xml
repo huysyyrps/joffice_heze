@@ -31,7 +31,20 @@
                 android:text="@string/department_budget" />
         </LinearLayout>
         <View style="@style/HourLine"/>
+        <LinearLayout
+            android:id="@+id/ll8"
+            style="@style/ycLinearLayout">
 
+            <ImageView
+                style="@style/ycImageView"
+                android:layout_gravity="center"
+                android:src="@drawable/flow_item13" />
+
+            <TextView
+                style="@style/ycTextView"
+                android:text="@string/notice_budget" />
+        </LinearLayout>
+        <View style="@style/HourLine"/>
         <LinearLayout
             android:id="@+id/ll2"
             style="@style/ycLinearLayout">
@@ -45,7 +58,6 @@
                 android:text="@string/borrow_accident" />
         </LinearLayout>
         <View style="@style/HourLine"/>
-
         <LinearLayout
             android:id="@+id/ll3"
             style="@style/ycLinearLayout">
@@ -59,7 +71,6 @@
                 android:text="@string/department_accident" />
         </LinearLayout>
         <View style="@style/HourLine"/>
-
         <LinearLayout
             android:id="@+id/ll4"
             style="@style/ycLinearLayout">
@@ -73,7 +84,6 @@
                 android:text="@string/department_file_huiqian" />
         </LinearLayout>
         <View style="@style/HourLine"/>
-
         <LinearLayout
             android:id="@+id/ll5"
             style="@style/ycLinearLayout">
@@ -87,7 +97,6 @@
                 android:text="@string/department_file_chuanyue" />
         </LinearLayout>
         <View style="@style/HourLine"/>
-
         <LinearLayout
             android:id="@+id/ll6"
             style="@style/ycLinearLayout">
@@ -117,6 +126,8 @@
                 android:text="@string/zhijin_shenpi" />
         </LinearLayout>
         <View style="@style/HourLine"/>
+
+
     </LinearLayout>
 
 </LinearLayout>

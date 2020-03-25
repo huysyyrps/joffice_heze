@@ -142,7 +142,10 @@ public class CapitalApprovalWillActivity extends BaseActivity implements Capital
 
     @Override
     protected void rightClient() {
-
+        setDataBack();
+        map.put("back", "true");
+        map.put("useTemplate", "");
+        willDoPresenter.getWillDo(map);
     }
 
     @OnClick(R.id.btnUp)
@@ -281,6 +284,19 @@ public class CapitalApprovalWillActivity extends BaseActivity implements Capital
             map.put("comments", etLeader4.getText().toString());
             mycomments = etLeader4.getText().toString();
         }
+    }
+
+    private void setDataBack() {
+        map.put("taskId", taskId);
+        map.put("destName", destTypeList.get(0).getDestination());
+        map.put("mainId", mainId);
+        map.put("formDefId", Constant.CAPITALAPPROVAL_FORMDEFIS);
+        map.put("sbdate", tvTime.getText().toString());
+        map.put("dataUrl_save", dataUrl_save);
+        map.put("sbdepName", tvDepartment.getText().toString());
+        map.put("sbrname", tvName.getText().toString());
+        map.put("sbtype", tvType.getText().toString());
+        map.put("sbmemo", tvContent.getText().toString());
     }
 
     @Override
@@ -439,8 +455,8 @@ public class CapitalApprovalWillActivity extends BaseActivity implements Capital
     public void setWillDo(WillDoUp s) {
         if (s.isSuccess()) {
             borrowAccidentWillCheckTypePresenter.getBorrowAccidentWillCheckType(runId, accidentLoanId, destName, mycomments);
-//            Toast.makeText(this, "数据提交成功", Toast.LENGTH_SHORT).show();
-//            finish();
+        }else {
+            Toast.makeText(this, s.getMsg(), Toast.LENGTH_SHORT).show();
         }
     }
 

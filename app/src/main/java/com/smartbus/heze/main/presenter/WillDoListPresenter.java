@@ -28,8 +28,8 @@ public class WillDoListPresenter implements WillDoListContract.presenter {
     }
 
     @Override
-    public void getWillDoList(String proTypeId) {
-        RetrofitUtil.getInstance().initRetrofitSetSession().getWillDoList(proTypeId).subscribeOn(Schedulers.io())
+    public void getWillDoList(String proTypeId,int start,int limit) {
+        RetrofitUtil.getInstance().initRetrofitSetSession().getWillDoList(proTypeId,start,limit).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseObserverNoEntry<WillDoList>(context, MainUtil.getData) {
                     @Override

@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.smartbus.heze.R;
+import com.smartbus.heze.fileapprove.activity.AdverBudgeWillActivity;
 import com.smartbus.heze.fileapprove.activity.BorrowAccidentWillActivity;
 import com.smartbus.heze.fileapprove.activity.CurrencyAccidentWillActivity;
 import com.smartbus.heze.fileapprove.activity.DepartBudgetWillActivity;
@@ -143,6 +144,12 @@ public class WillDoListActivity2 extends BaseActivity implements WillDoList2Cont
                         public void onClick(View v) {
                             if (o.getFormDefId().equals(Constant.YSD_FORMDEFIS)) {
                                 Intent intent = new Intent(WillDoListActivity2.this, DepartBudgetWillActivity.class);
+                                intent.putExtra("activityName", o.getActivityName());
+                                intent.putExtra("taskId", o.getTaskId());
+                                startActivity(intent);
+                            }
+                            if (o.getFormDefId().equals(Constant.ADVER_FORMDEFIS)) {
+                                Intent intent = new Intent(WillDoListActivity2.this, AdverBudgeWillActivity.class);
                                 intent.putExtra("activityName", o.getActivityName());
                                 intent.putExtra("taskId", o.getTaskId());
                                 startActivity(intent);

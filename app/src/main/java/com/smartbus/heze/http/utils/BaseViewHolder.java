@@ -88,6 +88,15 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
     }
 
     /**
+     * 给TextView设置隐藏控件方法
+     */
+    public BaseViewHolder setGoneTextView(int viewId) {
+        TextView tv = getView(viewId);
+        tv.setVisibility(View.GONE);
+        return this;
+    }
+
+    /**
      * 给LinnerLayout设置隐藏控件方法
      */
     public BaseViewHolder setGoneLinner(int viewId) {

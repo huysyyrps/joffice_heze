@@ -67,6 +67,7 @@ import com.smartbus.heze.main.bean.Banner;
 import com.smartbus.heze.main.bean.OaWillDo;
 import com.smartbus.heze.main.bean.WillDoList;
 import com.smartbus.heze.main.bean.WillDoListType;
+import com.smartbus.heze.main.bean.WillDoNum;
 import com.smartbus.heze.oaflow.bean.AddWorkWill;
 import com.smartbus.heze.oaflow.bean.AtWorkWill;
 import com.smartbus.heze.oaflow.bean.CheckType;
@@ -131,6 +132,12 @@ public interface AllApi {
     Observable<WillDoListType> getWillDoListType(@Query("userId") String userId, @Query("catKey") String catKey);
 
     /**
+     * 获取是否有代办
+     */
+    @GET(ApiAddress.willdonum)
+    Observable<WillDoNum> getWillDoNum(@Query("userId") String userId);
+
+    /**
      * 获取部门列表
      */
     @GET(ApiAddress.department)
@@ -171,7 +178,7 @@ public interface AllApi {
      * 获取待办列表
      */
     @GET(ApiAddress.willdolist)
-    Observable<WillDoList> getWillDoList(@Query("typeId") String proTypeId);
+    Observable<WillDoList> getWillDoList(@Query("typeId") String proTypeId,@Query("start") int start,@Query("limit") int limit);
 
 //    /**
 //     * 点击待办列表获取formDefId
@@ -198,6 +205,18 @@ public interface AllApi {
     @GET(ApiAddress.willdodetail)
     Observable<DepartBudgetWill> getWillDepartBudget(@Query("activityName") String activityName
             , @Query("taskId") String taskId, @Query("defId") String defId);
+
+    /**
+     * 部门预算录入
+     */
+    @POST(ApiAddress.departbudge)
+    Observable<CapitalApprovalCheckType> getDepartDubgeLR(@QueryMap Map<String, String> params);
+
+    /**
+     * 部门预算状态修改
+     */
+    @GET(ApiAddress.departbudgechecktype)
+    Observable<CheckType> getDepartBudgeCheckType(@Query("runId") String runId, @Query("id") String vocationId);
 
     /**
      * 事故借款单录入
@@ -243,6 +262,8 @@ public interface AllApi {
     @GET(ApiAddress.willdodetail)
     Observable<CapitalApprovalWill> getCapitalApproval(@Query("activityName") String activityName
             , @Query("taskId") String taskId, @Query("defId") String defId);
+
+
 
     /**
      * 获取公文流转待办详情

@@ -38,6 +38,12 @@
             android:drawableTop="@drawable/tab_02_bg"
             android:text="@string/will_do"/>
         <RadioButton
+            android:id="@+id/rb22"
+            style="@style/RadionButton"
+            android:drawableTop="@drawable/tab_022_bg"
+            android:text="@string/will_do"
+            android:visibility="gone"/>
+        <RadioButton
             android:id="@+id/rb3"
             style="@style/RadionButton"
             android:drawableTop="@drawable/tab_03_bg"

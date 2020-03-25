@@ -111,6 +111,7 @@ public class CurrencyAccidentActivity extends BaseActivity implements OneContrac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        header.setRightTv(false);
         accidentCheckTypePresenter = new AccidentCheckTypePresenter(this, this);
         currencyAccidentLRPresenter = new CurrencyAccidentLRPresenter(this, this);
         initDatePicker();

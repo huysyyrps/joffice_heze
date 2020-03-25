@@ -15,6 +15,15 @@ public class WillDoUp implements Serializable {
 
     private boolean success;
     private int runId;
+    private String msg;
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
 
     public boolean isSuccess() {
         return success;

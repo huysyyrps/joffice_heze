@@ -359,6 +359,10 @@
         <activity android:name=".main.activity.WillDoListTypeActivity"/>
         <activity android:name=".fileapprove.activity.CapitalApprovalActivity"/>
         <activity android:name=".fileapprove.activity.CapitalApprovalWillActivity"/>
+        <activity android:name=".fileapprove.activity.AdverBudgetActivity"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
+        <activity android:name=".fileapprove.activity.AdverBudgeWillActivity"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
     </application>
 
 </manifest>

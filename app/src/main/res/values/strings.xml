@@ -33,7 +33,8 @@
     <string name="new_notice">最新公告</string>
     <string name="first_oa">OA传递单</string>
     <string name="first_file">文件审批</string>
-    <string name="first_process">审批流程</string>
+    <string name="first_process">行政办公</string>
+    <string name="first_leaver">考勤流程</string>
     <string name="jianzi_yp">兼职应聘</string>
     <string name="first_xunjian">车辆巡检</string>
     <string name="xunjian_history">记录</string>
@@ -60,19 +61,20 @@
     <!--文件审批-->
     <string name="department_budget">部门预算单</string>
     <string name="borrow_accident">事故借款单</string>
-    <string name="department_accident">部门通用借款单</string>
-    <string name="department_file_huiqian">部门文件会签单</string>
-    <string name="department_file_chuanyue">部门文件传阅</string>
-    <string name="decoment_liuzhuan">公文流转表单</string>
+    <string name="department_accident">通用借款单</string>
+    <string name="department_file_huiqian">会签发文流程</string>
+    <string name="department_file_chuanyue">文件传阅流程</string>
+    <string name="decoment_liuzhuan">部门文件流转</string>
     <string name="zhijin_shenpi">财务资金审批单</string>
+    <string name="notice_budget">广告预算单</string>
 
 
     <!--流程审批-->
-    <string name="userd_leave">通用请假单</string>
-    <string name="add_work">加班登记单</string>
-    <string name="old_work">补勤登记单</string>
-    <string name="at_work">值班登记单</string>
-    <string name="change_work">调休登记单</string>
+    <string name="userd_leave">员工请假流程</string>
+    <string name="add_work">员工加班申请</string>
+    <string name="old_work">员工补勤申请</string>
+    <string name="at_work">员工值班申请</string>
+    <string name="change_work">员工调休申请</string>
 
     <!--稽查-->
     <string name="line_code">线路编号</string>
@@ -115,4 +117,7 @@
     <string name="ab_shijian">安保事件</string>
     <string name="gg_kehu">广告客户</string>
     <string name="jianzi_yp1">城乡点检统计</string>
+
+
+    <string name="flow_back">驳回</string>
 </resources>

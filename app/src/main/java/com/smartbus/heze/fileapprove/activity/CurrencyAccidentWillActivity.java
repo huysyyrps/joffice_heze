@@ -135,7 +135,10 @@ public class CurrencyAccidentWillActivity extends BaseActivity implements Curren
 
     @Override
     protected void rightClient() {
-
+        setDataBack();
+        map.put("back", "true");
+        map.put("useTemplate", "");
+        willDoPresenter.getWillDo(map);
     }
 
     @OnClick(R.id.btnUp)
@@ -263,6 +266,19 @@ public class CurrencyAccidentWillActivity extends BaseActivity implements Curren
             map.put("comments", etLeader3.getText().toString());
             mycomments = etLeader3.getText().toString();
         }
+    }
+
+    private void setDataBack() {
+        map.put("defId", Constant.CURRENCYACCIDENT_DEFID);
+        map.put("startFlow", "true");
+        map.put("formDefId", Constant.CURRENCYACCIDENT_FORMDEFIS);
+        map.put("jiekuanDate", tvTime.getText().toString());
+        map.put("jiekuansy", etReason.getText().toString());
+        map.put("jiekuanje", etSmallMoney.getText().toString());
+        map.put("jiekuanren", tvName.getText().toString());
+        map.put("mainId", mainId);
+        map.put("taskId", taskId);
+        map.put("destName", destTypeList.get(0).getDestination());
     }
 
     @Override
@@ -404,6 +420,8 @@ public class CurrencyAccidentWillActivity extends BaseActivity implements Curren
     public void setWillDo(WillDoUp s) {
         if (s.isSuccess()) {
             accidentWillCheckTypePresenter.getAccidentWillCheckType(runId, accidentLoanId, destName, mycomments);
+        }else {
+            Toast.makeText(this, s.getMsg(), Toast.LENGTH_SHORT).show();
         }
     }
 

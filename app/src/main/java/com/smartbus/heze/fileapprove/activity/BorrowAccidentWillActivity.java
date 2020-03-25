@@ -149,7 +149,10 @@ public class BorrowAccidentWillActivity extends BaseActivity implements BorrowAc
 
     @Override
     protected void rightClient() {
-
+        setDataBack();
+        map.put("back", "true");
+        map.put("useTemplate", "");
+        willDoPresenter.getWillDo(map);
     }
 
     @OnClick(R.id.btnUp)
@@ -249,6 +252,63 @@ public class BorrowAccidentWillActivity extends BaseActivity implements BorrowAc
         map.put("taskId", taskId);
         map.put("signalName", signaName);
         map.put("destName", destName);
+        if (tvLeader.getVisibility() == View.VISIBLE) {
+            if (!tvLeader.getText().toString().equals("")) {
+                map.put("kezhang", tvLeader.getText().toString());
+            }
+        } else {
+            map.put("kezhang", etLeader.getText().toString());
+            map.put("comments", etLeader.getText().toString());
+            mycomments = etLeader.getText().toString();
+        }
+        if (tvLeader1.getVisibility() == View.VISIBLE) {
+            if (!tvLeader1.getText().toString().equals("")) {
+                map.put("fenguanjingli", tvLeader1.getText().toString());
+            }
+        } else {
+            map.put("fenguanjingli", etLeader1.getText().toString());
+            map.put("comments", etLeader1.getText().toString());
+            mycomments = etLeader1.getText().toString();
+        }
+        if (tvLeader2.getVisibility() == View.VISIBLE) {
+            if (!tvLeader2.getText().toString().equals("")) {
+                map.put("caiwujingli", tvLeader2.getText().toString());
+            }
+        } else {
+            map.put("caiwujingli", etLeader2.getText().toString());
+            map.put("comments", etLeader2.getText().toString());
+            mycomments = etLeader2.getText().toString();
+        }
+        if (tvLeader3.getVisibility() == View.VISIBLE) {
+            if (!tvLeader3.getText().toString().equals("")) {
+                map.put("ldps", tvLeader3.getText().toString());
+            }
+        } else {
+            map.put("ldps", etLeader3.getText().toString());
+            map.put("comments", etLeader3.getText().toString());
+            mycomments = etLeader3.getText().toString();
+        }
+    }
+
+    private void setDataBack() {
+        map.put("defId", Constant.BORROWACCIDENT_DEFID);
+        map.put("startFlow", "true");
+        map.put("formDefId", Constant.BORROWACCIDENT_FORMDEFIS);
+        map.put("depName", tvDepartment.getText().toString());
+        map.put("jiekuanDate", tvTime.getText().toString());
+        map.put("atDate", tvTime1.getText().toString());
+        map.put("atPlace", tvAddress.getText().toString());
+        map.put("lineCode", tvLuBie.getText().toString());
+        map.put("carNo", tvCarNo.getText().toString());
+        map.put("driverName", tvDriver.getText().toString());
+        map.put("acDuty", tvBlame.getText().toString());
+        map.put("atAfter", tvReason.getText().toString());
+        map.put("atje", tvSmallMoney.getText().toString());
+        map.put("acNumber", tvNum.getText().toString());
+        map.put("jiekuanren", tvName.getText().toString());
+        map.put("mainId", mainId);
+        map.put("taskId", taskId);
+        map.put("destName", destTypeList.get(0).getDestination());
         if (tvLeader.getVisibility() == View.VISIBLE) {
             if (!tvLeader.getText().toString().equals("")) {
                 map.put("kezhang", tvLeader.getText().toString());
@@ -434,8 +494,8 @@ public class BorrowAccidentWillActivity extends BaseActivity implements BorrowAc
     public void setWillDo(WillDoUp s) {
         if (s.isSuccess()) {
             borrowAccidentWillCheckTypePresenter.getBorrowAccidentWillCheckType(runId, accidentLoanId, destName, mycomments);
-//            Toast.makeText(this, "数据提交成功", Toast.LENGTH_SHORT).show();
-//            finish();
+        }else {
+            Toast.makeText(this, s.getMsg(), Toast.LENGTH_SHORT).show();
         }
     }
 
