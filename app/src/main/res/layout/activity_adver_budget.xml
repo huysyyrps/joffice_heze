@@ -672,7 +672,37 @@
                     style="@style/oaTextView"
                     android:layout_height="45dp"
                     android:layout_gravity="center_vertical"
-                    android:text="分管领导:" />
+                    android:text="企管科领导:" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/shouye" />
+
+                <EditText
+                    android:id="@+id/etLeader0"
+                    style="@style/textWrite"
+                    android:hint="企管科领导意见"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/tvLeader0"
+                    style="@style/textWrite"
+                    android:hint="企管科领导意见" />
+            </LinearLayout>
+            <View style="@style/HourLine"></View>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/oaTextView"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_vertical"
+                    android:text="分管经理:" />
 
                 <View
                     android:layout_width="1dp"
@@ -683,13 +713,13 @@
                 <EditText
                     android:id="@+id/etLeader1"
                     style="@style/textWrite"
-                    android:hint="分管领导意见"
+                    android:hint="分管经理意见"
                     android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/tvLeader1"
                     style="@style/textWrite"
-                    android:hint="分管领导意见" />
+                    android:hint="分管经理意见" />
             </LinearLayout>
             <View style="@style/HourLine"></View>
 

@@ -182,6 +182,10 @@ public class AdverBudgeWillActivity extends BaseActivity implements DepartBudget
     TextView textView8;
     @BindView(R.id.btnLR)
     Button btnLR;
+    @BindView(R.id.etLeader0)
+    EditText etLeader0;
+    @BindView(R.id.tvLeader0)
+    TextView tvLeader0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -365,7 +369,7 @@ public class AdverBudgeWillActivity extends BaseActivity implements DepartBudget
                 if (!s.toString().equals("")) {
                     allNum1 = (Integer.valueOf(s.toString()));
                     tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
-                    if (!etMoney1.getText().toString().equals("")&&!etLong1.getText().toString().equals("") &&!etWide1.getText().toString().equals("")) {
+                    if (!etMoney1.getText().toString().equals("") && !etLong1.getText().toString().equals("") && !etWide1.getText().toString().equals("")) {
                         etAllMoney1.setText(String.valueOf(Double.valueOf(etMoney1.getText().toString()) * allNum1 * Double.valueOf(etLong1.getText().toString()) * Double.valueOf(etWide1.getText().toString())));
                     } else {
                         etAllMoney1.setText(String.valueOf(0 * allNum1));
@@ -393,9 +397,9 @@ public class AdverBudgeWillActivity extends BaseActivity implements DepartBudget
                 if (!s.toString().equals("")) {
                     allNum2 = (Integer.valueOf(s.toString()));
                     tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
-                    if (!etMoney2.getText().toString().equals("")&&!etLong2.getText().toString().equals("") &&!etWide2.getText().toString().equals("")) {
+                    if (!etMoney2.getText().toString().equals("") && !etLong2.getText().toString().equals("") && !etWide2.getText().toString().equals("")) {
                         etAllMoney2.setText(String.valueOf(Double.valueOf(etMoney2.getText().toString())
-                                * allNum2*Double.valueOf(etLong2.getText().toString())*Double.valueOf(etWide2.getText().toString())));
+                                * allNum2 * Double.valueOf(etLong2.getText().toString()) * Double.valueOf(etWide2.getText().toString())));
                     } else {
                         etAllMoney2.setText(String.valueOf(0 * allNum2));
                     }
@@ -422,9 +426,9 @@ public class AdverBudgeWillActivity extends BaseActivity implements DepartBudget
                 if (!s.toString().equals("")) {
                     allNum3 = (Integer.valueOf(s.toString()));
                     tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
-                    if (!etMoney3.getText().toString().equals("")&&!etLong3.getText().toString().equals("") &&!etWide3.getText().toString().equals("")) {
+                    if (!etMoney3.getText().toString().equals("") && !etLong3.getText().toString().equals("") && !etWide3.getText().toString().equals("")) {
                         etAllMoney3.setText(String.valueOf(Double.valueOf(etMoney3.getText().toString())
-                                * allNum3*Double.valueOf(etLong3.getText().toString())*Double.valueOf(etWide3.getText().toString())));
+                                * allNum3 * Double.valueOf(etLong3.getText().toString()) * Double.valueOf(etWide3.getText().toString())));
                     } else {
                         etAllMoney3.setText(String.valueOf(0 * allNum3));
                     }
@@ -451,9 +455,9 @@ public class AdverBudgeWillActivity extends BaseActivity implements DepartBudget
                 if (!s.toString().equals("")) {
                     allNum4 = (Integer.valueOf(s.toString()));
                     tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
-                    if (!etMoney4.getText().toString().equals("")&&!etLong4.getText().toString().equals("") &&!etWide4.getText().toString().equals("")) {
+                    if (!etMoney4.getText().toString().equals("") && !etLong4.getText().toString().equals("") && !etWide4.getText().toString().equals("")) {
                         etAllMoney4.setText(String.valueOf(Double.valueOf(etMoney4.getText().toString())
-                                * allNum4*Double.valueOf(etLong4.getText().toString())*Double.valueOf(etWide4.getText().toString())));
+                                * allNum4 * Double.valueOf(etLong4.getText().toString()) * Double.valueOf(etWide4.getText().toString())));
                     } else {
                         etAllMoney4.setText(String.valueOf(0 * allNum4));
                     }
@@ -480,9 +484,9 @@ public class AdverBudgeWillActivity extends BaseActivity implements DepartBudget
                 if (!s.toString().equals("")) {
                     allNum5 = (Integer.valueOf(s.toString()));
                     tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
-                    if (!etMoney5.getText().toString().equals("")&&!etLong5.getText().toString().equals("") &&!etWide5.getText().toString().equals("")) {
+                    if (!etMoney5.getText().toString().equals("") && !etLong5.getText().toString().equals("") && !etWide5.getText().toString().equals("")) {
                         etAllMoney5.setText(String.valueOf(Double.valueOf(etMoney5.getText().toString())
-                                * allNum5*Double.valueOf(etLong5.getText().toString())*Double.valueOf(etWide5.getText().toString())));
+                                * allNum5 * Double.valueOf(etLong5.getText().toString()) * Double.valueOf(etWide5.getText().toString())));
                     } else {
                         etAllMoney5.setText(String.valueOf(0 * allNum5));
                     }
@@ -509,9 +513,9 @@ public class AdverBudgeWillActivity extends BaseActivity implements DepartBudget
             public void afterTextChanged(Editable s) {
                 if (!s.toString().equals("")) {
                     moneyS1 = (Double.valueOf(s.toString()));
-                    if (!etNum1.getText().toString().equals("")&&!etLong1.getText().toString().equals("") &&!etWide1.getText().toString().equals("")) {
+                    if (!etNum1.getText().toString().equals("") && !etLong1.getText().toString().equals("") && !etWide1.getText().toString().equals("")) {
                         etAllMoney1.setText(String.valueOf(Double.valueOf(etNum1.getText().toString())
-                                * moneyS1*Double.valueOf(etLong1.getText().toString())*Double.valueOf(etWide1.getText().toString())));
+                                * moneyS1 * Double.valueOf(etLong1.getText().toString()) * Double.valueOf(etWide1.getText().toString())));
                     } else {
                         etAllMoney1.setText(String.valueOf(0 * moneyS1));
                     }
@@ -535,9 +539,9 @@ public class AdverBudgeWillActivity extends BaseActivity implements DepartBudget
             public void afterTextChanged(Editable s) {
                 if (!s.toString().equals("")) {
                     moneyS2 = (Double.valueOf(s.toString()));
-                    if (!etNum2.getText().toString().equals("")&&!etLong2.getText().toString().equals("") &&!etWide2.getText().toString().equals("")) {
+                    if (!etNum2.getText().toString().equals("") && !etLong2.getText().toString().equals("") && !etWide2.getText().toString().equals("")) {
                         etAllMoney2.setText(String.valueOf(Double.valueOf(etNum2.getText().toString())
-                                * moneyS2*Double.valueOf(etLong2.getText().toString())*Double.valueOf(etWide2.getText().toString())));
+                                * moneyS2 * Double.valueOf(etLong2.getText().toString()) * Double.valueOf(etWide2.getText().toString())));
                     } else {
                         etAllMoney2.setText(String.valueOf(0 * moneyS2));
                     }
@@ -561,9 +565,9 @@ public class AdverBudgeWillActivity extends BaseActivity implements DepartBudget
             public void afterTextChanged(Editable s) {
                 if (!s.toString().equals("")) {
                     moneyS3 = (Double.valueOf(s.toString()));
-                    if (!etNum3.getText().toString().equals("")&&!etLong3.getText().toString().equals("") &&!etWide3.getText().toString().equals("")) {
+                    if (!etNum3.getText().toString().equals("") && !etLong3.getText().toString().equals("") && !etWide3.getText().toString().equals("")) {
                         etAllMoney3.setText(String.valueOf(Double.valueOf(etNum3.getText().toString())
-                                * moneyS3*Double.valueOf(etLong3.getText().toString())*Double.valueOf(etWide3.getText().toString())));
+                                * moneyS3 * Double.valueOf(etLong3.getText().toString()) * Double.valueOf(etWide3.getText().toString())));
                     } else {
                         etAllMoney3.setText(String.valueOf(0 * moneyS3));
                     }
@@ -587,9 +591,9 @@ public class AdverBudgeWillActivity extends BaseActivity implements DepartBudget
             public void afterTextChanged(Editable s) {
                 if (!s.toString().equals("")) {
                     moneyS4 = (Double.valueOf(s.toString()));
-                    if (!etNum4.getText().toString().equals("")&&!etLong4.getText().toString().equals("") &&!etWide4.getText().toString().equals("")) {
+                    if (!etNum4.getText().toString().equals("") && !etLong4.getText().toString().equals("") && !etWide4.getText().toString().equals("")) {
                         etAllMoney4.setText(String.valueOf(Double.valueOf(etNum4.getText().toString())
-                                * moneyS4*Double.valueOf(etLong4.getText().toString())*Double.valueOf(etWide4.getText().toString())));
+                                * moneyS4 * Double.valueOf(etLong4.getText().toString()) * Double.valueOf(etWide4.getText().toString())));
                     } else {
                         etAllMoney4.setText(String.valueOf(0 * moneyS4));
                     }
@@ -613,9 +617,9 @@ public class AdverBudgeWillActivity extends BaseActivity implements DepartBudget
             public void afterTextChanged(Editable s) {
                 if (!s.toString().equals("")) {
                     moneyS5 = (Double.valueOf(s.toString()));
-                    if (!etNum5.getText().toString().equals("")&&!etLong5.getText().toString().equals("") &&!etWide5.getText().toString().equals("")) {
+                    if (!etNum5.getText().toString().equals("") && !etLong5.getText().toString().equals("") && !etWide5.getText().toString().equals("")) {
                         etAllMoney5.setText(String.valueOf(Double.valueOf(etNum4.getText().toString())
-                                * moneyS4*Double.valueOf(etLong5.getText().toString())*Double.valueOf(etWide5.getText().toString())));
+                                * moneyS4 * Double.valueOf(etLong5.getText().toString()) * Double.valueOf(etWide5.getText().toString())));
                     } else {
                         etAllMoney5.setText(String.valueOf(0 * moneyS5));
                     }
@@ -640,9 +644,9 @@ public class AdverBudgeWillActivity extends BaseActivity implements DepartBudget
             public void afterTextChanged(Editable s) {
                 if (!s.toString().equals("")) {
                     longS1 = (Double.valueOf(s.toString()));
-                    if (!etNum1.getText().toString().equals("")&&!etMoney1.getText().toString().equals("")&&!etWide1.getText().toString().equals("")) {
+                    if (!etNum1.getText().toString().equals("") && !etMoney1.getText().toString().equals("") && !etWide1.getText().toString().equals("")) {
                         etAllMoney1.setText(String.valueOf(Double.valueOf(etNum1.getText().toString())
-                                * longS1*Double.valueOf(etMoney1.getText().toString())*Double.valueOf(etWide1.getText().toString())));
+                                * longS1 * Double.valueOf(etMoney1.getText().toString()) * Double.valueOf(etWide1.getText().toString())));
                     } else {
                         etAllMoney1.setText(String.valueOf(0 * moneyS1));
                     }
@@ -666,9 +670,9 @@ public class AdverBudgeWillActivity extends BaseActivity implements DepartBudget
             public void afterTextChanged(Editable s) {
                 if (!s.toString().equals("")) {
                     longS2 = (Double.valueOf(s.toString()));
-                    if (!etNum2.getText().toString().equals("")&&!etMoney2.getText().toString().equals("")&&!etWide2.getText().toString().equals("")) {
+                    if (!etNum2.getText().toString().equals("") && !etMoney2.getText().toString().equals("") && !etWide2.getText().toString().equals("")) {
                         etAllMoney2.setText(String.valueOf(Double.valueOf(etNum2.getText().toString())
-                                * longS2*Double.valueOf(etMoney2.getText().toString())*Double.valueOf(etWide2.getText().toString())));
+                                * longS2 * Double.valueOf(etMoney2.getText().toString()) * Double.valueOf(etWide2.getText().toString())));
                     } else {
                         etAllMoney2.setText(String.valueOf(0 * moneyS2));
                     }
@@ -692,9 +696,9 @@ public class AdverBudgeWillActivity extends BaseActivity implements DepartBudget
             public void afterTextChanged(Editable s) {
                 if (!s.toString().equals("")) {
                     longS3 = (Double.valueOf(s.toString()));
-                    if (!etNum3.getText().toString().equals("")&&!etMoney3.getText().toString().equals("")&&!etWide3.getText().toString().equals("")) {
+                    if (!etNum3.getText().toString().equals("") && !etMoney3.getText().toString().equals("") && !etWide3.getText().toString().equals("")) {
                         etAllMoney3.setText(String.valueOf(Double.valueOf(etNum3.getText().toString())
-                                * longS3*Double.valueOf(etMoney3.getText().toString())*Double.valueOf(etWide3.getText().toString())));
+                                * longS3 * Double.valueOf(etMoney3.getText().toString()) * Double.valueOf(etWide3.getText().toString())));
                     } else {
                         etAllMoney3.setText(String.valueOf(0 * moneyS3));
                     }
@@ -718,9 +722,9 @@ public class AdverBudgeWillActivity extends BaseActivity implements DepartBudget
             public void afterTextChanged(Editable s) {
                 if (!s.toString().equals("")) {
                     longS4 = (Double.valueOf(s.toString()));
-                    if (!etNum4.getText().toString().equals("")&&!etMoney4.getText().toString().equals("")&&!etWide4.getText().toString().equals("")) {
+                    if (!etNum4.getText().toString().equals("") && !etMoney4.getText().toString().equals("") && !etWide4.getText().toString().equals("")) {
                         etAllMoney4.setText(String.valueOf(Double.valueOf(etNum4.getText().toString())
-                                * longS4*Double.valueOf(etMoney4.getText().toString())*Double.valueOf(etWide4.getText().toString())));
+                                * longS4 * Double.valueOf(etMoney4.getText().toString()) * Double.valueOf(etWide4.getText().toString())));
                     } else {
                         etAllMoney4.setText(String.valueOf(0 * moneyS4));
                     }
@@ -744,10 +748,10 @@ public class AdverBudgeWillActivity extends BaseActivity implements DepartBudget
             public void afterTextChanged(Editable s) {
                 if (!s.toString().equals("")) {
                     longS5 = (Double.valueOf(s.toString()));
-                    if (!etNum5.getText().toString().equals("")&&!etMoney5.getText().toString().equals("")&&!etWide5.getText().toString().equals("")) {
+                    if (!etNum5.getText().toString().equals("") && !etMoney5.getText().toString().equals("") && !etWide5.getText().toString().equals("")) {
                         etAllMoney5.setText(String.valueOf(Double.valueOf(etNum5.getText().toString())
-                                * longS5*Double.valueOf(etMoney5.getText().toString())*Double.valueOf(etWide5.getText().toString())));
-                    }  else {
+                                * longS5 * Double.valueOf(etMoney5.getText().toString()) * Double.valueOf(etWide5.getText().toString())));
+                    } else {
                         etAllMoney5.setText(String.valueOf(0 * moneyS5));
                     }
                 } else {
@@ -771,9 +775,9 @@ public class AdverBudgeWillActivity extends BaseActivity implements DepartBudget
             public void afterTextChanged(Editable s) {
                 if (!s.toString().equals("")) {
                     wideS1 = (Double.valueOf(s.toString()));
-                    if (!etNum1.getText().toString().equals("")&&!etMoney1.getText().toString().equals("")&&!etLong1.getText().toString().equals("")) {
+                    if (!etNum1.getText().toString().equals("") && !etMoney1.getText().toString().equals("") && !etLong1.getText().toString().equals("")) {
                         etAllMoney1.setText(String.valueOf(Double.valueOf(etNum1.getText().toString())
-                                * wideS1*Double.valueOf(etMoney1.getText().toString())*Double.valueOf(etLong1.getText().toString())));
+                                * wideS1 * Double.valueOf(etMoney1.getText().toString()) * Double.valueOf(etLong1.getText().toString())));
                     } else {
                         etAllMoney1.setText(String.valueOf(0 * moneyS1));
                     }
@@ -797,9 +801,9 @@ public class AdverBudgeWillActivity extends BaseActivity implements DepartBudget
             public void afterTextChanged(Editable s) {
                 if (!s.toString().equals("")) {
                     wideS2 = (Double.valueOf(s.toString()));
-                    if (!etNum2.getText().toString().equals("")&&!etMoney2.getText().toString().equals("")&&!etLong2.getText().toString().equals("")) {
+                    if (!etNum2.getText().toString().equals("") && !etMoney2.getText().toString().equals("") && !etLong2.getText().toString().equals("")) {
                         etAllMoney2.setText(String.valueOf(Double.valueOf(etNum2.getText().toString())
-                                * wideS2*Double.valueOf(etMoney2.getText().toString())*Double.valueOf(etLong2.getText().toString())));
+                                * wideS2 * Double.valueOf(etMoney2.getText().toString()) * Double.valueOf(etLong2.getText().toString())));
                     } else {
                         etAllMoney2.setText(String.valueOf(0 * moneyS2));
                     }
@@ -823,9 +827,9 @@ public class AdverBudgeWillActivity extends BaseActivity implements DepartBudget
             public void afterTextChanged(Editable s) {
                 if (!s.toString().equals("")) {
                     wideS3 = (Double.valueOf(s.toString()));
-                    if (!etNum3.getText().toString().equals("")&&!etMoney3.getText().toString().equals("")&&!etLong3.getText().toString().equals("")) {
+                    if (!etNum3.getText().toString().equals("") && !etMoney3.getText().toString().equals("") && !etLong3.getText().toString().equals("")) {
                         etAllMoney3.setText(String.valueOf(Double.valueOf(etNum3.getText().toString())
-                                * wideS3*Double.valueOf(etMoney3.getText().toString())*Double.valueOf(etLong3.getText().toString())));
+                                * wideS3 * Double.valueOf(etMoney3.getText().toString()) * Double.valueOf(etLong3.getText().toString())));
                     } else {
                         etAllMoney3.setText(String.valueOf(0 * moneyS3));
                     }
@@ -849,9 +853,9 @@ public class AdverBudgeWillActivity extends BaseActivity implements DepartBudget
             public void afterTextChanged(Editable s) {
                 if (!s.toString().equals("")) {
                     wideS4 = (Double.valueOf(s.toString()));
-                    if (!etNum4.getText().toString().equals("")&&!etMoney4.getText().toString().equals("")&&!etLong4.getText().toString().equals("")) {
+                    if (!etNum4.getText().toString().equals("") && !etMoney4.getText().toString().equals("") && !etLong4.getText().toString().equals("")) {
                         etAllMoney4.setText(String.valueOf(Double.valueOf(etNum4.getText().toString())
-                                * wideS4*Double.valueOf(etMoney4.getText().toString())*Double.valueOf(etLong4.getText().toString())));
+                                * wideS4 * Double.valueOf(etMoney4.getText().toString()) * Double.valueOf(etLong4.getText().toString())));
                     } else {
                         etAllMoney4.setText(String.valueOf(0 * moneyS4));
                     }
@@ -875,10 +879,10 @@ public class AdverBudgeWillActivity extends BaseActivity implements DepartBudget
             public void afterTextChanged(Editable s) {
                 if (!s.toString().equals("")) {
                     wideS5 = (Double.valueOf(s.toString()));
-                    if (!etNum5.getText().toString().equals("")&&!etMoney5.getText().toString().equals("")&&!etLong5.getText().toString().equals("")) {
+                    if (!etNum5.getText().toString().equals("") && !etMoney5.getText().toString().equals("") && !etLong5.getText().toString().equals("")) {
                         etAllMoney5.setText(String.valueOf(Double.valueOf(etNum5.getText().toString())
-                                * wideS5*Double.valueOf(etMoney5.getText().toString())*Double.valueOf(etLong5.getText().toString())));
-                    }  else {
+                                * wideS5 * Double.valueOf(etMoney5.getText().toString()) * Double.valueOf(etLong5.getText().toString())));
+                    } else {
                         etAllMoney5.setText(String.valueOf(0 * moneyS5));
                     }
                 } else {
@@ -921,10 +925,12 @@ public class AdverBudgeWillActivity extends BaseActivity implements DepartBudget
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btnUp:
-                if (etLeader.getVisibility() == View.VISIBLE
+                if (etLeader0.getVisibility() == View.VISIBLE
+                        ||etLeader.getVisibility() == View.VISIBLE
                         || etLeader1.getVisibility() == View.VISIBLE
                         || etLeader2.getVisibility() == View.VISIBLE) {
-                    if (etLeader.getText().toString().equals("")
+                    if (etLeader0.getText().toString().equals("")
+                            &&etLeader.getText().toString().equals("")
                             && etLeader1.getText().toString().equals("")
                             && etLeader2.getText().toString().equals("")) {
                         Toast.makeText(this, "请填写意见", Toast.LENGTH_SHORT).show();
@@ -1052,6 +1058,15 @@ public class AdverBudgeWillActivity extends BaseActivity implements DepartBudget
         map.put("signalName", signaName);
         map.put("destName", destName);
         map.put("zhibiao", zhibiao);
+        if (tvLeader0.getVisibility() == View.VISIBLE) {
+            if (!tvLeader0.getText().toString().equals("")) {
+                map.put("qiguanlingdao", tvLeader0.getText().toString());
+            }
+        } else {
+            map.put("qiguanlingdao", etLeader0.getText().toString());
+            map.put("comments", etLeader0.getText().toString());
+        }
+
         if (tvLeader.getVisibility() == View.VISIBLE) {
             if (!tvLeader.getText().toString().equals("")) {
                 map.put("cwk", tvLeader.getText().toString());
@@ -1190,15 +1205,31 @@ public class AdverBudgeWillActivity extends BaseActivity implements DepartBudget
         tvDepartment.setText(s.getMainform().get(0).getDepName());
         tvTime.setText(s.getMainform().get(0).getCreateDate());
         mainId = String.valueOf(s.getMainform().get(0).getMainId());
+        String leader0 = s.getMainform().get(0).getQiguanlingdao();
         String leader = s.getMainform().get(0).getCwk();
         String leader1 = s.getMainform().get(0).getFgyj();
         String leader2 = s.getMainform().get(0).getJlyj();
         String move = s.getFormRights();
         try {
             JSONObject jsonObject = new JSONObject(move);
+            String qgMove = jsonObject.getString("qiguanlingdao");
             String cwMove = jsonObject.getString("cwk");
             String fgMove = jsonObject.getString("fgyj");
             String zjlMove = jsonObject.getString("jlyj");
+            if (qgMove.equals("2")) {
+                tvLeader0.setVisibility(View.GONE);
+                etLeader0.setVisibility(View.VISIBLE);
+                if (leader0 != null && leader0.length() != 0) {
+                    etLeader0.setText(leader0);
+                }
+            } else {
+                tvLeader0.setVisibility(View.VISIBLE);
+                etLeader0.setVisibility(View.GONE);
+                if (leader0 != null && leader0.length() != 0) {
+                    tvLeader0.setText(leader);
+                }
+            }
+
             if (cwMove.equals("2")) {
                 tvLeader.setVisibility(View.GONE);
                 etLeader.setVisibility(View.VISIBLE);
@@ -1303,7 +1334,7 @@ public class AdverBudgeWillActivity extends BaseActivity implements DepartBudget
         if (s.isSuccess()) {
             Toast.makeText(this, "数据提交成功", Toast.LENGTH_SHORT).show();
             finish();
-        }else {
+        } else {
             Toast.makeText(this, s.getMsg(), Toast.LENGTH_SHORT).show();
         }
     }
