@@ -103,6 +103,10 @@ public class UserdLeaveWillActivity extends BaseActivity implements UserdLeaveWi
     @BindView(R.id.btnUp)
     Button btnUp;
 
+    String bmMove;
+    String fgMove;
+    String zjlMove;
+    String mycomments = "";
     String vocationId = "";
     String role1 = "";
     String role2 = "";
@@ -116,6 +120,10 @@ public class UserdLeaveWillActivity extends BaseActivity implements UserdLeaveWi
     String activityName, taskId;
     String[] bigNametemp = null;
     String[] bigCodetemp = null;
+    String[] bigNametemp1 = null;
+    String[] bigCodetemp1 = null;
+    String[] bigNametemp2 = null;
+    String[] bigCodetemp2 = null;
     NormalPresenter normalPresenter;
     NoEndPresenter noEndPersenter;
     NoHandlerPresenter noHandlerPresenter;
@@ -265,6 +273,7 @@ public class UserdLeaveWillActivity extends BaseActivity implements UserdLeaveWi
         } else {
             map.put("bumenjingli", etLeader.getText().toString());
             map.put("comments", etLeader.getText().toString());
+            mycomments = etLeader.getText().toString();
         }
         if (tvLeader1.getVisibility() == View.VISIBLE) {
             if (!tvLeader1.getText().toString().equals("")) {
@@ -273,6 +282,7 @@ public class UserdLeaveWillActivity extends BaseActivity implements UserdLeaveWi
         } else {
             map.put("fenguanjingli", etLeader1.getText().toString());
             map.put("comments", etLeader1.getText().toString());
+            mycomments = etLeader1.getText().toString();
         }
         if (tvLeader2.getVisibility() == View.VISIBLE) {
             if (!tvLeader2.getText().toString().equals("")) {
@@ -281,6 +291,7 @@ public class UserdLeaveWillActivity extends BaseActivity implements UserdLeaveWi
         } else {
             map.put("zongjingli", etLeader2.getText().toString());
             map.put("comments", etLeader2.getText().toString());
+            mycomments = etLeader2.getText().toString();
         }
     }
 
@@ -305,10 +316,10 @@ public class UserdLeaveWillActivity extends BaseActivity implements UserdLeaveWi
             String move = s.getFormRights();
             try {
                 JSONObject jsonObject = new JSONObject(move);
-                String bmMove = jsonObject.getString("bumenjingli");
-                String fgMove = jsonObject.getString("fenguanjingli");
-                String zjlMove = jsonObject.getString("zongjingli");
-                if (bmMove.equals("2")) {
+                bmMove = jsonObject.getString("bumenjingli");
+                fgMove = jsonObject.getString("fenguanjingli");
+                zjlMove = jsonObject.getString("zongjingli");
+                if (bmMove.equals("3")) {
                     tvLeader.setVisibility(View.GONE);
                     etLeader.setVisibility(View.VISIBLE);
                     if (leader != null && leader.length() != 0) {
@@ -322,7 +333,7 @@ public class UserdLeaveWillActivity extends BaseActivity implements UserdLeaveWi
                     }
                 }
 
-                if (fgMove.equals("2")) {
+                if (fgMove.equals("3")) {
                     tvLeader1.setVisibility(View.GONE);
                     etLeader1.setVisibility(View.VISIBLE);
                     if (leader1 != null && leader1.length() != 0) {
@@ -336,7 +347,7 @@ public class UserdLeaveWillActivity extends BaseActivity implements UserdLeaveWi
                     }
                 }
 
-                if (zjlMove.equals("2")) {
+                if (zjlMove.equals("3")) {
                     tvLeader2.setVisibility(View.GONE);
                     etLeader2.setVisibility(View.VISIBLE);
                     if (leader2 != null && leader2.length() != 0) {
@@ -367,15 +378,31 @@ public class UserdLeaveWillActivity extends BaseActivity implements UserdLeaveWi
     @Override
     public void setNormalPerson(NormalPerson s) {
         if (s.getData() != null) {
-            role1 = s.getData().get(0).getRole();
-            role2 = s.getData().get(1).getRole();
-            leaderName = s.getData().get(0).getUserNames();
-            leaderCode = s.getData().get(0).getUserCodes();
-            leaderName1 = s.getData().get(1).getUserNames();
-            leaderCode1 = s.getData().get(1).getUserCodes();
-            bigNametemp = leaderName1.split(",");
-            bigCodetemp = leaderCode1.split(",");
-            setDialog();
+            if (s.getData().size() == 1){
+                role1 = s.getData().get(0).getRole();
+//            role2 = s.getData().get(1).getRole();
+                leaderName = s.getData().get(0).getUserNames();
+                leaderCode = s.getData().get(0).getUserCodes();
+                bigNametemp = leaderName.split(",");
+                bigCodetemp = leaderCode.split(",");
+                setDialog();
+            }else if (s.getData().size() == 2) {
+                role1 = s.getData().get(0).getRole();
+                role2 = s.getData().get(1).getRole();
+                leaderName = s.getData().get(0).getUserNames();
+                leaderCode = s.getData().get(0).getUserCodes();
+                leaderName1 = s.getData().get(1).getUserNames();
+                leaderCode1 = s.getData().get(1).getUserCodes();
+                bigNametemp1 = leaderName.split(",");
+                bigCodetemp1 = leaderCode.split(",");
+                bigNametemp2 = leaderName1.split(",");
+                bigCodetemp2 = leaderCode1.split(",");
+                bigNametemp = concat2(bigNametemp1, bigNametemp2);
+                bigCodetemp = concat2(bigCodetemp1, bigCodetemp2);
+//                System.arraycopy(bigNametemp2, 0, bigNametemp1, 0, bigNametemp2.length - 1);
+//                System.arraycopy(bigCodetemp2, 0, bigCodetemp1, 0, bigCodetemp2.length - 1);
+                setDialog();
+            }
         }
     }
 
@@ -387,15 +414,31 @@ public class UserdLeaveWillActivity extends BaseActivity implements UserdLeaveWi
     @Override
     public void setNoEndPerson(NoEndPerson s) {
         if (s.getData() != null) {
-            role1 = s.getData().get(0).getRole();
-            role2 = s.getData().get(1).getRole();
-            leaderName = s.getData().get(0).getUserNames();
-            leaderCode = s.getData().get(0).getUserCodes();
-            leaderName1 = s.getData().get(1).getUserNames();
-            leaderCode1 = s.getData().get(1).getUserCodes();
-            bigNametemp = leaderName1.split(",");
-            bigCodetemp = leaderCode1.split(",");
-            setDialog();
+            if (s.getData().size() == 1){
+                role1 = s.getData().get(0).getRole();
+//            role2 = s.getData().get(1).getRole();
+                leaderName = s.getData().get(0).getUserNames();
+                leaderCode = s.getData().get(0).getUserCodes();
+                bigNametemp = leaderName.split(",");
+                bigCodetemp = leaderCode.split(",");
+                setDialog();
+            }else if (s.getData().size() == 2) {
+                role1 = s.getData().get(0).getRole();
+                role2 = s.getData().get(1).getRole();
+                leaderName = s.getData().get(0).getUserNames();
+                leaderCode = s.getData().get(0).getUserCodes();
+                leaderName1 = s.getData().get(1).getUserNames();
+                leaderCode1 = s.getData().get(1).getUserCodes();
+                bigNametemp1 = leaderName.split(",");
+                bigCodetemp1 = leaderCode.split(",");
+                bigNametemp2 = leaderName1.split(",");
+                bigCodetemp2 = leaderCode1.split(",");
+                bigNametemp = concat2(bigNametemp1, bigNametemp2);
+                bigCodetemp = concat2(bigCodetemp1, bigCodetemp2);
+//                System.arraycopy(bigNametemp2, 0, bigNametemp1, 0, bigNametemp2.length - 1);
+//                System.arraycopy(bigCodetemp2, 0, bigCodetemp1, 0, bigCodetemp2.length - 1);
+                setDialog();
+            }
         }
     }
 
@@ -407,8 +450,26 @@ public class UserdLeaveWillActivity extends BaseActivity implements UserdLeaveWi
     @Override
     public void setNoHandlerPerson(NoHandlerPerson s) {
         setData();
-        map.put("flowAssignId", role1 + ":" + role2 + "|" + leaderCode + ":" + uId);
-        willDoPresenter.getWillDo(map);
+        if (bmMove.equals("1") && fgMove.equals("1") && zjlMove.equals("1")) {
+            if (Integer.valueOf(tvDays.getText().toString()) > 1) {
+                map.put("flowAssignId", role1 + ":" + role2 + "|" + leaderCode + ":" + uId);
+            } else {
+                map.put("flowAssignId", role1 + "|" + uId);
+            }
+            willDoPresenter.getWillDo(map);
+        } else {
+            if (!mycomments.equals("同意") && !mycomments.equals("不同意")) {
+                map.clear();
+                Toast.makeText(UserdLeaveWillActivity.this, "意见请填写同意或不同意", Toast.LENGTH_SHORT).show();
+            } else {
+                if (Integer.valueOf(tvDays.getText().toString()) > 1) {
+                    map.put("flowAssignId", role1 + ":" + role2 + "|" + leaderCode + ":" + uId);
+                } else {
+                    map.put("flowAssignId", role1 + "|" + uId);
+                }
+                willDoPresenter.getWillDo(map);
+            }
+        }
     }
 
     @Override
@@ -485,9 +546,26 @@ public class UserdLeaveWillActivity extends BaseActivity implements UserdLeaveWi
                 setData();
                 // 关闭提示框
                 alertDialog3.dismiss();
-                map.put("flowAssignId", role1 + ":" + role2 + "|" + leaderCode + ":" + uId);
-//                map.put("flowAssignId", destName + "|" + uId);
-                willDoPresenter.getWillDo(map);
+                if (bmMove.equals("1") && fgMove.equals("1") && zjlMove.equals("1")) {
+                    if (Integer.valueOf(tvDays.getText().toString()) > 1) {
+                        map.put("flowAssignId", role1 + ":" + role2 + "|" + leaderCode + ":" + uId);
+                    } else {
+                        map.put("flowAssignId", role1 + "|" + uId);
+                    }
+                    willDoPresenter.getWillDo(map);
+                } else {
+                    if (!mycomments.equals("同意") && !mycomments.equals("不同意")) {
+                        map.clear();
+                        Toast.makeText(UserdLeaveWillActivity.this, "意见请填写同意或不同意", Toast.LENGTH_SHORT).show();
+                    } else {
+                        if (Integer.valueOf(tvDays.getText().toString()) > 1) {
+                            map.put("flowAssignId", role1 + ":" + role2 + "|" + leaderCode + ":" + uId);
+                        } else {
+                            map.put("flowAssignId", role1 + "|" + uId);
+                        }
+                        willDoPresenter.getWillDo(map);
+                    }
+                }
             }
         }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
 
@@ -502,6 +580,7 @@ public class UserdLeaveWillActivity extends BaseActivity implements UserdLeaveWi
     }
 
     private String getListData() {
+        uId = "";
         if (selectList.size() == 1) {
             //uName = backlist.get(0).getActivityName();
             uId = selectList.get(0);
@@ -518,4 +597,19 @@ public class UserdLeaveWillActivity extends BaseActivity implements UserdLeaveWi
         return uId;
     }
 
+    private static <T> String[] concat2(String[] a, String[] b) {
+        final int alen = a.length;
+        final int blen = b.length;
+        if (alen == 0) {
+            return b;
+        }
+        if (blen == 0) {
+            return a;
+        }
+        String[] result = (String[]) java.lang.reflect.Array.
+                newInstance(a.getClass().getComponentType(), alen + blen);
+        System.arraycopy(a, 0, result, 0, alen);
+        System.arraycopy(b, 0, result, alen, blen);
+        return result;
+    }
 }

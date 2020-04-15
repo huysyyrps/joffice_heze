@@ -3,21 +3,25 @@
 buildscript {
     repositories {
         jcenter()
+        maven {
+            url 'http://maven.aliyun.com/nexus/content/repositories/releases/'
+        }
     }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.3'
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
-    }
+        dependencies {
+            classpath 'com.android.tools.build:gradle:2.3.3'
+            // 添加emas-services插件
+            classpath 'com.aliyun.ams:emas-services:1.0.1'
+            // NOTE: Do not place your application dependencies here; they belong
+            // in the individual module build.gradle files
+        }
 }
 
 allprojects {
     repositories {
         jcenter()
-//        maven {
-//            url "http://mvn.gt.igexin.com/nexus/content/repositories/releases/"
-//        }
+        maven {
+            url 'http://maven.aliyun.com/nexus/content/repositories/releases/'
+        }
     }
 }
 

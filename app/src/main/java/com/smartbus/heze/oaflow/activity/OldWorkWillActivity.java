@@ -82,6 +82,7 @@ public class OldWorkWillActivity extends BaseActivity implements OldWorkWillCont
     Button btnUp;
 
     String role = "";
+    String mycomments = "";
     String vocationId = "";
     String mainId = "";
     String destType = "";
@@ -228,6 +229,7 @@ public class OldWorkWillActivity extends BaseActivity implements OldWorkWillCont
         } else {
             map.put("bumenjingli", etLeader.getText().toString());
             map.put("comments", etLeader.getText().toString());
+            mycomments = etLeader.getText().toString();
         }
         if (tvLeader1.getVisibility() == View.VISIBLE) {
             if (!tvLeader1.getText().toString().equals("")) {
@@ -236,6 +238,7 @@ public class OldWorkWillActivity extends BaseActivity implements OldWorkWillCont
         } else {
             map.put("fenguanjingli", etLeader1.getText().toString());
             map.put("comments", etLeader1.getText().toString());
+            mycomments = etLeader1.getText().toString();
         }
     }
 
@@ -270,7 +273,7 @@ public class OldWorkWillActivity extends BaseActivity implements OldWorkWillCont
                 JSONObject jsonObject = new JSONObject(move);
                 String kzMove = jsonObject.getString("bumenjingli");
                 String fgMove = jsonObject.getString("fenguanjingli");
-                if (kzMove.equals("2")) {
+                if (kzMove.equals("3")) {
                     tvLeader.setVisibility(View.GONE);
                     etLeader.setVisibility(View.VISIBLE);
                     if (leader != null && leader.length() != 0) {
@@ -284,7 +287,7 @@ public class OldWorkWillActivity extends BaseActivity implements OldWorkWillCont
                     }
                 }
 
-                if (fgMove.equals("2")) {
+                if (fgMove.equals("3")) {
                     tvLeader1.setVisibility(View.GONE);
                     etLeader1.setVisibility(View.VISIBLE);
                     if (leader1 != null && leader1.length() != 0) {
@@ -349,8 +352,13 @@ public class OldWorkWillActivity extends BaseActivity implements OldWorkWillCont
     @Override
     public void setNoHandlerPerson(NoHandlerPerson s) {
         setData();
-        map.put("flowAssignId", role + "|" + uId);
-        willDoPresenter.getWillDo(map);
+        if (!mycomments.equals("同意")&&!mycomments.equals("不同意")){
+            map.clear();
+            Toast.makeText(OldWorkWillActivity.this, "意见请填写同意或不同意", Toast.LENGTH_SHORT).show();
+        }else {
+            map.put("flowAssignId", role + "|" + uId);
+            willDoPresenter.getWillDo(map);
+        }
     }
 
     @Override
@@ -423,8 +431,13 @@ public class OldWorkWillActivity extends BaseActivity implements OldWorkWillCont
                 setData();
                 // 关闭提示框
                 alertDialog3.dismiss();
-                map.put("flowAssignId", role + "|" + uId);
-                willDoPresenter.getWillDo(map);
+                if (!mycomments.equals("同意")&&!mycomments.equals("不同意")){
+                    map.clear();
+                    Toast.makeText(OldWorkWillActivity.this, "意见请填写同意或不同意", Toast.LENGTH_SHORT).show();
+                }else {
+                    map.put("flowAssignId", role + "|" + uId);
+                    willDoPresenter.getWillDo(map);
+                }
             }
         }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
 
@@ -439,6 +452,7 @@ public class OldWorkWillActivity extends BaseActivity implements OldWorkWillCont
     }
 
     private String getListData() {
+        uId = "";
         if (selectList.size() == 1) {
             //uName = backlist.get(0).getActivityName();
             uId = selectList.get(0);

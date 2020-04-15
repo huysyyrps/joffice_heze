@@ -5,6 +5,7 @@ import android.content.Context;
 import com.smartbus.heze.http.base.BaseObserverNoEntry;
 import com.smartbus.heze.http.utils.MainUtil;
 import com.smartbus.heze.http.utils.RetrofitUtil;
+import com.smartbus.heze.main.bean.WillDoCheckTask;
 import com.smartbus.heze.main.bean.WillDoList;
 import com.smartbus.heze.main.module.WillDoListContract;
 
@@ -40,6 +41,23 @@ public class WillDoListPresenter implements WillDoListContract.presenter {
                     @Override
                     protected void onFailure(Throwable e, boolean isNetWorkError) throws Exception {
                         view.setWillDoListMessage("失败了----->" + e.getMessage());
+                    }
+                });
+    }
+
+    @Override
+    public void getWillDoCheckTask(String taskId, String userId) {
+        RetrofitUtil.getInstance().initRetrofitSetSession().getWillDoListCheckTask(taskId,userId).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new BaseObserverNoEntry<WillDoCheckTask>(context, MainUtil.getData) {
+                    @Override
+                    protected void onSuccees(WillDoCheckTask t) throws Exception {
+                        view.setWillDoCheckTask(t);
+                    }
+
+                    @Override
+                    protected void onFailure(Throwable e, boolean isNetWorkError) throws Exception {
+                        view.setWillDoCheckTaskMessage("失败了----->" + e.getMessage());
                     }
                 });
     }

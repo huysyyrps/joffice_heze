@@ -2,6 +2,7 @@ package com.smartbus.heze.main.module;
 
 import com.smartbus.heze.http.base.BaseDFiveView;
 import com.smartbus.heze.http.base.BasePresenter;
+import com.smartbus.heze.main.bean.WillDoCheckTask;
 import com.smartbus.heze.main.bean.WillDoList;
 
 /**
@@ -10,17 +11,16 @@ import com.smartbus.heze.main.bean.WillDoList;
 
 public interface WillDoListContract {
     interface View extends BaseDFiveView<presenter> {
-        //设置banner
         void setWillDoList(WillDoList willDoList);
         void setWillDoListMessage(String s);
 
-//        void setWillDoFormDefId(WillDoFormDefId willDoFormDefId);
-//        void setWillDoFormDefIdMessage(String s);
+        void setWillDoCheckTask(WillDoCheckTask willDoCheckTask);
+        void setWillDoCheckTaskMessage(String s);
     }
 
     interface presenter extends BasePresenter {
         //banner回调
         void getWillDoList(String proTypeId,int start,int limit);
-//        void getWillDoFormDefId(String defId);
+        void getWillDoCheckTask(String taskId,String userId);
     }
 }

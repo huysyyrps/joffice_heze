@@ -134,7 +134,7 @@
                     android:layout_gravity="center_vertical"
                     android:paddingTop="15dp"
                     android:paddingBottom="15dp"
-                    android:hint="请填写同一事故借款次数" />
+                    android:hint="请填写申报内容" />
             </LinearLayout>
             <View style="@style/HourLine"></View>
 

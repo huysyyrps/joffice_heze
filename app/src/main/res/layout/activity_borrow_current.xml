@@ -121,12 +121,14 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     style="@style/oaTextView"
-                    android:text="科长意见:" />
+                    android:text="科长意见:"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center"/>
 
                 <View
                     android:layout_width="1dp"
@@ -136,24 +138,26 @@
 
                 <TextView
                     android:id="@+id/tvLeader"
-                    style="@style/oaEditText"
+                    style="@style/textWrite"
                     android:hint="请填写科长意见" />
                 <EditText
                     android:id="@+id/etLeader"
                     android:visibility="gone"
-                    style="@style/oaEditText"
+                    style="@style/textWrite"
                     android:hint="请填写科长意见" />
             </LinearLayout>
             <View style="@style/HourLine"></View>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     style="@style/oaTextView"
-                    android:text="分管领导意见:" />
+                    android:text="分管经理意见:"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center"/>
 
                 <View
                     android:layout_width="1dp"
@@ -163,24 +167,26 @@
 
                 <TextView
                     android:id="@+id/tvLeader1"
-                    style="@style/oaEditText"
-                    android:hint="分管领导意见" />
+                    style="@style/textWrite"
+                    android:hint="分管经理意见" />
                 <EditText
                     android:id="@+id/etLeader1"
                     android:visibility="gone"
-                    style="@style/oaEditText"
-                    android:hint="分管领导意见" />
+                    style="@style/textWrite"
+                    android:hint="分管经理意见" />
             </LinearLayout>
             <View style="@style/HourLine"></View>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     style="@style/oaTextView"
-                    android:text="财务经理意见:" />
+                    android:text="财务经理意见:"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center"/>
 
                 <View
                     android:layout_width="1dp"
@@ -190,24 +196,26 @@
 
                 <TextView
                     android:id="@+id/tvLeader2"
-                    style="@style/oaEditText"
+                    style="@style/textWrite"
                     android:hint="财务经理意见" />
                 <EditText
                     android:id="@+id/etLeader2"
                     android:visibility="gone"
-                    style="@style/oaEditText"
+                    style="@style/textWrite"
                     android:hint="财务经理意见" />
             </LinearLayout>
             <View style="@style/HourLine"></View>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     style="@style/oaTextView"
-                    android:text="总经理意见:" />
+                    android:text="总经理意见:"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center"/>
 
                 <View
                     android:layout_width="1dp"
@@ -217,12 +225,12 @@
 
                 <TextView
                     android:id="@+id/tvLeader3"
-                    style="@style/oaEditText"
+                    style="@style/textWrite"
                     android:hint="总经理意见" />
                 <EditText
                     android:id="@+id/etLeader3"
                     android:visibility="gone"
-                    style="@style/oaEditText"
+                    style="@style/textWrite"
                     android:hint="总经理意见" />
             </LinearLayout>
 

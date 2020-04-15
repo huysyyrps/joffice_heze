@@ -13,7 +13,6 @@ import com.smartbus.heze.fileapprove.activity.CurrencyAccidentActivity;
 import com.smartbus.heze.fileapprove.activity.DepartBudgetActivity;
 import com.smartbus.heze.fileapprove.activity.DocumentLZActivity;
 import com.smartbus.heze.fileapprove.activity.FileCirculateActivity;
-import com.smartbus.heze.fileapprove.activity.HuiQianActivity;
 import com.smartbus.heze.http.base.BaseActivity;
 import com.smartbus.heze.http.views.Header;
 
@@ -31,8 +30,6 @@ public class FileMainActivity extends BaseActivity {
     LinearLayout ll2;
     @BindView(R.id.ll3)
     LinearLayout ll3;
-    @BindView(R.id.ll4)
-    LinearLayout ll4;
     @BindView(R.id.ll5)
     LinearLayout ll5;
     @BindView(R.id.ll6)
@@ -65,7 +62,7 @@ public class FileMainActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.ll1, R.id.ll2, R.id.ll3, R.id.ll4, R.id.ll5, R.id.ll6, R.id.ll7, R.id.ll8})
+    @OnClick({R.id.ll1, R.id.ll2, R.id.ll3, R.id.ll5, R.id.ll6, R.id.ll7, R.id.ll8})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll1:
@@ -78,10 +75,6 @@ public class FileMainActivity extends BaseActivity {
                 break;
             case R.id.ll3:
                 intent = new Intent(this, CurrencyAccidentActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.ll4:
-                intent = new Intent(this, HuiQianActivity.class);
                 startActivity(intent);
                 break;
             case R.id.ll5:

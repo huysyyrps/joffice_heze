@@ -25,6 +25,7 @@ import com.smartbus.heze.http.base.ProgressDialogUtil;
 import com.smartbus.heze.http.utils.BaseRecyclerAdapter;
 import com.smartbus.heze.http.utils.BaseViewHolder;
 import com.smartbus.heze.http.views.Header;
+import com.smartbus.heze.main.bean.WillDoCheckTask;
 import com.smartbus.heze.main.bean.WillDoList;
 import com.smartbus.heze.main.module.WillDoListContract;
 import com.smartbus.heze.main.presenter.WillDoListPresenter;
@@ -55,6 +56,9 @@ public class WillDoListActivity extends BaseActivity implements WillDoListContra
     float mCurPosX = 0;
     String userId = "";
     String proTypeId = "";
+    String taskId = "";
+    String formDefId = "";
+    String activityName = "";
     BaseRecyclerAdapter adapter;
     List<WillDoList.ResultBean> beanList = new ArrayList<>();
     WillDoListPresenter willDoListPresenter;
@@ -78,84 +82,10 @@ public class WillDoListActivity extends BaseActivity implements WillDoListContra
                 holder.setOnClickListener(R.id.textView, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (o.getFormDefId().equals(Constant.YSD_FORMDEFIS)) {
-                            Intent intent = new Intent(WillDoListActivity.this, DepartBudgetWillActivity.class);
-                            intent.putExtra("activityName", o.getActivityName());
-                            intent.putExtra("taskId", o.getTaskId());
-                            startActivity(intent);
-                        }
-                        if (o.getFormDefId().equals(Constant.ADVER_FORMDEFIS)) {
-                            Intent intent = new Intent(WillDoListActivity.this, AdverBudgeWillActivity.class);
-                            intent.putExtra("activityName", o.getActivityName());
-                            intent.putExtra("taskId", o.getTaskId());
-                            startActivity(intent);
-                        }
-                        if (o.getFormDefId().equals(Constant.BORROWACCIDENT_FORMDEFIS)) {
-                            Intent intent = new Intent(WillDoListActivity.this, BorrowAccidentWillActivity.class);
-                            intent.putExtra("activityName", o.getActivityName());
-                            intent.putExtra("taskId", o.getTaskId());
-                            startActivity(intent);
-                        }
-                        if (o.getFormDefId().equals(Constant.CURRENCYACCIDENT_FORMDEFIS)) {
-                            Intent intent = new Intent(WillDoListActivity.this, CurrencyAccidentWillActivity.class);
-                            intent.putExtra("activityName", o.getActivityName());
-                            intent.putExtra("taskId", o.getTaskId());
-                            startActivity(intent);
-                        }
-                        if (o.getFormDefId().equals(Constant.HUIQIAN_FORMDEFIS)) {
-                            Intent intent = new Intent(WillDoListActivity.this, HuiQianWillActivity.class);
-                            intent.putExtra("activityName", o.getActivityName());
-                            intent.putExtra("taskId", o.getTaskId());
-                            startActivity(intent);
-                        }
-                        if (o.getFormDefId().equals(Constant.FILECIR_FORMDEFIS)) {
-                            Intent intent = new Intent(WillDoListActivity.this, FileCirculateWillActivity.class);
-                            intent.putExtra("activityName", o.getActivityName());
-                            intent.putExtra("taskId", o.getTaskId());
-                            startActivity(intent);
-                        }
-                        if (o.getFormDefId().equals(Constant.DOCUMENTLZ_FORMDEFIS)) {
-                            Intent intent = new Intent(WillDoListActivity.this, DocumentLZWillActivity.class);
-                            intent.putExtra("activityName", o.getActivityName());
-                            intent.putExtra("taskId", o.getTaskId());
-                            startActivity(intent);
-                        }
-                        if (o.getFormDefId().equals(Constant.USERDLEAVE_FORMDEFIS)) {
-                            Intent intent = new Intent(WillDoListActivity.this, UserdLeaveWillActivity.class);
-                            intent.putExtra("activityName", o.getActivityName());
-                            intent.putExtra("taskId", o.getTaskId());
-                            startActivity(intent);
-                        }
-                        if (o.getFormDefId().equals(Constant.ADDWORK_FORMDEFIS)) {
-                            Intent intent = new Intent(WillDoListActivity.this, AddWorkWillActivity.class);
-                            intent.putExtra("activityName", o.getActivityName());
-                            intent.putExtra("taskId", o.getTaskId());
-                            startActivity(intent);
-                        }
-                        if (o.getFormDefId().equals(Constant.OLDWORK_FORMDEFIS)) {
-                            Intent intent = new Intent(WillDoListActivity.this, OldWorkWillActivity.class);
-                            intent.putExtra("activityName", o.getActivityName());
-                            intent.putExtra("taskId", o.getTaskId());
-                            startActivity(intent);
-                        }
-                        if (o.getFormDefId().equals(Constant.ATWORK_FORMDEFIS)) {
-                            Intent intent = new Intent(WillDoListActivity.this, AtWorkWillActivity.class);
-                            intent.putExtra("activityName", o.getActivityName());
-                            intent.putExtra("taskId", o.getTaskId());
-                            startActivity(intent);
-                        }
-                        if (o.getFormDefId().equals(Constant.CHECKWORK_FORMDEFIS)) {
-                            Intent intent = new Intent(WillDoListActivity.this, CheckWorkWillActivity.class);
-                            intent.putExtra("activityName", o.getActivityName());
-                            intent.putExtra("taskId", o.getTaskId());
-                            startActivity(intent);
-                        }
-                        if (o.getFormDefId().equals(Constant.CAPITALAPPROVAL_FORMDEFIS)) {
-                            Intent intent = new Intent(WillDoListActivity.this, CapitalApprovalWillActivity.class);
-                            intent.putExtra("activityName", o.getActivityName());
-                            intent.putExtra("taskId", o.getTaskId());
-                            startActivity(intent);
-                        }
+                        taskId = o.getTaskId();
+                        formDefId = o.getFormDefId();
+                        activityName = o.getActivityName();
+                        willDoListPresenter.getWillDoCheckTask(taskId,userId);
                     }
                 });
             }
@@ -298,5 +228,98 @@ public class WillDoListActivity extends BaseActivity implements WillDoListContra
     @Override
     public void setWillDoListMessage(String s) {
         Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void setWillDoCheckTask(WillDoCheckTask willDoCheckTask) {
+        if (willDoCheckTask.getSuccess().contains("true")){
+            if (willDoCheckTask.getAssigned().contains("true")){
+                if (formDefId.equals(Constant.YSD_FORMDEFIS)) {
+                    Intent intent = new Intent(WillDoListActivity.this, DepartBudgetWillActivity.class);
+                    intent.putExtra("activityName", activityName);
+                    intent.putExtra("taskId", taskId);
+                    startActivity(intent);
+                }
+                if (formDefId.equals(Constant.ADVER_FORMDEFIS)) {
+                    Intent intent = new Intent(WillDoListActivity.this, AdverBudgeWillActivity.class);
+                    intent.putExtra("activityName", activityName);
+                    intent.putExtra("taskId", taskId);
+                    startActivity(intent);
+                }
+                if (formDefId.equals(Constant.BORROWACCIDENT_FORMDEFIS)) {
+                    Intent intent = new Intent(WillDoListActivity.this, BorrowAccidentWillActivity.class);
+                    intent.putExtra("activityName", activityName);
+                    intent.putExtra("taskId", taskId);
+                    startActivity(intent);
+                }
+                if (formDefId.equals(Constant.CURRENCYACCIDENT_FORMDEFIS)) {
+                    Intent intent = new Intent(WillDoListActivity.this, CurrencyAccidentWillActivity.class);
+                    intent.putExtra("activityName", activityName);
+                    intent.putExtra("taskId", taskId);
+                    startActivity(intent);
+                }
+                if (formDefId.equals(Constant.HUIQIAN_FORMDEFIS)) {
+                    Intent intent = new Intent(WillDoListActivity.this, HuiQianWillActivity.class);
+                    intent.putExtra("activityName", activityName);
+                    intent.putExtra("taskId", taskId);
+                    startActivity(intent);
+                }
+                if (formDefId.equals(Constant.FILECIR_FORMDEFIS)) {
+                    Intent intent = new Intent(WillDoListActivity.this, FileCirculateWillActivity.class);
+                    intent.putExtra("activityName", activityName);
+                    intent.putExtra("taskId", taskId);
+                    startActivity(intent);
+                }
+                if (formDefId.equals(Constant.DOCUMENTLZ_FORMDEFIS)) {
+                    Intent intent = new Intent(WillDoListActivity.this, DocumentLZWillActivity.class);
+                    intent.putExtra("activityName", activityName);
+                    intent.putExtra("taskId", taskId);
+                    startActivity(intent);
+                }
+                if (formDefId.equals(Constant.USERDLEAVE_FORMDEFIS)) {
+                    Intent intent = new Intent(WillDoListActivity.this, UserdLeaveWillActivity.class);
+                    intent.putExtra("activityName", activityName);
+                    intent.putExtra("taskId", taskId);
+                    startActivity(intent);
+                }
+                if (formDefId.equals(Constant.ADDWORK_FORMDEFIS)) {
+                    Intent intent = new Intent(WillDoListActivity.this, AddWorkWillActivity.class);
+                    intent.putExtra("activityName", activityName);
+                    intent.putExtra("taskId", taskId);
+                    startActivity(intent);
+                }
+                if (formDefId.equals(Constant.OLDWORK_FORMDEFIS)) {
+                    Intent intent = new Intent(WillDoListActivity.this, OldWorkWillActivity.class);
+                    intent.putExtra("activityName", activityName);
+                    intent.putExtra("taskId", taskId);
+                    startActivity(intent);
+                }
+                if (formDefId.equals(Constant.ATWORK_FORMDEFIS)) {
+                    Intent intent = new Intent(WillDoListActivity.this, AtWorkWillActivity.class);
+                    intent.putExtra("activityName", activityName);
+                    intent.putExtra("taskId", taskId);
+                    startActivity(intent);
+                }
+                if (formDefId.equals(Constant.CHECKWORK_FORMDEFIS)) {
+                    Intent intent = new Intent(WillDoListActivity.this, CheckWorkWillActivity.class);
+                    intent.putExtra("activityName", activityName);
+                    intent.putExtra("taskId", taskId);
+                    startActivity(intent);
+                }
+                if (formDefId.equals(Constant.CAPITALAPPROVAL_FORMDEFIS)) {
+                    Intent intent = new Intent(WillDoListActivity.this, CapitalApprovalWillActivity.class);
+                    intent.putExtra("activityName", activityName);
+                    intent.putExtra("taskId", taskId);
+                    startActivity(intent);
+                }
+            }else {
+                Toast.makeText(this, "此任务已被其他用户锁定", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    @Override
+    public void setWillDoCheckTaskMessage(String s) {
+         Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
     }
 }

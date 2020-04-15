@@ -18,7 +18,7 @@ public class HuiQianWill implements Serializable {
      * formDefId : 33
      * preTaskName :
      * isSignTask : false
-     * trans : [{"destType":"task","destination":"总经理","name":"to 总经理","source":"分管领导"}]
+     * trans : [{"destType":"task","destination":"总经理","name":"to 总经理","source":"分管经理"}]
      * runId : 32024
      */
 
@@ -334,7 +334,7 @@ public class HuiQianWill implements Serializable {
          * destType : task
          * destination : 总经理
          * name : to 总经理
-         * source : 分管领导
+         * source : 分管经理
          */
 
         private String destType;

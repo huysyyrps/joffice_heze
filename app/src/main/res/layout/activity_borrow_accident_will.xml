@@ -326,7 +326,7 @@
 
                 <TextView
                     style="@style/oaTextView"
-                    android:text="分管领导意见:" />
+                    android:text="分管经理意见:" />
 
                 <View
                     android:layout_width="1dp"
@@ -337,12 +337,12 @@
                 <TextView
                     android:id="@+id/tvLeader1"
                     style="@style/oaEditText"
-                    android:hint="分管领导意见" />
+                    android:hint="分管经理意见" />
                 <EditText
                     android:id="@+id/etLeader1"
                     android:visibility="gone"
                     style="@style/oaEditText"
-                    android:hint="分管领导意见" />
+                    android:hint="分管经理意见" />
             </LinearLayout>
             <View style="@style/HourLine"></View>
 

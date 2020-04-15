@@ -1102,6 +1102,26 @@ public class AdverBudgetActivity extends BaseActivity implements OneContract.Vie
                     Toast.makeText(this, "请填写预算理由", Toast.LENGTH_SHORT).show();
                     break;
                 }
+                if (etName1.getText().toString().equals("")) {
+                    Toast.makeText(this, "请填写项目名称", Toast.LENGTH_SHORT).show();
+                    break;
+                }
+                if (etDepartment1.getText().toString().equals("")) {
+                    Toast.makeText(this, "请填写单位", Toast.LENGTH_SHORT).show();
+                    break;
+                }
+                if (etMoney1.getText().toString().equals("")) {
+                    Toast.makeText(this, "请填写项目单价", Toast.LENGTH_SHORT).show();
+                    break;
+                }
+                if (etName1.getText().toString().equals("")) {
+                    Toast.makeText(this, "请填写数量", Toast.LENGTH_SHORT).show();
+                    break;
+                }
+                if (etLong1.getText().toString().equals("")||etWide1.getText().toString().equals("")) {
+                    Toast.makeText(this, "长和宽不能为空", Toast.LENGTH_SHORT).show();
+                    break;
+                }
                 setDataFirst();
                 departBudgetLRPresenter.getDepartBudgeLR(firstmap);
                 break;

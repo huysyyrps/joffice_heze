@@ -187,7 +187,7 @@
 
                 <TextView
                     style="@style/oaTextView"
-                    android:text="分管领导:" />
+                    android:text="分管经理:" />
 
                 <View
                     android:layout_width="1dp"
@@ -198,7 +198,7 @@
                 <TextView
                     android:id="@+id/etLeader1"
                     style="@style/oaEditText"
-                    android:hint="分管领导签名" />
+                    android:hint="分管经理签名" />
             </LinearLayout>
             <View style="@style/HourLine"></View>
 

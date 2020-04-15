@@ -16,6 +16,6 @@ public interface AtCheckTypeContract {
     }
 
     interface presenter extends BasePresenter {
-        void getCheckType(String runId, String vocationId);
+        void getAtCheckType(String runId, String vocationId);
     }
 }

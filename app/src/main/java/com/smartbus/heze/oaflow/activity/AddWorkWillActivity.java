@@ -96,6 +96,7 @@ public class AddWorkWillActivity extends BaseActivity implements AddWorkWillCont
     Button btnUp;
 
     String role = "";
+    String mycomments = "";
     String vocationId = "";
     String mainId = "";
     String destType = "";
@@ -248,6 +249,7 @@ public class AddWorkWillActivity extends BaseActivity implements AddWorkWillCont
         } else {
             map.put("bumenjingli", etLeader.getText().toString());
             map.put("comments", etLeader.getText().toString());
+            mycomments = etLeader.getText().toString();
         }
         if (tvLeader1.getVisibility() == View.VISIBLE) {
             if (!tvLeader1.getText().toString().equals("")) {
@@ -256,6 +258,7 @@ public class AddWorkWillActivity extends BaseActivity implements AddWorkWillCont
         } else {
             map.put("fenguanjingli", etLeader1.getText().toString());
             map.put("comments", etLeader1.getText().toString());
+            mycomments = etLeader1.getText().toString();
         }
         if (tvLeader2.getVisibility() == View.VISIBLE) {
             if (!tvLeader2.getText().toString().equals("")) {
@@ -264,6 +267,7 @@ public class AddWorkWillActivity extends BaseActivity implements AddWorkWillCont
         } else {
             map.put("zongjingli", etLeader2.getText().toString());
             map.put("comments", etLeader2.getText().toString());
+            mycomments = etLeader2.getText().toString();
         }
     }
 
@@ -291,7 +295,7 @@ public class AddWorkWillActivity extends BaseActivity implements AddWorkWillCont
                 String kzMove = jsonObject.getString("bumenjingli");
                 String fgMove = jsonObject.getString("fenguanjingli");
                 String cwMove = jsonObject.getString("zongjingli");
-                if (kzMove.equals("2")) {
+                if (kzMove.equals("3")) {
                     tvLeader.setVisibility(View.GONE);
                     etLeader.setVisibility(View.VISIBLE);
                     if (leader != null && leader.length() != 0) {
@@ -305,7 +309,7 @@ public class AddWorkWillActivity extends BaseActivity implements AddWorkWillCont
                     }
                 }
 
-                if (fgMove.equals("2")) {
+                if (fgMove.equals("3")) {
                     tvLeader1.setVisibility(View.GONE);
                     etLeader1.setVisibility(View.VISIBLE);
                     if (leader1 != null && leader1.length() != 0) {
@@ -319,7 +323,7 @@ public class AddWorkWillActivity extends BaseActivity implements AddWorkWillCont
                     }
                 }
 
-                if (cwMove.equals("2")) {
+                if (cwMove.equals("3")) {
                     tvLeader2.setVisibility(View.GONE);
                     etLeader2.setVisibility(View.VISIBLE);
                     if (leader2 != null && leader2.length() != 0) {
@@ -384,8 +388,13 @@ public class AddWorkWillActivity extends BaseActivity implements AddWorkWillCont
     @Override
     public void setNoHandlerPerson(NoHandlerPerson s) {
         setData();
-        map.put("flowAssignId", role + "|" + uId);
-        willDoPresenter.getWillDo(map);
+        if (!mycomments.equals("同意")&&!mycomments.equals("不同意")){
+            map.clear();
+            Toast.makeText(AddWorkWillActivity.this, "意见请填写同意或不同意", Toast.LENGTH_SHORT).show();
+        }else {
+            map.put("flowAssignId", role + "|" + uId);
+            willDoPresenter.getWillDo(map);
+        }
     }
 
     @Override
@@ -458,8 +467,13 @@ public class AddWorkWillActivity extends BaseActivity implements AddWorkWillCont
                 setData();
                 // 关闭提示框
                 alertDialog3.dismiss();
-                map.put("flowAssignId", role + "|" + uId);
-                willDoPresenter.getWillDo(map);
+                if (!mycomments.equals("同意")&&!mycomments.equals("不同意")){
+                    map.clear();
+                    Toast.makeText(AddWorkWillActivity.this, "意见请填写同意或不同意", Toast.LENGTH_SHORT).show();
+                }else {
+                    map.put("flowAssignId", role + "|" + uId);
+                    willDoPresenter.getWillDo(map);
+                }
             }
         }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
 
@@ -474,6 +488,7 @@ public class AddWorkWillActivity extends BaseActivity implements AddWorkWillCont
     }
 
     private String getListData() {
+        uId = "";
         if (selectList.size() == 1) {
             //uName = backlist.get(0).getActivityName();
             uId = selectList.get(0);

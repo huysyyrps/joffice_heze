@@ -65,6 +65,7 @@ import com.smartbus.heze.fileapprove.bean.WorkOnePerson;
 import com.smartbus.heze.fileapprove.bean.WorkPerson;
 import com.smartbus.heze.main.bean.Banner;
 import com.smartbus.heze.main.bean.OaWillDo;
+import com.smartbus.heze.main.bean.WillDoCheckTask;
 import com.smartbus.heze.main.bean.WillDoList;
 import com.smartbus.heze.main.bean.WillDoListType;
 import com.smartbus.heze.main.bean.WillDoNum;
@@ -180,6 +181,12 @@ public interface AllApi {
     @GET(ApiAddress.willdolist)
     Observable<WillDoList> getWillDoList(@Query("typeId") String proTypeId,@Query("start") int start,@Query("limit") int limit);
 
+    /**
+     * 获取待办列表内item是否已经被处理
+     */
+    @GET(ApiAddress.willdolistTask)
+    Observable<WillDoCheckTask> getWillDoListCheckTask(@Query("taskId") String taskId, @Query("userId") String userId);
+
 //    /**
 //     * 点击待办列表获取formDefId
 //     */
@@ -240,6 +247,15 @@ public interface AllApi {
             , @Query("mycomments") String mycomments);
 
     /**
+     * 修改广告预算发布状态
+     */
+    @GET(ApiAddress.departbudgechecktype)
+    Observable<CheckType> getDepartBudgetWillCheckType(@Query("runId") String runId
+            , @Query("id") String accidentLoanId
+            , @Query("destName") String destName
+            , @Query("mycomments") String mycomments);
+
+    /**
      * 获取事故借款单待办详情
      */
     @GET(ApiAddress.willdodetail)
@@ -256,6 +272,15 @@ public interface AllApi {
      */
     @GET(ApiAddress.capitalapprovalchange)
     Observable<CheckType> getCapitalApprovalCheckType(@Query("runId") String runId, @Query("id") String vocationId);
+
+    /**
+     * 修改资金审批待办状态
+     */
+    @GET(ApiAddress.capitalapprovalchange)
+    Observable<CheckType> getCapitalApprovalWillCheckType(@Query("runId") String runId
+            , @Query("id") String accidentLoanId
+            , @Query("destName") String destName
+            , @Query("mycomments") String mycomments);
     /**
      * 资金审批待办详情
      */
@@ -403,7 +428,7 @@ public interface AllApi {
     Observable<CheckType> getAddCheckType(@Query("runId") String runId, @Query("addClassId") String vocationId);
 
     /**
-     * 修改调休发布状态
+     * 修改值班发布状态
      */
     @GET(ApiAddress.atworkchecktype)
     Observable<CheckType> getAtCheckType(@Query("runId") String runId, @Query("id") String vocationId);

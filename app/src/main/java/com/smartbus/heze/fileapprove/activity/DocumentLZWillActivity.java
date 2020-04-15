@@ -109,6 +109,8 @@ public class DocumentLZWillActivity extends BaseActivity implements DocumentLZWi
     @BindView(R.id.btnLR)
     Button btnLR;
 
+    String runId, accidentLoanId;
+    String mycomments = "";
     String mainId = "";
     String dataRes;
     String destType = "";
@@ -296,8 +298,13 @@ public class DocumentLZWillActivity extends BaseActivity implements DocumentLZWi
                     } else {
                         setData();
                         getListData();
-                        map.put("flowAssignId", destName + "|" + uId);
-                        willDoPresenter.getWillDo(map);
+                        if (!mycomments.equals("同意") && !mycomments.equals("不同意")) {
+                            map.clear();
+                            Toast.makeText(DocumentLZWillActivity.this, "意见请填写同意或不同意", Toast.LENGTH_SHORT).show();
+                        } else {
+                            map.put("flowAssignId", destName + "|" + uId);
+                            willDoPresenter.getWillDo(map);
+                        }
                     }
                 }
                 break;
@@ -324,6 +331,7 @@ public class DocumentLZWillActivity extends BaseActivity implements DocumentLZWi
         } else {
             map.put("nibanyj", etLeader.getText().toString());
             map.put("comments", etLeader.getText().toString());
+            mycomments = etLeader.getText().toString();
         }
         if (tvLeader1.getVisibility() == View.VISIBLE) {
             if (!tvLeader1.getText().toString().equals("")) {
@@ -332,6 +340,7 @@ public class DocumentLZWillActivity extends BaseActivity implements DocumentLZWi
         } else {
             map.put("ldyj", etLeader1.getText().toString());
             map.put("comments", etLeader1.getText().toString());
+            mycomments = etLeader1.getText().toString();
         }
         if (tvLeader2.getVisibility() == View.VISIBLE) {
             if (!tvLeader2.getText().toString().equals("")) {
@@ -340,10 +349,12 @@ public class DocumentLZWillActivity extends BaseActivity implements DocumentLZWi
         } else {
             map.put("chengbanjg", etLeader2.getText().toString());
             map.put("comments", etLeader2.getText().toString());
+            mycomments = etLeader2.getText().toString();
         }
     }
 
     private String getListData() {
+        uId = "";
         if (selectList.size() == 0) {
             if (selectList1.size() == 1) {
                 uId = selectList1.get(0);
@@ -444,7 +455,7 @@ public class DocumentLZWillActivity extends BaseActivity implements DocumentLZWi
                 String nbMove = jsonObject.getString("nibanyj");
                 String ldMove = jsonObject.getString("ldyj");
                 String jgMove = jsonObject.getString("chengbanjg");
-                if (nbMove.equals("2")) {
+                if (nbMove.equals("3")) {
                     tvLeader.setVisibility(View.GONE);
                     etLeader.setVisibility(View.VISIBLE);
                     if (leader != null && leader.length() != 0) {
@@ -458,7 +469,7 @@ public class DocumentLZWillActivity extends BaseActivity implements DocumentLZWi
                     }
                 }
 
-                if (ldMove.equals("2")) {
+                if (ldMove.equals("3")) {
                     tvLeader1.setVisibility(View.GONE);
                     etLeader1.setVisibility(View.VISIBLE);
                     if (leader1 != null && leader1.length() != 0) {
@@ -472,7 +483,7 @@ public class DocumentLZWillActivity extends BaseActivity implements DocumentLZWi
                     }
                 }
 
-                if (jgMove.equals("2")) {
+                if (jgMove.equals("3")) {
                     tvLeader2.setVisibility(View.GONE);
                     etLeader2.setVisibility(View.VISIBLE);
                     if (leader2 != null && leader2.length() != 0) {
@@ -537,8 +548,13 @@ public class DocumentLZWillActivity extends BaseActivity implements DocumentLZWi
         setData();
         getListData();
 //        map.put("flowAssignId", null);
-        map.put("flowAssignId", destName + "|" + uId);
-        willDoPresenter.getWillDo(map);
+        if (!mycomments.equals("同意") && !mycomments.equals("不同意")) {
+            map.clear();
+            Toast.makeText(DocumentLZWillActivity.this, "意见请填写同意或不同意", Toast.LENGTH_SHORT).show();
+        } else {
+            map.put("flowAssignId", destName + "|" + uId);
+            willDoPresenter.getWillDo(map);
+        }
     }
 
     @Override
@@ -650,8 +666,13 @@ public class DocumentLZWillActivity extends BaseActivity implements DocumentLZWi
                 setData();
                 // 关闭提示框
                 alertDialog3.dismiss();
-                map.put("flowAssignId", destName + "|" + uId);
-                willDoPresenter.getWillDo(map);
+                if (!mycomments.equals("同意") && !mycomments.equals("不同意")) {
+                    map.clear();
+                    Toast.makeText(DocumentLZWillActivity.this, "意见请填写同意或不同意", Toast.LENGTH_SHORT).show();
+                } else {
+                    map.put("flowAssignId", destName + "|" + uId);
+                    willDoPresenter.getWillDo(map);
+                }
             }
         }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
 

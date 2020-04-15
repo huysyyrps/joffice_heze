@@ -507,7 +507,7 @@ public class AtWorkActivity extends BaseActivity implements OneContract.View
     public void setUPYSD(BackData s) {
         if (s.isSuccess()) {
             String s1 = String.valueOf(s.getRunId());
-            atWorkCheckTypePresenter.getCheckType(String.valueOf(s.getRunId()), vocationId);
+            atWorkCheckTypePresenter.getAtCheckType(String.valueOf(s.getRunId()), vocationId);
         }
     }
 

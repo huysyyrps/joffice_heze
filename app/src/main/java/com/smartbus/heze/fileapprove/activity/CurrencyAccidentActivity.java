@@ -378,7 +378,7 @@ public class CurrencyAccidentActivity extends BaseActivity implements OneContrac
                 if (resultCode == TAG_ONE) {
                     if (data != null) {
                         tvName.setText(data.getStringArrayListExtra("beanId").get(0));
-                        eCard = data.getStringArrayListExtra("bean").get(0);
+                        eCard = data.getStringExtra("ecard");
                     }
                 }
                 break;

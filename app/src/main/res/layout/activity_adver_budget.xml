@@ -25,11 +25,13 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     style="@style/oaTextView"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center"
                     android:text="编制单位: *" />
 
                 <View
@@ -40,7 +42,7 @@
 
                 <TextView
                     android:id="@+id/tvDepartment"
-                    style="@style/oaEditText"
+                    style="@style/textWrite"
                     android:hint="请选择编制单位" />
             </LinearLayout>
 
@@ -65,7 +67,8 @@
 
                 <EditText
                     android:id="@+id/etName"
-                    style="@style/oaEditText"
+                    style="@style/textWrite"
+                    android:maxLength="15"
                     android:hint="请填写费用项目" />
             </LinearLayout>
             <View style="@style/HourLine"></View>
@@ -142,40 +145,45 @@
                         <EditText
                             android:id="@+id/etName1"
                             style="@style/oaEditText1"
+                            android:maxLength="15"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp" />
+                            android:layout_height="75dp" />
 
                         <View style="@style/HourLine"></View>
 
                         <EditText
                             android:id="@+id/etName2"
                             style="@style/oaEditText1"
+                            android:maxLength="15"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp" />
+                            android:layout_height="75dp" />
 
                         <View style="@style/HourLine"></View>
 
                         <EditText
                             android:id="@+id/etName3"
                             style="@style/oaEditText1"
+                            android:maxLength="15"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp" />
+                            android:layout_height="75dp" />
 
                         <View style="@style/HourLine"></View>
 
                         <EditText
                             android:id="@+id/etName4"
                             style="@style/oaEditText1"
+                            android:maxLength="15"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp" />
+                            android:layout_height="75dp" />
 
                         <View style="@style/HourLine"></View>
 
                         <EditText
                             android:id="@+id/etName5"
                             style="@style/oaEditText1"
+                            android:maxLength="15"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp" />
+                            android:layout_height="75dp" />
                     </LinearLayout>
 
                     <View
@@ -184,7 +192,7 @@
                         android:background="@color/shouye" />
 
                     <LinearLayout
-                        android:layout_width="60dp"
+                        android:layout_width="140dp"
                         android:layout_height="match_parent"
                         android:orientation="vertical">
 
@@ -199,41 +207,46 @@
 
                         <EditText
                             android:id="@+id/etLong1"
-                            style="@style/oaEditText"
+                            style="@style/oaEditText1"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp" />
+                            android:layout_height="45dp"
+                            android:inputType="number|numberDecimal"/>
 
                         <View style="@style/HourLine"></View>
 
                         <EditText
                             android:id="@+id/etLong2"
-                            style="@style/oaEditText"
+                            style="@style/oaEditText1"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp" />
+                            android:layout_height="45dp"
+                            android:inputType="number|numberDecimal"/>
 
                         <View style="@style/HourLine"></View>
 
                         <EditText
                             android:id="@+id/etLong3"
-                            style="@style/oaEditText"
+                            style="@style/oaEditText1"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp" />
+                            android:layout_height="45dp"
+                            android:inputType="number|numberDecimal"/>
 
                         <View style="@style/HourLine"></View>
 
                         <EditText
                             android:id="@+id/etLong4"
-                            style="@style/oaEditText"
+                            style="@style/oaEditText1"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp" />
+                            android:layout_height="45dp"
+                            android:inputType="number|numberDecimal"/>
 
                         <View style="@style/HourLine"></View>
 
                         <EditText
                             android:id="@+id/etLong5"
-                            style="@style/oaEditText"
+                            style="@style/oaEditText1"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp" />
+                            android:layout_height="45dp"
+                            android:inputType="number|numberDecimal"/>
 
                     </LinearLayout>
 
@@ -243,7 +256,7 @@
                         android:background="@color/shouye" />
 
                     <LinearLayout
-                        android:layout_width="60dp"
+                        android:layout_width="140dp"
                         android:layout_height="match_parent"
                         android:orientation="vertical">
 
@@ -258,41 +271,46 @@
 
                         <EditText
                             android:id="@+id/etWide1"
-                            style="@style/oaEditText"
+                            style="@style/oaEditText1"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp" />
+                            android:layout_height="45dp"
+                            android:inputType="number|numberDecimal"/>
 
                         <View style="@style/HourLine"></View>
 
                         <EditText
                             android:id="@+id/etWide2"
-                            style="@style/oaEditText"
+                            style="@style/oaEditText1"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp" />
+                            android:layout_height="45dp"
+                            android:inputType="number|numberDecimal"/>
 
                         <View style="@style/HourLine"></View>
 
                         <EditText
                             android:id="@+id/etWide3"
-                            style="@style/oaEditText"
+                            style="@style/oaEditText1"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp" />
+                            android:layout_height="45dp"
+                            android:inputType="number|numberDecimal"/>
 
                         <View style="@style/HourLine"></View>
 
                         <EditText
                             android:id="@+id/etWide4"
-                            style="@style/oaEditText"
+                            style="@style/oaEditText1"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp" />
+                            android:layout_height="45dp"
+                            android:inputType="number|numberDecimal"/>
 
                         <View style="@style/HourLine"></View>
 
                         <EditText
                             android:id="@+id/etWide5"
-                            style="@style/oaEditText"
+                            style="@style/oaEditText1"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp" />
+                            android:layout_height="45dp"
+                            android:inputType="number|numberDecimal"/>
 
                     </LinearLayout>
 
@@ -302,7 +320,7 @@
                         android:background="@color/shouye" />
 
                     <LinearLayout
-                        android:layout_width="60dp"
+                        android:layout_width="140dp"
                         android:layout_height="match_parent"
                         android:orientation="vertical">
 
@@ -317,7 +335,7 @@
 
                         <EditText
                             android:id="@+id/etDepartment1"
-                            style="@style/oaEditText"
+                            style="@style/oaEditText1"
                             android:layout_width="match_parent"
                             android:layout_height="45dp" />
 
@@ -325,7 +343,7 @@
 
                         <EditText
                             android:id="@+id/etDepartment2"
-                            style="@style/oaEditText"
+                            style="@style/oaEditText1"
                             android:layout_width="match_parent"
                             android:layout_height="45dp" />
 
@@ -333,7 +351,7 @@
 
                         <EditText
                             android:id="@+id/etDepartment3"
-                            style="@style/oaEditText"
+                            style="@style/oaEditText1"
                             android:layout_width="match_parent"
                             android:layout_height="45dp" />
 
@@ -341,7 +359,7 @@
 
                         <EditText
                             android:id="@+id/etDepartment4"
-                            style="@style/oaEditText"
+                            style="@style/oaEditText1"
                             android:layout_width="match_parent"
                             android:layout_height="45dp" />
 
@@ -349,7 +367,7 @@
 
                         <EditText
                             android:id="@+id/etDepartment5"
-                            style="@style/oaEditText"
+                            style="@style/oaEditText1"
                             android:layout_width="match_parent"
                             android:layout_height="45dp" />
 
@@ -361,7 +379,7 @@
                         android:background="@color/shouye" />
 
                     <LinearLayout
-                        android:layout_width="60dp"
+                        android:layout_width="140dp"
                         android:layout_height="match_parent"
                         android:orientation="vertical">
 
@@ -424,7 +442,7 @@
                         android:background="@color/shouye" />
 
                     <LinearLayout
-                        android:layout_width="60dp"
+                        android:layout_width="140dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:orientation="vertical">
@@ -447,7 +465,7 @@
                                 android:id="@+id/etNum1"
                                 style="@style/oaEditText1"
                                 android:layout_width="match_parent"
-                                android:layout_height="45dp"
+                                android:layout_height="75dp"
                                 android:inputType="number" />
 
                             <View style="@style/HourLine"></View>
@@ -456,7 +474,7 @@
                                 android:id="@+id/etNum2"
                                 style="@style/oaEditText1"
                                 android:layout_width="match_parent"
-                                android:layout_height="45dp"
+                                android:layout_height="75dp"
                                 android:inputType="number" />
 
                             <View style="@style/HourLine"></View>
@@ -465,7 +483,7 @@
                                 android:id="@+id/etNum3"
                                 style="@style/oaEditText1"
                                 android:layout_width="match_parent"
-                                android:layout_height="45dp"
+                                android:layout_height="75dp"
                                 android:inputType="number" />
 
                             <View style="@style/HourLine"></View>
@@ -474,7 +492,7 @@
                                 android:id="@+id/etNum4"
                                 style="@style/oaEditText1"
                                 android:layout_width="match_parent"
-                                android:layout_height="45dp"
+                                android:layout_height="75dp"
                                 android:inputType="number" />
 
                             <View style="@style/HourLine"></View>
@@ -483,7 +501,7 @@
                                 android:id="@+id/etNum5"
                                 style="@style/oaEditText1"
                                 android:layout_width="match_parent"
-                                android:layout_height="45dp"
+                                android:layout_height="75dp"
                                 android:inputType="number" />
                         </LinearLayout>
                     </LinearLayout>
@@ -494,7 +512,7 @@
                         android:background="@color/shouye" />
 
                     <LinearLayout
-                        android:layout_width="60dp"
+                        android:layout_width="140dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:orientation="vertical">
@@ -517,7 +535,7 @@
                                 android:id="@+id/etAllMoney1"
                                 style="@style/oaEditText1"
                                 android:layout_width="match_parent"
-                                android:layout_height="45dp"
+                                android:layout_height="75dp"
                                 android:inputType="number|numberDecimal" />
 
                             <View style="@style/HourLine"></View>
@@ -526,7 +544,7 @@
                                 android:id="@+id/etAllMoney2"
                                 style="@style/oaEditText1"
                                 android:layout_width="match_parent"
-                                android:layout_height="45dp"
+                                android:layout_height="75dp"
                                 android:inputType="number|numberDecimal" />
 
                             <View style="@style/HourLine"></View>
@@ -535,7 +553,7 @@
                                 android:id="@+id/etAllMoney3"
                                 style="@style/oaEditText1"
                                 android:layout_width="match_parent"
-                                android:layout_height="45dp"
+                                android:layout_height="75dp"
                                 android:inputType="number|numberDecimal" />
 
                             <View style="@style/HourLine"></View>
@@ -544,7 +562,7 @@
                                 android:id="@+id/etAllMoney4"
                                 style="@style/oaEditText1"
                                 android:layout_width="match_parent"
-                                android:layout_height="45dp"
+                                android:layout_height="75dp"
                                 android:inputType="number|numberDecimal" />
 
                             <View style="@style/HourLine"></View>
@@ -553,7 +571,7 @@
                                 android:id="@+id/etAllMoney5"
                                 style="@style/oaEditText1"
                                 android:layout_width="match_parent"
-                                android:layout_height="45dp"
+                                android:layout_height="75dp"
                                 android:inputType="number|numberDecimal" />
                         </LinearLayout>
                     </LinearLayout>
@@ -664,6 +682,7 @@
             <View style="@style/HourLine"></View>
 
             <LinearLayout
+                android:id="@+id/llLeader0"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -694,6 +713,7 @@
             <View style="@style/HourLine"></View>
 
             <LinearLayout
+                android:id="@+id/llLeader1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -724,6 +744,7 @@
             <View style="@style/HourLine"></View>
 
             <LinearLayout
+                android:id="@+id/llLeader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -754,6 +775,7 @@
             <View style="@style/HourLine"></View>
 
             <LinearLayout
+                android:id="@+id/llLeader2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">

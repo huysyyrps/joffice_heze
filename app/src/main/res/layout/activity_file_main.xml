@@ -71,19 +71,19 @@
                 android:text="@string/department_accident" />
         </LinearLayout>
         <View style="@style/HourLine"/>
-        <LinearLayout
-            android:id="@+id/ll4"
-            style="@style/ycLinearLayout">
+        <!--<LinearLayout-->
+            <!--android:id="@+id/ll4"-->
+            <!--style="@style/ycLinearLayout">-->
 
-            <ImageView
-                style="@style/ycImageView"
-                android:src="@drawable/flow_item4" />
+            <!--<ImageView-->
+                <!--style="@style/ycImageView"-->
+                <!--android:src="@drawable/flow_item4" />-->
 
-            <TextView
-                style="@style/ycTextView"
-                android:text="@string/department_file_huiqian" />
-        </LinearLayout>
-        <View style="@style/HourLine"/>
+            <!--<TextView-->
+                <!--style="@style/ycTextView"-->
+                <!--android:text="@string/department_file_huiqian" />-->
+        <!--</LinearLayout>-->
+        <!--<View style="@style/HourLine"/>-->
         <LinearLayout
             android:id="@+id/ll5"
             style="@style/ycLinearLayout">

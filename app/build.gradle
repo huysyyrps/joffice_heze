@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-
+//apply plugin: 'com.aliyun.ams.emas-services'
 android {
     signingConfigs {
         config {
@@ -16,12 +16,16 @@ android {
         minSdkVersion 19
         targetSdkVersion 26
         versionCode 4
-        versionName "2.4"
+        versionName "2.6"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         manifestPlaceholders = [
                 GETUI_APP_ID    : "B0O9oXBBg66K3mUnkI4J19",
                 GETUI_APP_KEY   : "zV2KNaApn78PdHKtfUxZY5",
-                GETUI_APP_SECRET: "djAXc4A43EAbkSJnOrkEA"
+                GETUI_APP_SECRET: "djAXc4A43EAbkSJnOrkEA",
+
+                HOTFIX_APPID     : "29127949",
+                HOTFIX_APPSECRET : "b910a88c9441e21588fd891954f13f6a",
+                HOTFIX_RSA       : "MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCM7vSjgNbEmwoWML06k/HRN0rhedtRH4c3wwYRL6TXodyh+0G6a25DUAKGDMSb/SgbS1ZLneo4SjNwABv+lH7nICOJTliWyoORbJIVakPFnHox71MLt4zDwiP4fbJ/vwDZboQXaOnvKEYlw+bjxnAjCbmI4/zCa5ec5yWJig2gvVBfcaTNlw9VnbUtw6P473WF+o6WTkT1cwE79OvwqwflPYTppy11Wclg2c4SJ/XY+kGGxuF7SN7tcXwDiw7b0sbgTl1g9VogCL/BoZFLP/O4gPWcs5cOmNj2VAyVg5mkK7L/BTigy1sjWGS6hvDWGNtX27rHXQdzSCnZoXqovyx7AgMBAAECggEAJIpQI5RkGtWX5+j7JxT0van4YD2X/5CNHogSKqKPutjcu6LJh+wSyqEUBm2JDGi23VzLIw/uimmyrHdaysb1oDdU/2Sw02fudOYRejvzFmlbxVan0YHlnVvYt7Tfcv+y2K0u0mMBRGDMzz3bv3LT4EHFORjjkAUVajkEIoUIw4PvoSFvzBNWYNHUBn546Tx+kVydGMMmbdM9WQ3/NB0+/JggkdMGWjfwgOoPBdmPbrAQSd9tUzsBYkqnJeoXzmC5b8FF422qrrIVgnRbKRO28cA00q2t+7IRbnC5uH1reBqLWEebFlfNwhnvCGA5s4SlkN2JPIf81CHP/2egaVZGAQKBgQDFXjbiJUv9OGrQhTdv4opOekpwDefngM6hUNgcKGOryW+wrMEXgn6pUjhYJcM707EQjW8y3w21MfFXs4wgoUiw6374rRT0l6XF9s+CDpoS6HsvLssESwV7an3aBZsOv6SvM4wwJwKo5BIvZIQY9BIcJa1FOxV5sv4X9iAik6TtYwKBgQC2zOeVIrOmyDlUJCvKY7E1TNhmC4ekjVM2RZQCXzuAXA703xMKLbLy2Ldlxi1yD+Zf1Hcm20MMXU7TEYtCOqblA9XRGzxEUnBpVQmJuzf0+pTczc9+X8c8ReX78ej3CwFrKims5+cB4xNUJ/sZJv4sT4sc7eNgAlvYf9W3SNQcCQKBgC67tkcqCao116T0RkIp5BHdBw8tW8IHT+YGnIVeUut0UQwGe9ozPgadv1Wv62CZKY3/z1q+UiKbZsgbbYy0Y9/wgyoi4Zlg5xHO9SeYiYb8oV50uAGWOgAVISOkvChr3HTXwdQNCKYxCtVJ+bVm5XrguPxxlw4wAdZuowFM8Hp9AoGBAK9CGtHYOGex1Yz/NODQ3chdSafkbALu4BXLdZEkntZ87HYHHakHkWbVMlgoPc/6wIOmHyqo00qadwVT77DqrLIrECdwNkLGyzGhrwhW79o3GNvtkn718v2tgkcgcpvP+Gc3QEee+tLLU+++eTZvNQdkp9pvlSyqdkZGoa8c6weJAoGAVS0HApVmPttsQHwR3c3UcbkwTK68lCFQrqeYEBguG8uewZ8iRzRxbAfOuOW4ND1ktxziFNMr1NMtPOBQvv2CZbVc4aGbMC+3YMqY1wOVL7D20qXN6DFpKIdmfbVaEzD2ifxxPZRtar8clEgIYk950wB6PNf4MJTM55sZ8rV/CGE="
         ]
         signingConfig signingConfigs.config
     }
@@ -84,6 +88,8 @@ dependencies {
     compile 'com.zt.maven.widget:refreshview:1.0.2'
     compile 'com.zhihu.android:matisse:0.4.3'
     compile 'com.getbase:floatingactionbutton:1.10.1'
+//    热修复
+    compile 'com.aliyun.ams:alicloud-android-hotfix:3.2.13'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
 }

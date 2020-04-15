@@ -379,7 +379,7 @@ public class CapitalApprovalActivity extends BaseActivity implements OneContract
                     break;
                 }
                 if (etType.getText().toString().equals("")) {
-                    Toast.makeText(this, "请填写申报类型", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "请填写申报类别", Toast.LENGTH_SHORT).show();
                     break;
                 }
                 if (etContent.getText().toString().equals("")) {

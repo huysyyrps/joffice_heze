@@ -9,8 +9,8 @@ public class ApiAddress {
 //    public final static String mainApi = "http://192.168.2.150:8080/joffice21/" ;
     //川川
 //    public final static String mainApi = "http://192.168.2.137:8080/joffice/" ;
-    //孙琦
-//    public final static String mainApi = "http://192.168.2.127:8080/joffice/" ;
+    //孙琪
+//    public final static String mainApi = "http://192.168.2.183:8080/joffice/" ;
     //正式库
     public final static String mainApi = "http://120.192.74.58:8080/joffice/" ;
     //柱子
@@ -41,6 +41,8 @@ public class ApiAddress {
     public final static String dataup = "flow/upLoadImageProcessActivity.do";
     //待办列表
     public final static String willdolist = "flow/listTask.do";
+    //待办列表是否被处理
+    public final static String willdolistTask = "flow/checkTask.do";
     //点击待办列表获取formDefId
     public final static String willdoformdefid = "flow/getFormDefIdByDefIdProDefinition.do";
     //待办类型

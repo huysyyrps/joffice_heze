@@ -149,10 +149,24 @@ public class BorrowAccidentWillActivity extends BaseActivity implements BorrowAc
 
     @Override
     protected void rightClient() {
-        setDataBack();
-        map.put("back", "true");
-        map.put("useTemplate", "");
-        willDoPresenter.getWillDo(map);
+        if (etLeader.getVisibility() == View.VISIBLE || etLeader1.getVisibility() == View.VISIBLE
+                || etLeader2.getVisibility() == View.VISIBLE || etLeader3.getVisibility() == View.VISIBLE) {
+            if (etLeader.getText().toString().equals("") && etLeader1.getText().toString().equals("")
+                    && etLeader2.getText().toString().equals("") && etLeader3.getText().toString().equals("")) {
+                Toast.makeText(this, "请填写意见", Toast.LENGTH_SHORT).show();
+            } else {
+                setDataBack();
+                map.put("back", "true");
+                map.put("useTemplate", "");
+                willDoPresenter.getWillDo(map);
+            }
+        }else {
+            setDataBack();
+            map.put("back", "true");
+            map.put("useTemplate", "");
+            willDoPresenter.getWillDo(map);
+        }
+
     }
 
     @OnClick(R.id.btnUp)
@@ -377,11 +391,11 @@ public class BorrowAccidentWillActivity extends BaseActivity implements BorrowAc
                 String fgMove = jsonObject.getString("fenguanjingli");
                 String cwMove = jsonObject.getString("caiwujingli");
                 String psMove = jsonObject.getString("pishi");
-                if (kzMove.equals("2")) {
+                if (kzMove.equals("3")) {
                     tvLeader.setVisibility(View.GONE);
                     etLeader.setVisibility(View.VISIBLE);
                     if (leader != null && leader.length() != 0) {
-                        etLeader.setText(leader);
+//                        etLeader.setText(leader);
                     }
                 } else {
                     tvLeader.setVisibility(View.VISIBLE);
@@ -391,11 +405,11 @@ public class BorrowAccidentWillActivity extends BaseActivity implements BorrowAc
                     }
                 }
 
-                if (fgMove.equals("2")) {
+                if (fgMove.equals("3")) {
                     tvLeader1.setVisibility(View.GONE);
                     etLeader1.setVisibility(View.VISIBLE);
                     if (leader1 != null && leader1.length() != 0) {
-                        etLeader1.setText(leader1);
+//                        etLeader1.setText(leader1);
                     }
                 } else {
                     tvLeader1.setVisibility(View.VISIBLE);
@@ -405,11 +419,11 @@ public class BorrowAccidentWillActivity extends BaseActivity implements BorrowAc
                     }
                 }
 
-                if (cwMove.equals("2")) {
+                if (cwMove.equals("3")) {
                     tvLeader2.setVisibility(View.GONE);
                     etLeader2.setVisibility(View.VISIBLE);
                     if (leader2 != null && leader2.length() != 0) {
-                        etLeader2.setText(leader2);
+//                        etLeader2.setText(leader2);
                     }
                 } else {
                     tvLeader2.setVisibility(View.VISIBLE);
@@ -419,11 +433,11 @@ public class BorrowAccidentWillActivity extends BaseActivity implements BorrowAc
                     }
                 }
 
-                if (psMove.equals("2")) {
+                if (psMove.equals("3")) {
                     tvLeader3.setVisibility(View.GONE);
                     etLeader3.setVisibility(View.VISIBLE);
                     if (leader3 != null && leader3.length() != 0) {
-                        etLeader3.setText(leader3);
+//                        etLeader3.setText(leader3);
                     }
                 } else {
                     tvLeader3.setVisibility(View.VISIBLE);
@@ -431,6 +445,15 @@ public class BorrowAccidentWillActivity extends BaseActivity implements BorrowAc
                     if (leader3 != null && leader3.length() != 0) {
                         tvLeader3.setText(leader3);
                     }
+                }
+                if (kzMove.equals("3")){
+                    tvLeader1.setTextColor(getResources().getColor(R.color.color_set_right));
+                }
+                if (fgMove.equals("3")){
+                    tvLeader2.setTextColor(getResources().getColor(R.color.color_set_right));
+                }
+                if (cwMove.equals("3")){
+                    tvLeader3.setTextColor(getResources().getColor(R.color.color_set_right));
                 }
                 for (int i = 0; i < s.getTrans().size(); i++) {
                     destTypeList.add(s.getTrans().get(i));
@@ -481,8 +504,13 @@ public class BorrowAccidentWillActivity extends BaseActivity implements BorrowAc
     @Override
     public void setNoHandlerPerson(NoHandlerPerson s) {
         setData();
-        map.put("flowAssignId", destName + "|" + uId);
-        willDoPresenter.getWillDo(map);
+        if (!mycomments.equals("同意")&&!mycomments.equals("不同意")){
+            map.clear();
+            Toast.makeText(BorrowAccidentWillActivity.this, "意见请填写同意或不同意", Toast.LENGTH_SHORT).show();
+        }else {
+            map.put("flowAssignId", destName + "|" + uId);
+            willDoPresenter.getWillDo(map);
+        }
     }
 
     @Override
@@ -546,8 +574,13 @@ public class BorrowAccidentWillActivity extends BaseActivity implements BorrowAc
                 setData();
                 // 关闭提示框
                 alertDialog3.dismiss();
-                map.put("flowAssignId", destName + "|" + uId);
-                willDoPresenter.getWillDo(map);
+                if (!mycomments.equals("同意")&&!mycomments.equals("不同意")){
+                    map.clear();
+                    Toast.makeText(BorrowAccidentWillActivity.this, "意见请填写同意或不同意", Toast.LENGTH_SHORT).show();
+                }else {
+                    map.put("flowAssignId", destName + "|" + uId);
+                    willDoPresenter.getWillDo(map);
+                }
             }
         }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
 
@@ -562,6 +595,7 @@ public class BorrowAccidentWillActivity extends BaseActivity implements BorrowAc
     }
 
     private String getListData() {
+        uId = "";
         if (selectList.size() == 1) {
             //uName = backlist.get(0).getActivityName();
             uId = selectList.get(0);

@@ -17,13 +17,13 @@ import com.smartbus.heze.fileapprove.bean.NoEndPerson;
 import com.smartbus.heze.fileapprove.bean.NoHandlerPerson;
 import com.smartbus.heze.fileapprove.bean.NormalPerson;
 import com.smartbus.heze.fileapprove.bean.WillDoUp;
-import com.smartbus.heze.fileapprove.module.BorrowAccidentWillCheckTypeContract;
+import com.smartbus.heze.fileapprove.module.CapitalApprovalWillCheckTypeContract;
 import com.smartbus.heze.fileapprove.module.CapitalApprovalWillContract;
 import com.smartbus.heze.fileapprove.module.NoEndContract;
 import com.smartbus.heze.fileapprove.module.NoHandlerContract;
 import com.smartbus.heze.fileapprove.module.NormalContract;
 import com.smartbus.heze.fileapprove.module.WillDoContract;
-import com.smartbus.heze.fileapprove.presenter.BorrowAccidentWillCheckTypePresenter;
+import com.smartbus.heze.fileapprove.presenter.CapitalApprovalWillCheckTypePresenter;
 import com.smartbus.heze.fileapprove.presenter.CapitalApprovalWillPresenter;
 import com.smartbus.heze.fileapprove.presenter.NoEndPresenter;
 import com.smartbus.heze.fileapprove.presenter.NoHandlerPresenter;
@@ -52,7 +52,7 @@ import butterknife.OnClick;
  * 资金审批待办
  */
 public class CapitalApprovalWillActivity extends BaseActivity implements CapitalApprovalWillContract.View
-        , NormalContract.View, NoEndContract.View, NoHandlerContract.View, WillDoContract.View, BorrowAccidentWillCheckTypeContract.View {
+        , NormalContract.View, NoEndContract.View, NoHandlerContract.View, WillDoContract.View, CapitalApprovalWillCheckTypeContract.View {
 
     @BindView(R.id.header)
     Header header;
@@ -107,7 +107,7 @@ public class CapitalApprovalWillActivity extends BaseActivity implements Capital
     NoHandlerPresenter noHandlerPresenter;
     WillDoPresenter willDoPresenter;
     CapitalApprovalWillPresenter capitalApprovalWillPresenter;
-    BorrowAccidentWillCheckTypePresenter borrowAccidentWillCheckTypePresenter;
+    CapitalApprovalWillCheckTypePresenter borrowAccidentWillCheckTypePresenter;
     List<String> selectList = new ArrayList<>();
     List<String> namelist = new ArrayList<>();
     Map<String, String> map = new HashMap<>();
@@ -126,7 +126,7 @@ public class CapitalApprovalWillActivity extends BaseActivity implements Capital
         willDoPresenter = new WillDoPresenter(this, this);
         Log.e("sessionLogin ", taskId + "-" + activityName);
         capitalApprovalWillPresenter = new CapitalApprovalWillPresenter(this, this);
-        borrowAccidentWillCheckTypePresenter = new BorrowAccidentWillCheckTypePresenter(this, this);
+        borrowAccidentWillCheckTypePresenter = new CapitalApprovalWillCheckTypePresenter(this, this);
         capitalApprovalWillPresenter.getCapitalApprovalWill(activityName, taskId, Constant.CAPITALAPPROVAL_DEFID);
     }
 
@@ -142,10 +142,23 @@ public class CapitalApprovalWillActivity extends BaseActivity implements Capital
 
     @Override
     protected void rightClient() {
-        setDataBack();
-        map.put("back", "true");
-        map.put("useTemplate", "");
-        willDoPresenter.getWillDo(map);
+        if (etLeader.getVisibility() == View.VISIBLE || etLeader1.getVisibility() == View.VISIBLE
+                || etLeader2.getVisibility() == View.VISIBLE || etLeader3.getVisibility() == View.VISIBLE) {
+            if (etLeader.getText().toString().equals("") && etLeader1.getText().toString().equals("")
+                    && etLeader2.getText().toString().equals("") && etLeader3.getText().toString().equals("")) {
+                Toast.makeText(this, "请填写意见", Toast.LENGTH_SHORT).show();
+            } else {
+                setDataBack();
+                map.put("back", "true");
+                map.put("useTemplate", "");
+                willDoPresenter.getWillDo(map);
+            }
+        } else {
+            setDataBack();
+            map.put("back", "true");
+            map.put("useTemplate", "");
+            willDoPresenter.getWillDo(map);
+        }
     }
 
     @OnClick(R.id.btnUp)
@@ -297,6 +310,52 @@ public class CapitalApprovalWillActivity extends BaseActivity implements Capital
         map.put("sbrname", tvName.getText().toString());
         map.put("sbtype", tvType.getText().toString());
         map.put("sbmemo", tvContent.getText().toString());
+        if (tvLeader.getVisibility() == View.VISIBLE) {
+            if (!tvLeader.getText().toString().equals("")) {
+                map.put("keshiyijian", tvLeader.getText().toString());
+            }
+        } else {
+            map.put("keshiyijian", etLeader.getText().toString());
+            map.put("comments", etLeader.getText().toString());
+            mycomments = etLeader.getText().toString();
+        }
+        if (tvLeader1.getVisibility() == View.VISIBLE) {
+            if (!tvLeader1.getText().toString().equals("")) {
+                map.put("caiwuyijian", tvLeader1.getText().toString());
+            }
+        } else {
+            map.put("caiwuyijian", etLeader1.getText().toString());
+            map.put("comments", etLeader1.getText().toString());
+            mycomments = etLeader1.getText().toString();
+        }
+        if (tvLeader2.getVisibility() == View.VISIBLE) {
+            if (!tvLeader2.getText().toString().equals("")) {
+                map.put("zongjingliyijian", tvLeader2.getText().toString());
+            }
+        } else {
+            map.put("zongjingliyijian", etLeader2.getText().toString());
+            map.put("comments", etLeader2.getText().toString());
+            mycomments = etLeader2.getText().toString();
+        }
+        if (tvLeader3.getVisibility() == View.VISIBLE) {
+            if (!tvLeader3.getText().toString().equals("")) {
+                map.put("caiwujingli", tvLeader3.getText().toString());
+            }
+        } else {
+            map.put("caiwujingli", etLeader3.getText().toString());
+            map.put("comments", etLeader3.getText().toString());
+            mycomments = etLeader3.getText().toString();
+        }
+
+        if (tvLeader4.getVisibility() == View.VISIBLE) {
+            if (!tvLeader4.getText().toString().equals("")) {
+                map.put("caiwuke", tvLeader4.getText().toString());
+            }
+        } else {
+            map.put("caiwuke", etLeader4.getText().toString());
+            map.put("comments", etLeader4.getText().toString());
+            mycomments = etLeader4.getText().toString();
+        }
     }
 
     @Override
@@ -321,14 +380,14 @@ public class CapitalApprovalWillActivity extends BaseActivity implements Capital
                 JSONObject jsonObject = new JSONObject(move);
                 String ksMove = jsonObject.getString("keshiyijian");
                 String cwMove = jsonObject.getString("caiwuyijian");
-                String zjlMove = jsonObject.getString("zongjingliyijian");
+                String zjlMove = jsonObject.getString("zongjingli");
                 String cwspMove = jsonObject.getString("caiwujingli");
                 String cwjlMove = jsonObject.getString("caiwuke");
-                if (ksMove.equals("2")) {
+                if (ksMove.equals("3")) {
                     tvLeader.setVisibility(View.GONE);
                     etLeader.setVisibility(View.VISIBLE);
                     if (leader != null && leader.length() != 0) {
-                        etLeader.setText(leader);
+//                        etLeader.setText(leader);
                     }
                 } else {
                     tvLeader.setVisibility(View.VISIBLE);
@@ -338,11 +397,11 @@ public class CapitalApprovalWillActivity extends BaseActivity implements Capital
                     }
                 }
 
-                if (cwMove.equals("2")) {
+                if (cwMove.equals("3")) {
                     tvLeader1.setVisibility(View.GONE);
                     etLeader1.setVisibility(View.VISIBLE);
                     if (leader1 != null && leader1.length() != 0) {
-                        etLeader1.setText(leader1);
+//                        etLeader1.setText(leader1);
                     }
                 } else {
                     tvLeader1.setVisibility(View.VISIBLE);
@@ -352,11 +411,11 @@ public class CapitalApprovalWillActivity extends BaseActivity implements Capital
                     }
                 }
 
-                if (zjlMove.equals("2")) {
+                if (zjlMove.equals("3")) {
                     tvLeader2.setVisibility(View.GONE);
                     etLeader2.setVisibility(View.VISIBLE);
                     if (leader2 != null && leader2.length() != 0) {
-                        etLeader2.setText(leader2);
+//                        etLeader2.setText(leader2);
                     }
                 } else {
                     tvLeader2.setVisibility(View.VISIBLE);
@@ -366,11 +425,11 @@ public class CapitalApprovalWillActivity extends BaseActivity implements Capital
                     }
                 }
 
-                if (cwspMove.equals("2")) {
+                if (cwspMove.equals("3")) {
                     tvLeader3.setVisibility(View.GONE);
                     etLeader3.setVisibility(View.VISIBLE);
                     if (leader3 != null && leader3.length() != 0) {
-                        etLeader3.setText(leader3);
+//                        etLeader3.setText(leader3);
                     }
                 } else {
                     tvLeader3.setVisibility(View.VISIBLE);
@@ -380,11 +439,11 @@ public class CapitalApprovalWillActivity extends BaseActivity implements Capital
                     }
                 }
 
-                if (cwjlMove.equals("2")) {
+                if (cwjlMove.equals("3")) {
                     tvLeader4.setVisibility(View.GONE);
                     etLeader4.setVisibility(View.VISIBLE);
                     if (leader4 != null && leader4.length() != 0) {
-                        etLeader4.setText(leader4);
+//                        etLeader4.setText(leader4);
                     }
                 } else {
                     tvLeader4.setVisibility(View.VISIBLE);
@@ -393,6 +452,20 @@ public class CapitalApprovalWillActivity extends BaseActivity implements Capital
                         tvLeader4.setText(leader4);
                     }
                 }
+
+                if (ksMove.equals("3")){
+                    tvLeader1.setTextColor(getResources().getColor(R.color.color_set_right));
+                }
+                if (cwMove.equals("3")){
+                    tvLeader2.setTextColor(getResources().getColor(R.color.color_set_right));
+                }
+                if (zjlMove.equals("3")){
+                    tvLeader3.setTextColor(getResources().getColor(R.color.color_set_right));
+                }
+                if (cwspMove.equals("3")){
+                    tvLeader3.setTextColor(getResources().getColor(R.color.color_set_right));
+                }
+
                 for (int i = 0; i < s.getTrans().size(); i++) {
                     destTypeList.add(s.getTrans().get(i));
                 }
@@ -442,8 +515,13 @@ public class CapitalApprovalWillActivity extends BaseActivity implements Capital
     @Override
     public void setNoHandlerPerson(NoHandlerPerson s) {
         setData();
-        map.put("flowAssignId", destName + "|" + uId);
-        willDoPresenter.getWillDo(map);
+        if (!mycomments.equals("同意")&&!mycomments.equals("不同意")){
+            map.clear();
+            Toast.makeText(CapitalApprovalWillActivity.this, "意见请填写同意或不同意", Toast.LENGTH_SHORT).show();
+        }else {
+            map.put("flowAssignId", destName + "|" + uId);
+            willDoPresenter.getWillDo(map);
+        }
     }
 
     @Override
@@ -454,7 +532,7 @@ public class CapitalApprovalWillActivity extends BaseActivity implements Capital
     @Override
     public void setWillDo(WillDoUp s) {
         if (s.isSuccess()) {
-            borrowAccidentWillCheckTypePresenter.getBorrowAccidentWillCheckType(runId, accidentLoanId, destName, mycomments);
+            borrowAccidentWillCheckTypePresenter.getCapitalApprovalCheckType(runId, accidentLoanId, destName, mycomments);
         }else {
             Toast.makeText(this, s.getMsg(), Toast.LENGTH_SHORT).show();
         }
@@ -507,8 +585,13 @@ public class CapitalApprovalWillActivity extends BaseActivity implements Capital
                 setData();
                 // 关闭提示框
                 alertDialog3.dismiss();
-                map.put("flowAssignId", destName + "|" + uId);
-                willDoPresenter.getWillDo(map);
+                if (!mycomments.equals("同意")&&!mycomments.equals("不同意")){
+                    map.clear();
+                    Toast.makeText(CapitalApprovalWillActivity.this, "意见请填写同意或不同意", Toast.LENGTH_SHORT).show();
+                }else {
+                    map.put("flowAssignId", destName + "|" + uId);
+                    willDoPresenter.getWillDo(map);
+                }
             }
         }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
 
@@ -523,6 +606,7 @@ public class CapitalApprovalWillActivity extends BaseActivity implements Capital
     }
 
     private String getListData() {
+        uId = "";
         if (selectList.size() == 1) {
             //uName = backlist.get(0).getActivityName();
             uId = selectList.get(0);
@@ -541,7 +625,7 @@ public class CapitalApprovalWillActivity extends BaseActivity implements Capital
     }
 
     @Override
-    public void setBorrowAccidentWillCheckType(CheckType s) {
+    public void setCapitalApprovalWillCheckType(CheckType s) {
         if (s.isSuccess()) {
             Toast.makeText(this, "数据提交成功", Toast.LENGTH_SHORT).show();
             finish();
@@ -549,7 +633,7 @@ public class CapitalApprovalWillActivity extends BaseActivity implements Capital
     }
 
     @Override
-    public void setBorrowAccidentWillCheckTypeMessage(String s) {
+    public void setCapitalApprovalWillCheckTypeMessage(String s) {
         Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
     }
 }

@@ -49,12 +49,14 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     style="@style/oaTextView"
-                    android:text="编报单位: *" />
+                    android:text="编报单位: *"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center"/>
 
                 <View
                     android:layout_width="1dp"
@@ -64,7 +66,7 @@
 
                 <TextView
                     android:id="@+id/tvDepartment"
-                    style="@style/oaEditText"
+                    style="@style/textWrite"
                     android:hint="请选择编报单位" />
             </LinearLayout>
             <View style="@style/HourLine"></View>
@@ -87,7 +89,8 @@
 
                 <EditText
                     android:id="@+id/etName"
-                    style="@style/oaEditText"
+                    style="@style/textWrite"
+                    android:maxLength="15"
                     android:hint="请填写费用项目" />
             </LinearLayout>
             <View style="@style/HourLine"></View>
@@ -118,40 +121,45 @@
                         <EditText
                             android:id="@+id/etName1"
                             style="@style/oaEditText1"
+                            android:maxLength="15"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp" />
+                            android:layout_height="75dp" />
 
                         <View style="@style/HourLine"></View>
 
                         <EditText
                             android:id="@+id/etName2"
                             style="@style/oaEditText1"
+                            android:maxLength="15"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp" />
+                            android:layout_height="75dp" />
 
                         <View style="@style/HourLine"></View>
 
                         <EditText
                             android:id="@+id/etName3"
                             style="@style/oaEditText1"
+                            android:maxLength="15"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp" />
+                            android:layout_height="75dp" />
 
                         <View style="@style/HourLine"></View>
 
                         <EditText
                             android:id="@+id/etName4"
                             style="@style/oaEditText1"
+                            android:maxLength="15"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp" />
+                            android:layout_height="75dp" />
 
                         <View style="@style/HourLine"></View>
 
                         <EditText
                             android:id="@+id/etName5"
                             style="@style/oaEditText1"
+                            android:maxLength="15"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp" />
+                            android:layout_height="75dp" />
                     </LinearLayout>
                     <View
                         android:layout_width="1dp"
@@ -159,7 +167,7 @@
                         android:background="@color/shouye" />
 
                     <LinearLayout
-                        android:layout_width="60dp"
+                        android:layout_width="140dp"
                         android:layout_height="match_parent"
                         android:orientation="vertical">
 
@@ -174,7 +182,7 @@
 
                         <EditText
                             android:id="@+id/etDepartment1"
-                            style="@style/oaEditText"
+                            style="@style/oaEditText1"
                             android:layout_width="match_parent"
                             android:layout_height="45dp" />
 
@@ -182,7 +190,7 @@
 
                         <EditText
                             android:id="@+id/etDepartment2"
-                            style="@style/oaEditText"
+                            style="@style/oaEditText1"
                             android:layout_width="match_parent"
                             android:layout_height="45dp" />
 
@@ -190,7 +198,7 @@
 
                         <EditText
                             android:id="@+id/etDepartment3"
-                            style="@style/oaEditText"
+                            style="@style/oaEditText1"
                             android:layout_width="match_parent"
                             android:layout_height="45dp" />
 
@@ -198,7 +206,7 @@
 
                         <EditText
                             android:id="@+id/etDepartment4"
-                            style="@style/oaEditText"
+                            style="@style/oaEditText1"
                             android:layout_width="match_parent"
                             android:layout_height="45dp" />
 
@@ -206,7 +214,7 @@
 
                         <EditText
                             android:id="@+id/etDepartment5"
-                            style="@style/oaEditText"
+                            style="@style/oaEditText1"
                             android:layout_width="match_parent"
                             android:layout_height="45dp" />
 
@@ -217,7 +225,7 @@
                         android:background="@color/shouye" />
 
                     <LinearLayout
-                        android:layout_width="60dp"
+                        android:layout_width="140dp"
                         android:layout_height="match_parent"
                         android:orientation="vertical">
 
@@ -279,7 +287,7 @@
                         android:background="@color/shouye" />
 
                     <LinearLayout
-                        android:layout_width="60dp"
+                        android:layout_width="140dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:orientation="vertical">
@@ -301,7 +309,7 @@
                                     android:id="@+id/etNum1"
                                     style="@style/oaEditText1"
                                     android:layout_width="match_parent"
-                                    android:layout_height="45dp"
+                                    android:layout_height="75dp"
                                     android:inputType="number" />
 
                                 <View style="@style/HourLine"></View>
@@ -310,7 +318,7 @@
                                     android:id="@+id/etNum2"
                                     style="@style/oaEditText1"
                                     android:layout_width="match_parent"
-                                    android:layout_height="45dp"
+                                    android:layout_height="75dp"
                                     android:inputType="number" />
 
                                 <View style="@style/HourLine"></View>
@@ -319,7 +327,7 @@
                                     android:id="@+id/etNum3"
                                     style="@style/oaEditText1"
                                     android:layout_width="match_parent"
-                                    android:layout_height="45dp"
+                                    android:layout_height="75dp"
                                     android:inputType="number" />
 
                                 <View style="@style/HourLine"></View>
@@ -328,7 +336,7 @@
                                     android:id="@+id/etNum4"
                                     style="@style/oaEditText1"
                                     android:layout_width="match_parent"
-                                    android:layout_height="45dp"
+                                    android:layout_height="75dp"
                                     android:inputType="number" />
 
                                 <View style="@style/HourLine"></View>
@@ -337,7 +345,7 @@
                                     android:id="@+id/etNum5"
                                     style="@style/oaEditText1"
                                     android:layout_width="match_parent"
-                                    android:layout_height="45dp"
+                                    android:layout_height="75dp"
                                     android:inputType="number" />
                             </LinearLayout>
                     </LinearLayout>
@@ -347,7 +355,7 @@
                         android:background="@color/shouye" />
 
                     <LinearLayout
-                        android:layout_width="60dp"
+                        android:layout_width="140dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:orientation="vertical">
@@ -368,7 +376,7 @@
                                 android:id="@+id/etAllMoney1"
                                 style="@style/oaEditText1"
                                 android:layout_width="match_parent"
-                                android:layout_height="45dp"
+                                android:layout_height="75dp"
                                 android:inputType="number|numberDecimal" />
 
                             <View style="@style/HourLine"></View>
@@ -377,7 +385,7 @@
                                 android:id="@+id/etAllMoney2"
                                 style="@style/oaEditText1"
                                 android:layout_width="match_parent"
-                                android:layout_height="45dp"
+                                android:layout_height="75dp"
                                 android:inputType="number|numberDecimal" />
 
                             <View style="@style/HourLine"></View>
@@ -386,7 +394,7 @@
                                 android:id="@+id/etAllMoney3"
                                 style="@style/oaEditText1"
                                 android:layout_width="match_parent"
-                                android:layout_height="45dp"
+                                android:layout_height="75dp"
                                 android:inputType="number|numberDecimal" />
 
                             <View style="@style/HourLine"></View>
@@ -395,7 +403,7 @@
                                 android:id="@+id/etAllMoney4"
                                 style="@style/oaEditText1"
                                 android:layout_width="match_parent"
-                                android:layout_height="45dp"
+                                android:layout_height="75dp"
                                 android:inputType="number|numberDecimal" />
 
                             <View style="@style/HourLine"></View>
@@ -404,7 +412,7 @@
                                 android:id="@+id/etAllMoney5"
                                 style="@style/oaEditText1"
                                 android:layout_width="match_parent"
-                                android:layout_height="45dp"
+                                android:layout_height="75dp"
                                 android:inputType="number|numberDecimal" />
                         </LinearLayout>
                     </LinearLayout>
@@ -520,7 +528,37 @@
                     style="@style/oaTextView"
                     android:layout_height="45dp"
                     android:layout_gravity="center_vertical"
-                    android:text="分管领导:" />
+                    android:text="科室领导:" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/shouye" />
+
+                <EditText
+                    android:id="@+id/etLeader0"
+                    style="@style/textWrite"
+                    android:hint="科室领导意见"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/tvLeader0"
+                    style="@style/textWrite"
+                    android:hint="科室领导意见" />
+            </LinearLayout>
+            <View style="@style/HourLine"></View>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/oaTextView"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_vertical"
+                    android:text="分管经理:" />
 
                 <View
                     android:layout_width="1dp"
@@ -531,13 +569,13 @@
                 <EditText
                     android:id="@+id/etLeader1"
                     style="@style/textWrite"
-                    android:hint="分管领导意见"
+                    android:hint="分管经理意见"
                     android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/tvLeader1"
                     style="@style/textWrite"
-                    android:hint="分管领导意见" />
+                    android:hint="分管经理意见" />
             </LinearLayout>
             <View style="@style/HourLine"></View>
 

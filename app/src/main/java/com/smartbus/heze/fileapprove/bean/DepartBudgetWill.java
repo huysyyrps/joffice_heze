@@ -254,7 +254,7 @@ public class DepartBudgetWill implements Serializable {
         private String zwcl;
         private String depName;
         private String wide7;
-        private int runId;
+        private String runId;
         private String wide4;
         private String wide3;
         private String cwk;
@@ -656,11 +656,11 @@ public class DepartBudgetWill implements Serializable {
             this.wide7 = wide7;
         }
 
-        public int getRunId() {
+        public String getRunId() {
             return runId;
         }
 
-        public void setRunId(int runId) {
+        public void setRunId(String runId) {
             this.runId = runId;
         }
 

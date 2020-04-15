@@ -31,9 +31,9 @@ import com.smartbus.heze.http.views.Header;
 import com.smartbus.heze.http.views.MyAlertDialog;
 import com.smartbus.heze.oaflow.bean.AtWorkWill;
 import com.smartbus.heze.oaflow.bean.CheckType;
-import com.smartbus.heze.oaflow.module.CheckCheckTypeContract;
+import com.smartbus.heze.oaflow.module.AtCheckTypeContract;
 import com.smartbus.heze.oaflow.module.CheckWorkWillContract;
-import com.smartbus.heze.oaflow.presenter.CheckWorkCheckTypePresenter;
+import com.smartbus.heze.oaflow.presenter.AtWorkCheckTypePresenter;
 import com.smartbus.heze.oaflow.presenter.CheckWorkWillPresenter;
 
 import org.json.JSONException;
@@ -53,7 +53,7 @@ import butterknife.OnClick;
  */
 public class AtWorkWillActivity extends BaseActivity implements CheckWorkWillContract.View
         , NormalContract.View, NoEndContract.View, NoHandlerContract.View, WillDoContract.View
-        , CheckCheckTypeContract.View {
+        , AtCheckTypeContract.View {
     @BindView(R.id.header)
     Header header;
     @BindView(R.id.tvPerson)
@@ -80,6 +80,7 @@ public class AtWorkWillActivity extends BaseActivity implements CheckWorkWillCon
     Button btnUp;
 
     String role = "";
+    String mycomments = "";
     String vocationId = "";
     String mainId = "";
     String destType = "";
@@ -93,7 +94,7 @@ public class AtWorkWillActivity extends BaseActivity implements CheckWorkWillCon
     NoEndPresenter noEndPersenter;
     NoHandlerPresenter noHandlerPresenter;
     WillDoPresenter willDoPresenter;
-    CheckWorkCheckTypePresenter checkTypePresenter;
+    AtWorkCheckTypePresenter checkTypePresenter;
     CheckWorkWillPresenter atWorkWillPresenter;
     List<String> selectList = new ArrayList<>();
     List<String> namelist = new ArrayList<>();
@@ -104,7 +105,7 @@ public class AtWorkWillActivity extends BaseActivity implements CheckWorkWillCon
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-        checkTypePresenter = new CheckWorkCheckTypePresenter(this, this);
+        checkTypePresenter = new AtWorkCheckTypePresenter(this, this);
         Intent intent = getIntent();
         activityName = intent.getStringExtra("activityName");
         taskId = intent.getStringExtra("taskId");
@@ -224,6 +225,7 @@ public class AtWorkWillActivity extends BaseActivity implements CheckWorkWillCon
         } else {
             map.put("bumenjingli", etLeader.getText().toString());
             map.put("comments", etLeader.getText().toString());
+            mycomments = etLeader.getText().toString();
         }
         if (tvLeader1.getVisibility() == View.VISIBLE) {
             if (!tvLeader1.getText().toString().equals("")) {
@@ -232,6 +234,7 @@ public class AtWorkWillActivity extends BaseActivity implements CheckWorkWillCon
         } else {
             map.put("fenguanjingli", etLeader1.getText().toString());
             map.put("comments", etLeader1.getText().toString());
+            mycomments = etLeader1.getText().toString();
         }
     }
 
@@ -254,7 +257,7 @@ public class AtWorkWillActivity extends BaseActivity implements CheckWorkWillCon
                 JSONObject jsonObject = new JSONObject(move);
                 String kzMove = jsonObject.getString("bumenjingli");
                 String fgMove = jsonObject.getString("fenguanjingli");
-                if (kzMove.equals("2")) {
+                if (kzMove.equals("3")) {
                     tvLeader.setVisibility(View.GONE);
                     etLeader.setVisibility(View.VISIBLE);
                     if (leader != null && leader.length() != 0) {
@@ -268,7 +271,7 @@ public class AtWorkWillActivity extends BaseActivity implements CheckWorkWillCon
                     }
                 }
 
-                if (fgMove.equals("2")) {
+                if (fgMove.equals("3")) {
                     tvLeader1.setVisibility(View.GONE);
                     etLeader1.setVisibility(View.VISIBLE);
                     if (leader1 != null && leader1.length() != 0) {
@@ -333,8 +336,13 @@ public class AtWorkWillActivity extends BaseActivity implements CheckWorkWillCon
     @Override
     public void setNoHandlerPerson(NoHandlerPerson s) {
         setData();
-        map.put("flowAssignId", role + "|" + uId);
-        willDoPresenter.getWillDo(map);
+        if (!mycomments.equals("同意")&&!mycomments.equals("不同意")){
+            map.clear();
+            Toast.makeText(AtWorkWillActivity.this, "意见请填写同意或不同意", Toast.LENGTH_SHORT).show();
+        }else {
+            map.put("flowAssignId", role + "|" + uId);
+            willDoPresenter.getWillDo(map);
+        }
     }
 
     @Override
@@ -344,7 +352,7 @@ public class AtWorkWillActivity extends BaseActivity implements CheckWorkWillCon
 
     @Override
     public void setWillDo(WillDoUp s) {
-        checkTypePresenter.getCheckType(String.valueOf(s.getRunId()), vocationId);
+        checkTypePresenter.getAtCheckType(String.valueOf(s.getRunId()), vocationId);
     }
 
     @Override
@@ -407,8 +415,13 @@ public class AtWorkWillActivity extends BaseActivity implements CheckWorkWillCon
                 setData();
                 // 关闭提示框
                 alertDialog3.dismiss();
-                map.put("flowAssignId", role + "|" + uId);
-                willDoPresenter.getWillDo(map);
+                if (!mycomments.equals("同意")&&!mycomments.equals("不同意")){
+                    map.clear();
+                    Toast.makeText(AtWorkWillActivity.this, "意见请填写同意或不同意", Toast.LENGTH_SHORT).show();
+                }else {
+                    map.put("flowAssignId", role + "|" + uId);
+                    willDoPresenter.getWillDo(map);
+                }
             }
         }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
 
@@ -423,6 +436,7 @@ public class AtWorkWillActivity extends BaseActivity implements CheckWorkWillCon
     }
 
     private String getListData() {
+        uId = "";
         if (selectList.size() == 1) {
             //uName = backlist.get(0).getActivityName();
             uId = selectList.get(0);

@@ -135,10 +135,23 @@ public class CurrencyAccidentWillActivity extends BaseActivity implements Curren
 
     @Override
     protected void rightClient() {
-        setDataBack();
-        map.put("back", "true");
-        map.put("useTemplate", "");
-        willDoPresenter.getWillDo(map);
+        if (etLeader.getVisibility() == View.VISIBLE || etLeader1.getVisibility() == View.VISIBLE
+                || etLeader2.getVisibility() == View.VISIBLE || etLeader3.getVisibility() == View.VISIBLE) {
+            if (etLeader.getText().toString().equals("") && etLeader1.getText().toString().equals("")
+                    && etLeader2.getText().toString().equals("") && etLeader3.getText().toString().equals("")) {
+                Toast.makeText(this, "请填写意见", Toast.LENGTH_SHORT).show();
+            } else {
+                setDataBack();
+                map.put("back", "true");
+                map.put("useTemplate", "");
+                willDoPresenter.getWillDo(map);
+            }
+        } else {
+            setDataBack();
+            map.put("back", "true");
+            map.put("useTemplate", "");
+            willDoPresenter.getWillDo(map);
+        }
     }
 
     @OnClick(R.id.btnUp)
@@ -279,6 +292,42 @@ public class CurrencyAccidentWillActivity extends BaseActivity implements Curren
         map.put("mainId", mainId);
         map.put("taskId", taskId);
         map.put("destName", destTypeList.get(0).getDestination());
+        if (tvLeader.getVisibility() == View.VISIBLE) {
+            if (!tvLeader.getText().toString().equals("")) {
+                map.put("kezhang", tvLeader.getText().toString());
+            }
+        } else {
+            map.put("kezhang", etLeader.getText().toString());
+            mycomments = etLeader.getText().toString();
+            map.put("comments", etLeader.getText().toString());
+        }
+        if (tvLeader1.getVisibility() == View.VISIBLE) {
+            if (!tvLeader1.getText().toString().equals("")) {
+                map.put("fenguanlingdao", tvLeader1.getText().toString());
+            }
+        } else {
+            map.put("fenguanlingdao", etLeader1.getText().toString());
+            map.put("comments", etLeader1.getText().toString());
+            mycomments = etLeader1.getText().toString();
+        }
+        if (tvLeader2.getVisibility() == View.VISIBLE) {
+            if (!tvLeader2.getText().toString().equals("")) {
+                map.put("caiwujingli", tvLeader2.getText().toString());
+            }
+        } else {
+            map.put("caiwujingli", etLeader2.getText().toString());
+            map.put("comments", etLeader2.getText().toString());
+            mycomments = etLeader2.getText().toString();
+        }
+        if (tvLeader3.getVisibility() == View.VISIBLE) {
+            if (!tvLeader3.getText().toString().equals("")) {
+                map.put("ldps", tvLeader3.getText().toString());
+            }
+        } else {
+            map.put("ldps", etLeader3.getText().toString());
+            map.put("comments", etLeader3.getText().toString());
+            mycomments = etLeader3.getText().toString();
+        }
     }
 
     @Override
@@ -303,11 +352,11 @@ public class CurrencyAccidentWillActivity extends BaseActivity implements Curren
                 String fgMove = jsonObject.getString("fenguanlingdao");
                 String cwMove = jsonObject.getString("caiwujingli");
                 String psMove = jsonObject.getString("ldps");
-                if (kzMove.equals("2")) {
+                if (kzMove.equals("3")) {
                     tvLeader.setVisibility(View.GONE);
                     etLeader.setVisibility(View.VISIBLE);
                     if (leader != null && leader.length() != 0) {
-                        etLeader.setText(leader);
+//                        etLeader.setText(leader);
                     }
                 } else {
                     tvLeader.setVisibility(View.VISIBLE);
@@ -317,11 +366,11 @@ public class CurrencyAccidentWillActivity extends BaseActivity implements Curren
                     }
                 }
 
-                if (fgMove.equals("2")) {
+                if (fgMove.equals("3")) {
                     tvLeader1.setVisibility(View.GONE);
                     etLeader1.setVisibility(View.VISIBLE);
                     if (leader1 != null && leader1.length() != 0) {
-                        etLeader1.setText(leader1);
+//                        etLeader1.setText(leader1);
                     }
                 } else {
                     tvLeader1.setVisibility(View.VISIBLE);
@@ -331,11 +380,11 @@ public class CurrencyAccidentWillActivity extends BaseActivity implements Curren
                     }
                 }
 
-                if (cwMove.equals("2")) {
+                if (cwMove.equals("3")) {
                     tvLeader2.setVisibility(View.GONE);
                     etLeader2.setVisibility(View.VISIBLE);
                     if (leader2 != null && leader2.length() != 0) {
-                        etLeader2.setText(leader2);
+//                        etLeader2.setText(leader2);
                     }
                 } else {
                     tvLeader2.setVisibility(View.VISIBLE);
@@ -345,11 +394,11 @@ public class CurrencyAccidentWillActivity extends BaseActivity implements Curren
                     }
                 }
 
-                if (psMove.equals("2")) {
+                if (psMove.equals("3")) {
                     tvLeader3.setVisibility(View.GONE);
                     etLeader3.setVisibility(View.VISIBLE);
                     if (leader3 != null && leader3.length() != 0) {
-                        etLeader3.setText(leader3);
+//                        etLeader3.setText(leader3);
                     }
                 } else {
                     tvLeader3.setVisibility(View.VISIBLE);
@@ -358,6 +407,17 @@ public class CurrencyAccidentWillActivity extends BaseActivity implements Curren
                         tvLeader3.setText(leader3);
                     }
                 }
+
+                if (kzMove.equals("3")){
+                    tvLeader1.setTextColor(getResources().getColor(R.color.color_set_right));
+                }
+                if (fgMove.equals("3")){
+                    tvLeader2.setTextColor(getResources().getColor(R.color.color_set_right));
+                }
+                if (cwMove.equals("3")){
+                    tvLeader3.setTextColor(getResources().getColor(R.color.color_set_right));
+                }
+
                 for (int i = 0; i < s.getTrans().size(); i++) {
                     destTypeList.add(s.getTrans().get(i));
                 }
@@ -407,8 +467,13 @@ public class CurrencyAccidentWillActivity extends BaseActivity implements Curren
     @Override
     public void setNoHandlerPerson(NoHandlerPerson s) {
         setData();
-        map.put("flowAssignId", destName + "|" + uId);
-        willDoPresenter.getWillDo(map);
+        if (!mycomments.equals("同意")&&!mycomments.equals("不同意")){
+            map.clear();
+            Toast.makeText(CurrencyAccidentWillActivity.this, "意见请填写同意或不同意", Toast.LENGTH_SHORT).show();
+        }else {
+            map.put("flowAssignId", destName + "|" + uId);
+            willDoPresenter.getWillDo(map);
+        }
     }
 
     @Override
@@ -472,8 +537,13 @@ public class CurrencyAccidentWillActivity extends BaseActivity implements Curren
                 setData();
                 // 关闭提示框
                 alertDialog3.dismiss();
-                map.put("flowAssignId", destName + "|" + uId);
-                willDoPresenter.getWillDo(map);
+                if (!mycomments.equals("同意")&&!mycomments.equals("不同意")){
+                    map.clear();
+                    Toast.makeText(CurrencyAccidentWillActivity.this, "意见请填写同意或不同意", Toast.LENGTH_SHORT).show();
+                }else {
+                    map.put("flowAssignId", destName + "|" + uId);
+                    willDoPresenter.getWillDo(map);
+                }
             }
         }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
 
@@ -488,6 +558,7 @@ public class CurrencyAccidentWillActivity extends BaseActivity implements Curren
     }
 
     private String getListData() {
+        uId = "";
         if (selectList.size() == 1) {
             //uName = backlist.get(0).getActivityName();
             uId = selectList.get(0);

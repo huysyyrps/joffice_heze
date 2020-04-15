@@ -19,11 +19,13 @@ import com.smartbus.heze.fileapprove.bean.NoEndPerson;
 import com.smartbus.heze.fileapprove.bean.NoHandlerPerson;
 import com.smartbus.heze.fileapprove.bean.NormalPerson;
 import com.smartbus.heze.fileapprove.bean.WillDoUp;
+import com.smartbus.heze.fileapprove.module.DepartBudgetWillCheckTypeContract;
 import com.smartbus.heze.fileapprove.module.DepartBudgetWillContract;
 import com.smartbus.heze.fileapprove.module.NoEndContract;
 import com.smartbus.heze.fileapprove.module.NoHandlerContract;
 import com.smartbus.heze.fileapprove.module.NormalContract;
 import com.smartbus.heze.fileapprove.module.WillDoContract;
+import com.smartbus.heze.fileapprove.presenter.DepartBudgetWillCheckTypePresenter;
 import com.smartbus.heze.fileapprove.presenter.DepartBudgetWillPresenter;
 import com.smartbus.heze.fileapprove.presenter.NoEndPresenter;
 import com.smartbus.heze.fileapprove.presenter.NoHandlerPresenter;
@@ -34,6 +36,7 @@ import com.smartbus.heze.http.base.BaseActivity;
 import com.smartbus.heze.http.base.Constant;
 import com.smartbus.heze.http.views.Header;
 import com.smartbus.heze.http.views.MyAlertDialog;
+import com.smartbus.heze.oaflow.bean.CheckType;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -51,7 +54,8 @@ import butterknife.OnClick;
  * 各部门的预算单待办
  */
 public class DepartBudgetWillActivity extends BaseActivity implements DepartBudgetWillContract.View
-        , NormalContract.View, NoEndContract.View, NoHandlerContract.View, WillDoContract.View {
+        , NormalContract.View, NoEndContract.View, NoHandlerContract.View, WillDoContract.View
+        , DepartBudgetWillCheckTypeContract.View {
 
     @BindView(R.id.header)
     Header header;
@@ -144,11 +148,13 @@ public class DepartBudgetWillActivity extends BaseActivity implements DepartBudg
     NoHandlerPresenter noHandlerPresenter;
     WillDoPresenter willDoPresenter;
     DepartBudgetWillPresenter departBudgetWillPresenter;
+    DepartBudgetWillCheckTypePresenter departBudgetWillCheckTypePresenter;
     List<String> selectList = new ArrayList<>();
     List<String> namelist = new ArrayList<>();
     Map<String, String> map = new HashMap<>();
     List<DepartBudgetWill.TransBean> destTypeList = new ArrayList<>();
-
+    String runId, accidentLoanId;
+    String mycomments = "";
     int allNum1 = 0, allNum2 = 0, allNum3 = 0, allNum4 = 0, allNum5 = 0;
     double moneyS1 = 0.0, moneyS2 = 0.0, moneyS3 = 0.0, moneyS4 = 0.0, moneyS5 = 0.0;
     double AllMoney1 = 0.0, AllMoney2 = 0.0, AllMoney3 = 0.0, AllMoney4 = 0.0, AllMoney5 = 0.0;
@@ -158,6 +164,10 @@ public class DepartBudgetWillActivity extends BaseActivity implements DepartBudg
     TextView textView8;
     @BindView(R.id.btnLR)
     Button btnLR;
+    @BindView(R.id.etLeader0)
+    EditText etLeader0;
+    @BindView(R.id.tvLeader0)
+    TextView tvLeader0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -650,6 +660,7 @@ public class DepartBudgetWillActivity extends BaseActivity implements DepartBudg
         willDoPresenter = new WillDoPresenter(this, this);
         Log.e("sessionLogin ", taskId + "-" + activityName);
         departBudgetWillPresenter = new DepartBudgetWillPresenter(this, this);
+        departBudgetWillCheckTypePresenter = new DepartBudgetWillCheckTypePresenter(this, this);
         departBudgetWillPresenter.getDepartBudgetWill(activityName, taskId, Constant.YSD_DEFID);
     }
 
@@ -665,20 +676,35 @@ public class DepartBudgetWillActivity extends BaseActivity implements DepartBudg
 
     @Override
     protected void rightClient() {
-        setDataBack();
-        map.put("back", "true");
-        map.put("useTemplate", "");
-        willDoPresenter.getWillDo(map);
+        if (etLeader0.getVisibility() == View.VISIBLE ||etLeader.getVisibility() == View.VISIBLE
+                || etLeader1.getVisibility() == View.VISIBLE || etLeader2.getVisibility() == View.VISIBLE) {
+            if (etLeader0.getText().toString().equals("") &&etLeader.getText().toString().equals("")
+                    && etLeader1.getText().toString().equals("") && etLeader2.getText().toString().equals("")) {
+                Toast.makeText(this, "请填写意见", Toast.LENGTH_SHORT).show();
+            } else {
+                setDataBack();
+                map.put("back", "true");
+                map.put("useTemplate", "");
+                willDoPresenter.getWillDo(map);
+            }
+        } else {
+            setDataBack();
+            map.put("back", "true");
+            map.put("useTemplate", "");
+            willDoPresenter.getWillDo(map);
+        }
     }
 
     @OnClick({R.id.btnUp})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btnUp:
-                if (etLeader.getVisibility() == View.VISIBLE
+                if (etLeader0.getVisibility() == View.VISIBLE
+                        ||etLeader.getVisibility() == View.VISIBLE
                         || etLeader1.getVisibility() == View.VISIBLE
                         || etLeader2.getVisibility() == View.VISIBLE) {
-                    if (etLeader.getText().toString().equals("")
+                    if (etLeader0.getText().toString().equals("")
+                            &&etLeader.getText().toString().equals("")
                             && etLeader1.getText().toString().equals("")
                             && etLeader2.getText().toString().equals("")) {
                         Toast.makeText(this, "请填写意见", Toast.LENGTH_SHORT).show();
@@ -792,6 +818,15 @@ public class DepartBudgetWillActivity extends BaseActivity implements DepartBudg
         map.put("signalName", signaName);
         map.put("destName", destName);
         map.put("zhibiao", zhibiao);
+        if (tvLeader0.getVisibility() == View.VISIBLE) {
+            if (!tvLeader0.getText().toString().equals("")) {
+                map.put("keshifuzer", tvLeader0.getText().toString());
+            }
+        } else {
+            map.put("keshifuzer", etLeader0.getText().toString());
+            map.put("comments", etLeader0.getText().toString());
+            mycomments = etLeader0.getText().toString();
+        }
         if (tvLeader.getVisibility() == View.VISIBLE) {
             if (!tvLeader.getText().toString().equals("")) {
                 map.put("cwk", tvLeader.getText().toString());
@@ -799,6 +834,7 @@ public class DepartBudgetWillActivity extends BaseActivity implements DepartBudg
         } else {
             map.put("cwk", etLeader.getText().toString());
             map.put("comments", etLeader.getText().toString());
+            mycomments = etLeader.getText().toString();
         }
         if (tvLeader1.getVisibility() == View.VISIBLE) {
             if (!tvLeader1.getText().toString().equals("")) {
@@ -807,6 +843,7 @@ public class DepartBudgetWillActivity extends BaseActivity implements DepartBudg
         } else {
             map.put("fgyj", etLeader1.getText().toString());
             map.put("comments", etLeader1.getText().toString());
+            mycomments = etLeader1.getText().toString();
         }
         if (tvLeader2.getVisibility() == View.VISIBLE) {
             if (!tvLeader2.getText().toString().equals("")) {
@@ -815,6 +852,7 @@ public class DepartBudgetWillActivity extends BaseActivity implements DepartBudg
         } else {
             map.put("jlyj", etLeader2.getText().toString());
             map.put("comments", etLeader2.getText().toString());
+            mycomments = etLeader2.getText().toString();
         }
     }
 
@@ -859,6 +897,42 @@ public class DepartBudgetWillActivity extends BaseActivity implements DepartBudg
         map.put("hjje2", "");
         map.put("destName", destTypeList.get(0).getDestination());
         map.put("zhibiao", zhibiao);
+        if (tvLeader0.getVisibility() == View.VISIBLE) {
+            if (!tvLeader0.getText().toString().equals("")) {
+                map.put("keshifuzer", tvLeader0.getText().toString());
+            }
+        } else {
+            map.put("keshifuzer", etLeader0.getText().toString());
+            map.put("comments", etLeader0.getText().toString());
+            mycomments = etLeader0.getText().toString();
+        }
+        if (tvLeader.getVisibility() == View.VISIBLE) {
+            if (!tvLeader.getText().toString().equals("")) {
+                map.put("cwk", tvLeader.getText().toString());
+            }
+        } else {
+            map.put("cwk", etLeader.getText().toString());
+            map.put("comments", etLeader.getText().toString());
+            mycomments = etLeader.getText().toString();
+        }
+        if (tvLeader1.getVisibility() == View.VISIBLE) {
+            if (!tvLeader1.getText().toString().equals("")) {
+                map.put("fgyj", tvLeader1.getText().toString());
+            }
+        } else {
+            map.put("fgyj", etLeader1.getText().toString());
+            map.put("comments", etLeader1.getText().toString());
+            mycomments = etLeader1.getText().toString();
+        }
+        if (tvLeader2.getVisibility() == View.VISIBLE) {
+            if (!tvLeader2.getText().toString().equals("")) {
+                map.put("jlyj", tvLeader2.getText().toString());
+            }
+        } else {
+            map.put("jlyj", etLeader2.getText().toString());
+            map.put("comments", etLeader2.getText().toString());
+            mycomments = etLeader2.getText().toString();
+        }
     }
 
     @Override
@@ -895,26 +969,44 @@ public class DepartBudgetWillActivity extends BaseActivity implements DepartBudg
         etAllMoney4.setText(s.getMainform().get(0).getJe4().toString());
         etAllMoney5.setText(s.getMainform().get(0).getJe5().toString());
         etName.setText(s.getMainform().get(0).getProject().toString());
-
+        runId = s.getMainform().get(0).getRunId();
+        String dataUrl_save = s.getMainform().get(0).getDataUrl_save().toString();
+        accidentLoanId = dataUrl_save.split("id=")[1];
         tvAllNum.setText(s.getMainform().get(0).getHjsl1());
         tvAllMoney.setText(s.getMainform().get(0).getHjje1());
         tvDepartment.setText(s.getMainform().get(0).getDepName());
         tvTime.setText(s.getMainform().get(0).getCreateDate());
         mainId = String.valueOf(s.getMainform().get(0).getMainId());
+        String leader0 = s.getMainform().get(0).getKeshifuzer();
         String leader = s.getMainform().get(0).getCwk();
         String leader1 = s.getMainform().get(0).getFgyj();
         String leader2 = s.getMainform().get(0).getJlyj();
         String move = s.getFormRights();
         try {
             JSONObject jsonObject = new JSONObject(move);
+            String ksMove = jsonObject.getString("keshifuzer");
             String cwMove = jsonObject.getString("cwk");
             String fgMove = jsonObject.getString("fgyj");
             String zjlMove = jsonObject.getString("jlyj");
-            if (cwMove.equals("2")) {
+            if (ksMove.equals("3")) {
+                tvLeader0.setVisibility(View.GONE);
+                etLeader0.setVisibility(View.VISIBLE);
+                if (leader0 != null && leader0.length() != 0) {
+//                    etLeader0.setText(leader0);
+                }
+            } else {
+                tvLeader0.setVisibility(View.VISIBLE);
+                etLeader0.setVisibility(View.GONE);
+                if (leader0 != null && leader0.length() != 0) {
+                    tvLeader0.setText(leader0);
+                }
+            }
+
+            if (cwMove.equals("3")) {
                 tvLeader.setVisibility(View.GONE);
                 etLeader.setVisibility(View.VISIBLE);
                 if (leader != null && leader.length() != 0) {
-                    etLeader.setText(leader);
+//                    etLeader.setText(leader);
                 }
             } else {
                 tvLeader.setVisibility(View.VISIBLE);
@@ -924,11 +1016,11 @@ public class DepartBudgetWillActivity extends BaseActivity implements DepartBudg
                 }
             }
 
-            if (fgMove.equals("2")) {
+            if (fgMove.equals("3")) {
                 tvLeader1.setVisibility(View.GONE);
                 etLeader1.setVisibility(View.VISIBLE);
                 if (leader1 != null && leader1.length() != 0) {
-                    etLeader1.setText(leader1);
+//                    etLeader1.setText(leader1);
                 }
             } else {
                 tvLeader1.setVisibility(View.VISIBLE);
@@ -938,11 +1030,11 @@ public class DepartBudgetWillActivity extends BaseActivity implements DepartBudg
                 }
             }
 
-            if (zjlMove.equals("2")) {
+            if (zjlMove.equals("3")) {
                 tvLeader2.setVisibility(View.GONE);
                 etLeader2.setVisibility(View.VISIBLE);
                 if (leader2 != null && leader2.length() != 0) {
-                    etLeader2.setText(leader2);
+//                    etLeader2.setText(leader2);
                 }
             } else {
                 tvLeader2.setVisibility(View.VISIBLE);
@@ -950,6 +1042,16 @@ public class DepartBudgetWillActivity extends BaseActivity implements DepartBudg
                 if (leader2 != null && leader2.length() != 0) {
                     tvLeader2.setText(leader2);
                 }
+            }
+
+            if (ksMove.equals("3")){
+                tvLeader1.setTextColor(getResources().getColor(R.color.color_set_right));
+            }
+            if (cwMove.equals("3")){
+                tvLeader.setTextColor(getResources().getColor(R.color.color_set_right));
+            }
+            if (fgMove.equals("3")){
+                tvLeader2.setTextColor(getResources().getColor(R.color.color_set_right));
             }
 
             for (int i = 0; i < s.getTrans().size(); i++) {
@@ -1000,8 +1102,13 @@ public class DepartBudgetWillActivity extends BaseActivity implements DepartBudg
     @Override
     public void setNoHandlerPerson(NoHandlerPerson s) {
         setData();
-        map.put("flowAssignId", destName + "|" + uId);
-        willDoPresenter.getWillDo(map);
+        if (!mycomments.equals("同意") && !mycomments.equals("不同意")) {
+            map.clear();
+            Toast.makeText(DepartBudgetWillActivity.this, "意见请填写同意或不同意", Toast.LENGTH_SHORT).show();
+        } else {
+            map.put("flowAssignId", destName + "|" + uId);
+            willDoPresenter.getWillDo(map);
+        }
     }
 
     @Override
@@ -1012,9 +1119,8 @@ public class DepartBudgetWillActivity extends BaseActivity implements DepartBudg
     @Override
     public void setWillDo(WillDoUp s) {
         if (s.isSuccess()) {
-            Toast.makeText(this, "数据提交成功", Toast.LENGTH_SHORT).show();
-            finish();
-        }else {
+            departBudgetWillCheckTypePresenter.getDepartBudgetWillCheckType(runId, accidentLoanId, destName, mycomments);
+        } else {
             Toast.makeText(this, s.getMsg(), Toast.LENGTH_SHORT).show();
         }
     }
@@ -1066,8 +1172,13 @@ public class DepartBudgetWillActivity extends BaseActivity implements DepartBudg
                 setData();
                 // 关闭提示框
                 alertDialog3.dismiss();
-                map.put("flowAssignId", destName + "|" + uId);
-                willDoPresenter.getWillDo(map);
+                if (!mycomments.equals("同意") && !mycomments.equals("不同意")) {
+                    map.clear();
+                    Toast.makeText(DepartBudgetWillActivity.this, "意见请填写同意或不同意", Toast.LENGTH_SHORT).show();
+                } else {
+                    map.put("flowAssignId", destName + "|" + uId);
+                    willDoPresenter.getWillDo(map);
+                }
             }
         }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
 
@@ -1082,6 +1193,7 @@ public class DepartBudgetWillActivity extends BaseActivity implements DepartBudg
     }
 
     private String getListData() {
+        uId = "";
         if (selectList.size() == 1) {
             //uName = backlist.get(0).getActivityName();
             uId = selectList.get(0);
@@ -1099,4 +1211,16 @@ public class DepartBudgetWillActivity extends BaseActivity implements DepartBudg
         return uId;
     }
 
+    @Override
+    public void setDepartBudgetWillCheckType(CheckType s) {
+        if (s.isSuccess()) {
+            Toast.makeText(this, "数据提交成功", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+    }
+
+    @Override
+    public void setDepartBudgetWillCheckTypeMessage(String s) {
+        Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
+    }
 }

@@ -1,5 +1,7 @@
 package com.smartbus.heze;
 
+import com.taobao.sophix.SophixManager;
+
 import org.litepal.LitePalApplication;
 
 /**
@@ -15,6 +17,7 @@ public class MyApplication extends LitePalApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        SophixManager.getInstance().queryAndLoadNewPatch();
         myApp = this;
         com.igexin.sdk.PushManager.getInstance().initialize(getApplicationContext(), DemoPushService.class);
         // DemoIntentService 为第三方自定义的推送服务事件接收类
