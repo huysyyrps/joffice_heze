@@ -117,17 +117,18 @@ public class DocumentLZWill implements Serializable {
 
     public static class MainformBean {
         /**
-         * chengbanjg :
-         * title : 标题
-         * ldyj :
-         * fawenjig : 安全科
-         * wenjianNo : 编号
-         * nibanyj :
-         * mainId : 5
+         * chengbanjg :getChengbanjg
+         * title : 标题getTitle
+         * ldyj :getLdyj
+         * fawenjig : 安全科getFawenjig
+         * wenjianNo : 编号getWenjianNo
+         * nibanyj :getNibanyj
+         * mainId : 5getMainId
          * runId : 32374
          * $type$ : WF_documentCirculation
-         * shouwenRq : 2019-05-13
-         * fawennum : 分数
+         * shouwenRq : 2019-05-13getShouwenRq
+         * fawennum : 分数getFawennum
+         * bhyj : 驳回意见
          */
 
         private String chengbanjg;
@@ -142,7 +143,16 @@ public class DocumentLZWill implements Serializable {
         private String shouwenRq;
         private String fawennum;
         private String fujian;
+        private String bhyj;
         private String dataUrl_save;
+
+        public String getBhyj() {
+            return bhyj;
+        }
+
+        public void setBhyj(String bhyj) {
+            this.bhyj = bhyj;
+        }
 
         public String getDataUrl_save() {
             return dataUrl_save;

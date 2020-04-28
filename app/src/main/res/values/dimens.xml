@@ -10,4 +10,5 @@
     <dimen name="margin_10">10dip</dimen>
     <dimen name="margin_15">15dip</dimen>
     <dimen name="btn_height">45dip</dimen>
+    <dimen name="grid_expected_size">100dp</dimen>
 </resources>

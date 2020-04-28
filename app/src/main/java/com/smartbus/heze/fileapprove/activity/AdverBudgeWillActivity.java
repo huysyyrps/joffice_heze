@@ -139,6 +139,7 @@ public class AdverBudgeWillActivity extends BaseActivity implements DepartBudget
     String destType = "";
     String leaderCode = "";
     String leaderName = "";
+    String  qgMove, cwMove, fgMove,zjlMove;
     String zhibiao;
     String destName, uId, signaName;
     String activityName, taskId;
@@ -931,42 +932,59 @@ public class AdverBudgeWillActivity extends BaseActivity implements DepartBudget
 
     @Override
     protected void rightClient() {
-        if (etLeader0.getVisibility() == View.VISIBLE) {
-            if (etLeader0.getText().toString().equals("")) {
-                Toast.makeText(this, "请填写意见", Toast.LENGTH_SHORT).show();
-            }else {
+//        if (etLeader0.getVisibility() == View.VISIBLE) {
+//            if (etLeader0.getText().toString().equals("")) {
+//                Toast.makeText(this, "请填写意见", Toast.LENGTH_SHORT).show();
+//            }else {
+//                setDataBack();
+//                map.put("back", "true");
+//                map.put("useTemplate", "");
+//                willDoPresenter.getWillDo(map);
+//            }
+//        }else if (etLeader.getVisibility() == View.VISIBLE) {
+//            if (etLeader.getText().toString().equals("")) {
+//                Toast.makeText(this, "请填写意见", Toast.LENGTH_SHORT).show();
+//            }else {
+//                setDataBack();
+//                map.put("back", "true");
+//                map.put("useTemplate", "");
+//                willDoPresenter.getWillDo(map);
+//            }
+//        }else if (etLeader1.getVisibility() == View.VISIBLE) {
+//            if (etLeader1.getText().toString().equals("")) {
+//                Toast.makeText(this, "请填写意见", Toast.LENGTH_SHORT).show();
+//            }else {
+//                setDataBack();
+//                map.put("back", "true");
+//                map.put("useTemplate", "");
+//                willDoPresenter.getWillDo(map);
+//            }
+//        }else if (etLeader2.getVisibility() == View.VISIBLE) {
+//            if (etLeader2.getText().toString().equals("")) {
+//                Toast.makeText(this, "请填写意见", Toast.LENGTH_SHORT).show();
+//            }else {
+//                setDataBack();
+//                map.put("back", "true");
+//                map.put("useTemplate", "");
+//                willDoPresenter.getWillDo(map);
+//            }
+//        }
+        if (etLeader0.getVisibility() == View.VISIBLE ||etLeader.getVisibility() == View.VISIBLE
+                || etLeader1.getVisibility() == View.VISIBLE || etLeader2.getVisibility() == View.VISIBLE) {
+            if (etLeader0.getText().toString().equals("") &&etLeader.getText().toString().equals("")
+                    && etLeader1.getText().toString().equals("") && etLeader2.getText().toString().equals("")) {
+                Toast.makeText(this, "输入意见后再次点击驳回", Toast.LENGTH_SHORT).show();
+            } else {
                 setDataBack();
                 map.put("back", "true");
                 map.put("useTemplate", "");
                 willDoPresenter.getWillDo(map);
             }
-        }else if (etLeader.getVisibility() == View.VISIBLE) {
-            if (etLeader.getText().toString().equals("")) {
-                Toast.makeText(this, "请填写意见", Toast.LENGTH_SHORT).show();
-            }else {
-                setDataBack();
-                map.put("back", "true");
-                map.put("useTemplate", "");
-                willDoPresenter.getWillDo(map);
-            }
-        }else if (etLeader1.getVisibility() == View.VISIBLE) {
-            if (etLeader1.getText().toString().equals("")) {
-                Toast.makeText(this, "请填写意见", Toast.LENGTH_SHORT).show();
-            }else {
-                setDataBack();
-                map.put("back", "true");
-                map.put("useTemplate", "");
-                willDoPresenter.getWillDo(map);
-            }
-        }else if (etLeader2.getVisibility() == View.VISIBLE) {
-            if (etLeader2.getText().toString().equals("")) {
-                Toast.makeText(this, "请填写意见", Toast.LENGTH_SHORT).show();
-            }else {
-                setDataBack();
-                map.put("back", "true");
-                map.put("useTemplate", "");
-                willDoPresenter.getWillDo(map);
-            }
+        } else {
+            setDataBack();
+            map.put("back", "true");
+            map.put("useTemplate", "");
+            willDoPresenter.getWillDo(map);
         }
     }
 
@@ -1329,10 +1347,10 @@ public class AdverBudgeWillActivity extends BaseActivity implements DepartBudget
         String move = s.getFormRights();
         try {
             JSONObject jsonObject = new JSONObject(move);
-            String qgMove = jsonObject.getString("qiguanlingdao");
-            String cwMove = jsonObject.getString("cwk");
-            String fgMove = jsonObject.getString("fgyj");
-            String zjlMove = jsonObject.getString("jlyj");
+            qgMove = jsonObject.getString("qiguanlingdao");
+            cwMove = jsonObject.getString("cwk");
+            fgMove = jsonObject.getString("fgyj");
+            zjlMove = jsonObject.getString("jlyj");
             if (qgMove.equals("3")) {
                 tvLeader0.setVisibility(View.GONE);
                 etLeader0.setVisibility(View.VISIBLE);
@@ -1401,14 +1419,25 @@ public class AdverBudgeWillActivity extends BaseActivity implements DepartBudget
                 }
             }
 
+            qgMove = jsonObject.getString("qiguanlingdao");
+            cwMove = jsonObject.getString("cwk");
+            fgMove = jsonObject.getString("fgyj");
+            zjlMove = jsonObject.getString("jlyj");
+            if (qgMove.equals("1")&&cwMove.equals("1")&&fgMove.equals("1")&&zjlMove.equals("1")){
+                tvLeader0.setTextColor(0xffff3030);
+            }
+
             if (qgMove.equals("3")){
-                tvLeader.setTextColor(getResources().getColor(R.color.color_set_right));
+                tvLeader1.setTextColor(0xffff3030);
+                tvLeader2.setTextColor(0xffff3030);
+                tvLeader.setTextColor(0xffff3030);
             }
             if (cwMove.equals("3")){
-                tvLeader1.setTextColor(getResources().getColor(R.color.color_set_right));
+                tvLeader2.setTextColor(0xffff3030);
             }
             if (fgMove.equals("3")){
-                tvLeader2.setTextColor(getResources().getColor(R.color.color_set_right));
+                tvLeader.setTextColor(0xffff3030);
+                tvLeader2.setTextColor(0xffff3030);
             }
 
             for (int i = 0; i < s.getTrans().size(); i++) {
@@ -1459,12 +1488,17 @@ public class AdverBudgeWillActivity extends BaseActivity implements DepartBudget
     @Override
     public void setNoHandlerPerson(NoHandlerPerson s) {
         setData();
-        if (!mycomments.equals("同意")&&!mycomments.equals("不同意")){
-            map.clear();
-            Toast.makeText(AdverBudgeWillActivity.this, "意见请填写同意或不同意", Toast.LENGTH_SHORT).show();
-        }else {
+        if (qgMove.equals("1") && cwMove.equals("1") && fgMove.equals("1")&& zjlMove.equals("1")) {
             map.put("flowAssignId", destName + "|" + uId);
             willDoPresenter.getWillDo(map);
+        } else {
+            if (!mycomments.equals("同意")&&!mycomments.equals("不同意")){
+                map.clear();
+                Toast.makeText(AdverBudgeWillActivity.this, "意见请填写同意或不同意", Toast.LENGTH_SHORT).show();
+            }else {
+                map.put("flowAssignId", destName + "|" + uId);
+                willDoPresenter.getWillDo(map);
+            }
         }
     }
 
@@ -1532,12 +1566,17 @@ public class AdverBudgeWillActivity extends BaseActivity implements DepartBudget
                 setData();
                 // 关闭提示框
                 alertDialog3.dismiss();
-                if (!mycomments.equals("同意")&&!mycomments.equals("不同意")){
-                    map.clear();
-                    Toast.makeText(AdverBudgeWillActivity.this, "意见请填写同意或不同意", Toast.LENGTH_SHORT).show();
-                }else {
+                if (qgMove.equals("1") && cwMove.equals("1") && fgMove.equals("1")&& zjlMove.equals("1")) {
                     map.put("flowAssignId", destName + "|" + uId);
                     willDoPresenter.getWillDo(map);
+                } else {
+                    if (!mycomments.equals("同意")&&!mycomments.equals("不同意")){
+                        map.clear();
+                        Toast.makeText(AdverBudgeWillActivity.this, "意见请填写同意或不同意", Toast.LENGTH_SHORT).show();
+                    }else {
+                        map.put("flowAssignId", destName + "|" + uId);
+                        willDoPresenter.getWillDo(map);
+                    }
                 }
             }
         }).setNegativeButton("取消", new DialogInterface.OnClickListener() {

@@ -2,15 +2,12 @@ package com.smartbus.heze.fileapprove.activity;
 
 import android.app.AlertDialog;
 import android.app.DownloadManager;
-import android.app.DownloadManager.Request;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
@@ -540,27 +537,9 @@ public class FileCirculateWillActivity extends BaseActivity implements FileCircu
                     FileData file = gson2.fromJson(dataRes, FileData.class);
                     String filePath = file.getData().getFilePath();
                     String url = ApiAddress.downloadfile + filePath;
-                    ProgressDialogUtil.startLoad(FileCirculateWillActivity.this, "文件下载中");
-                    downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
-
-                    // 动态注册广播接收器
-                    receiver = new DownloadCompleteReceiver();
-                    IntentFilter intentFilter = new IntentFilter(
-                            DownloadManager.ACTION_DOWNLOAD_COMPLETE);
-                    registerReceiver(receiver, intentFilter);
-
-                    Request request = new Request(Uri.parse(url));
-                    request.setTitle("下载文件");
-                    // 保存的文件名
-                    request.setDescription(filePath);
-                    // 存储的位置
-                    request.setDestinationInExternalFilesDir(FileCirculateWillActivity.this,
-                            Environment.DIRECTORY_DOWNLOADS, filePath);
-                    // 默认显示出来
-                    request.setNotificationVisibility(Request.VISIBILITY_VISIBLE);
-                    // 下载结束后显示出来
-                    request.setNotificationVisibility(Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-                    downloadId = downloadManager.enqueue(request);
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse(url));
+                    startActivity(intent);
                     break;
             }
         }

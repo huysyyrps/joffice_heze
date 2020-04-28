@@ -10,9 +10,9 @@ public class ApiAddress {
     //川川
 //    public final static String mainApi = "http://192.168.2.137:8080/joffice/" ;
     //孙琪
-//    public final static String mainApi = "http://192.168.2.183:8080/joffice/" ;
+    public final static String mainApi = "http://192.168.2.193:8080/joffice/" ;
     //正式库
-    public final static String mainApi = "http://120.192.74.58:8080/joffice/" ;
+//    public final static String mainApi = "http://120.192.74.58:8080/joffice/" ;
     //柱子
 //    public final static String mainApi = "http://192.168.2.155:8070/joffice/" ;
 
@@ -228,6 +228,10 @@ public class ApiAddress {
     public static final String  departbudge = "hrm/mobileSaveAppDepBudget.do";
     //部门预算状态修改
     public static final String  departbudgechecktype = "hrm/updateDepBudget.do";
-
-
+    //新版日常检查
+    public static final String  rcjcnew = "starkh/saveAppJckrichangZhjc.do";
+    //新版日常检查列表
+    public final static String rcjcnewlist = "starkh/listJckrichangZhjc.do";
+    //新版日常检查图片上传
+    public static final String  rcjcphotoup = "starkh/upLoadImageJckrichangZhjc.do";
 }

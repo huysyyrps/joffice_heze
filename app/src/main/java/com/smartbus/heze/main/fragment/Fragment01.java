@@ -18,6 +18,7 @@ import com.smartbus.heze.SharedPreferencesHelper;
 import com.smartbus.heze.checkup.activity.CarCheckActivity;
 import com.smartbus.heze.checkup.activity.HealthActivity;
 import com.smartbus.heze.checkup.activity.RCJCActivity;
+import com.smartbus.heze.checkup.activity.RCJCNewActivity;
 import com.smartbus.heze.checkup.activity.SafeActivity;
 import com.smartbus.heze.exam.ExamListActivity;
 import com.smartbus.heze.fault.FaultUpActivity;
@@ -145,7 +146,7 @@ public class Fragment01 extends Fragment implements WelcomeContract.View {
                             intent = new Intent(getActivity(), SafeActivity.class);
                             startActivity(intent);
                         }else if (itemBean.getName().equals(getResources().getString(R.string.first_richang))){
-                            intent = new Intent(getActivity(), RCJCActivity.class);
+                         intent = new Intent(getActivity(), RCJCNewActivity.class);
                             startActivity(intent);
                         }else if (itemBean.getName().equals(getResources().getString(R.string.first_dianjian))){
                             intent = new Intent(getActivity(), HealthActivity.class);

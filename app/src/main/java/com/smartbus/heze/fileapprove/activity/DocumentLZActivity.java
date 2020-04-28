@@ -111,7 +111,7 @@ public class DocumentLZActivity extends BaseActivity implements OneContract.View
     Button btnUp;
 
     Intent intent;
-    String uId = "",runId = "";
+    String uId = "", runId = "";
     String isShow = "true";
     String userDepart = "";
     String userCode = "";
@@ -133,7 +133,7 @@ public class DocumentLZActivity extends BaseActivity implements OneContract.View
     List<String> namelist1 = new ArrayList<>();
     List<TwoPerson.DataBean> dataList = new ArrayList<>();
     private CustomDatePickerDay customDatePicker1;
-    String fileName ,fileId= "";
+    String fileName, fileId = "";
     String selectTag = "1";
     String vocationId = "";
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
@@ -161,7 +161,7 @@ public class DocumentLZActivity extends BaseActivity implements OneContract.View
 
     @Override
     protected void rightClient() {
-        Intent intent = new Intent(this,DocumentLZListActivity.class);
+        Intent intent = new Intent(this, DocumentLZListActivity.class);
         startActivity(intent);
     }
 
@@ -196,7 +196,7 @@ public class DocumentLZActivity extends BaseActivity implements OneContract.View
         map.put("wenjianNo", etBianHao.getText().toString());
         map.put("fawennum", etNum.getText().toString());
         map.put("title", etTitle.getText().toString());
-        map.put("fujian", tvData.getText().toString()+"");
+        map.put("fujian", tvData.getText().toString() + "");
         map.put("dataUrl_save", "/joffice/hrm/updateLeaveDays.do?vocationId=" + vocationId);
         map.put("nibanyj", "");
         map.put("ldyj", "");
@@ -363,7 +363,7 @@ public class DocumentLZActivity extends BaseActivity implements OneContract.View
     public void setUPYSD(BackData s) {
         if (s.isSuccess()) {
             runId = String.valueOf(s.getRunId());
-            documentLRPresenter.getCheckTypeLR(runId,vocationId,userDepart,"","","","");
+            documentLRPresenter.getCheckTypeLR(runId, vocationId, userDepart, "", "", "", "");
         }
     }
 
@@ -393,7 +393,7 @@ public class DocumentLZActivity extends BaseActivity implements OneContract.View
 
     @Override
     public void setCheckTypeLR(CheckType s) {
-        if (s.isSuccess()){
+        if (s.isSuccess()) {
             Toast.makeText(this, "发布成功", Toast.LENGTH_SHORT).show();
             finish();
         }
@@ -410,7 +410,7 @@ public class DocumentLZActivity extends BaseActivity implements OneContract.View
         switch (view.getId()) {
             case R.id.btnLR:
                 setLZ();
-                documentLRPresenter = new DocumentLRPresenter(this,this);
+                documentLRPresenter = new DocumentLRPresenter(this, this);
                 documentLRPresenter.getDocumentLR(lrMap);
                 break;
             case R.id.tvCBDW:
@@ -450,16 +450,22 @@ public class DocumentLZActivity extends BaseActivity implements OneContract.View
                 startActivityForResult(intent, Constant.TAG_TWO);
                 break;
             case R.id.btnUp:
-                namelist.clear();
-                codeList.clear();
-                nameList.clear();
-                selectList.clear();
-                namelist1.clear();
-                dataList.clear();
-                onePersenter = new OnePresenter(this, this);
-                onePersenter.getOnePerson(Constant.DOCUMENTLZ_DEFID);
-                twoPersenter = new TwoPresenter(this, this);
-                upYsdPersenter = new UPYSDPresenter(this, this);
+                if (selectTag.equals("2")) {
+                    btnLR.setEnabled(false);
+                    namelist.clear();
+                    codeList.clear();
+                    nameList.clear();
+                    selectList.clear();
+                    namelist1.clear();
+                    dataList.clear();
+                    onePersenter = new OnePresenter(this, this);
+                    btnLR.setEnabled(true);
+                    onePersenter.getOnePerson(Constant.DOCUMENTLZ_DEFID);
+                    twoPersenter = new TwoPresenter(this, this);
+                    upYsdPersenter = new UPYSDPresenter(this, this);
+                } else {
+                    Toast.makeText(this, "请先录入", Toast.LENGTH_SHORT).show();
+                }
                 break;
         }
     }

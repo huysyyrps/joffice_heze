@@ -419,7 +419,7 @@ public class FaultUpActivity extends BaseActivity implements AboutDataContract.V
                             MY_PERMISSIONS_MY_UP_IMAGE);
                 } else {
                     Matisse.from(FaultUpActivity.this)
-                            .choose(MimeType.allOf())//图片类型
+                            .choose(MimeType.ofAll(), false)//图片类型
                             .countable(true)//true:选中后显示数字;false:选中后显示对号
                             .maxSelectable(3)//可选的最大数
                             .capture(false)//选择照片时，是否显示拍照
@@ -438,7 +438,7 @@ public class FaultUpActivity extends BaseActivity implements AboutDataContract.V
                             MY_PERMISSIONS_MY_UP_IMAGE);
                 } else {
                     Matisse.from(FaultUpActivity.this)
-                            .choose(MimeType.allOf())//图片类型
+                            .choose(MimeType.ofAll(), false)//图片类型
                             .countable(true)//true:选中后显示数字;false:选中后显示对号
                             .maxSelectable(3)//可选的最大数
                             .capture(false)//选择照片时，是否显示拍照
@@ -457,7 +457,7 @@ public class FaultUpActivity extends BaseActivity implements AboutDataContract.V
                             MY_PERMISSIONS_MY_UP_IMAGE);
                 } else {
                     Matisse.from(FaultUpActivity.this)
-                            .choose(MimeType.allOf())//图片类型
+                            .choose(MimeType.ofAll(), false)//图片类型
                             .countable(true)//true:选中后显示数字;false:选中后显示对号
                             .maxSelectable(3)//可选的最大数
                             .capture(false)//选择照片时，是否显示拍照
@@ -477,7 +477,7 @@ public class FaultUpActivity extends BaseActivity implements AboutDataContract.V
                 if (grantResults.length == 2 && grantResults[0] == PackageManager.PERMISSION_GRANTED
                         && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
                     Matisse.from(FaultUpActivity.this)
-                            .choose(MimeType.allOf())//图片类型
+                            .choose(MimeType.ofAll(), false)//图片类型
                             .countable(true)//true:选中后显示数字;false:选中后显示对号
                             .maxSelectable(8)//可选的最大数
                             .capture(true)//选择照片时，是否显示拍照

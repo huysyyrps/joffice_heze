@@ -35,7 +35,11 @@ public class WillDoPresenter implements WillDoContract.presenter {
                 .subscribe(new BaseObserverNoEntry<WillDoUp>(context, MainUtil.getData) {
                     @Override
                     protected void onSuccees(WillDoUp s) throws Exception {
-                        view.setWillDo(s);
+                        if (s.isSuccess()){
+                            view.setWillDo(s);
+                        }else {
+                            view.setWillDoMessage("失败了----->" + s.getMsg());
+                        }
                     }
 
                     @Override

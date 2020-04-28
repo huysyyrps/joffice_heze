@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.smartbus.heze">
-    <!--热修复-->
+
+    <!-- 热修复 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-
-
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.SET_PROCESS_LIMIT" />
@@ -54,16 +53,17 @@
         android:theme="@style/NoAction"
         android:usesCleartextTraffic="true">
 
-        <!--&lt;!&ndash;热修复 9b0c58b64abcf7b3178717397c436154   29127949&ndash;&gt;-->
-        <!--<meta-data-->
-            <!--android:name="com.taobao.android.hotfix.IDSECRET"-->
-            <!--android:value="29127949" />-->
-        <!--<meta-data-->
-            <!--android:name="com.taobao.android.hotfix.APPSECRET"-->
-            <!--android:value="b910a88c9441e21588fd891954f13f6a" />-->
-        <!--<meta-data-->
-            <!--android:name="com.taobao.android.hotfix.RSASECRET"-->
-            <!--android:value="MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCM7vSjgNbEmwoWML06k/HRN0rhedtRH4c3wwYRL6TXodyh+0G6a25DUAKGDMSb/SgbS1ZLneo4SjNwABv+lH7nICOJTliWyoORbJIVakPFnHox71MLt4zDwiP4fbJ/vwDZboQXaOnvKEYlw+bjxnAjCbmI4/zCa5ec5yWJig2gvVBfcaTNlw9VnbUtw6P473WF+o6WTkT1cwE79OvwqwflPYTppy11Wclg2c4SJ/XY+kGGxuF7SN7tcXwDiw7b0sbgTl1g9VogCL/BoZFLP/O4gPWcs5cOmNj2VAyVg5mkK7L/BTigy1sjWGS6hvDWGNtX27rHXQdzSCnZoXqovyx7AgMBAAECggEAJIpQI5RkGtWX5+j7JxT0van4YD2X/5CNHogSKqKPutjcu6LJh+wSyqEUBm2JDGi23VzLIw/uimmyrHdaysb1oDdU/2Sw02fudOYRejvzFmlbxVan0YHlnVvYt7Tfcv+y2K0u0mMBRGDMzz3bv3LT4EHFORjjkAUVajkEIoUIw4PvoSFvzBNWYNHUBn546Tx+kVydGMMmbdM9WQ3/NB0+/JggkdMGWjfwgOoPBdmPbrAQSd9tUzsBYkqnJeoXzmC5b8FF422qrrIVgnRbKRO28cA00q2t+7IRbnC5uH1reBqLWEebFlfNwhnvCGA5s4SlkN2JPIf81CHP/2egaVZGAQKBgQDFXjbiJUv9OGrQhTdv4opOekpwDefngM6hUNgcKGOryW+wrMEXgn6pUjhYJcM707EQjW8y3w21MfFXs4wgoUiw6374rRT0l6XF9s+CDpoS6HsvLssESwV7an3aBZsOv6SvM4wwJwKo5BIvZIQY9BIcJa1FOxV5sv4X9iAik6TtYwKBgQC2zOeVIrOmyDlUJCvKY7E1TNhmC4ekjVM2RZQCXzuAXA703xMKLbLy2Ldlxi1yD+Zf1Hcm20MMXU7TEYtCOqblA9XRGzxEUnBpVQmJuzf0+pTczc9+X8c8ReX78ej3CwFrKims5+cB4xNUJ/sZJv4sT4sc7eNgAlvYf9W3SNQcCQKBgC67tkcqCao116T0RkIp5BHdBw8tW8IHT+YGnIVeUut0UQwGe9ozPgadv1Wv62CZKY3/z1q+UiKbZsgbbYy0Y9/wgyoi4Zlg5xHO9SeYiYb8oV50uAGWOgAVISOkvChr3HTXwdQNCKYxCtVJ+bVm5XrguPxxlw4wAdZuowFM8Hp9AoGBAK9CGtHYOGex1Yz/NODQ3chdSafkbALu4BXLdZEkntZ87HYHHakHkWbVMlgoPc/6wIOmHyqo00qadwVT77DqrLIrECdwNkLGyzGhrwhW79o3GNvtkn718v2tgkcgcpvP+Gc3QEee+tLLU+++eTZvNQdkp9pvlSyqdkZGoa8c6weJAoGAVS0HApVmPttsQHwR3c3UcbkwTK68lCFQrqeYEBguG8uewZ8iRzRxbAfOuOW4ND1ktxziFNMr1NMtPOBQvv2CZbVc4aGbMC+3YMqY1wOVL7D20qXN6DFpKIdmfbVaEzD2ifxxPZRtar8clEgIYk950wB6PNf4MJTM55sZ8rV/CGE=" />-->
+        <!-- &lt;!&ndash;热修复 9b0c58b64abcf7b3178717397c436154   29127949&ndash;&gt; -->
+        <!-- <meta-data -->
+        <!-- android:name="com.taobao.android.hotfix.IDSECRET" -->
+        <!-- android:value="29127949" /> -->
+        <!-- <meta-data -->
+        <!-- android:name="com.taobao.android.hotfix.APPSECRET" -->
+        <!-- android:value="b910a88c9441e21588fd891954f13f6a" /> -->
+        <!-- <meta-data -->
+        <!-- android:name="com.taobao.android.hotfix.RSASECRET" -->
+        <!-- android:value="MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCM7vSjgNbEmwoWML06k/HRN0rhedtRH4c3wwYRL6TXodyh+0G6a25DUAKGDMSb/SgbS1ZLneo4SjNwABv+lH7nICOJTliWyoORbJIVakPFnHox71MLt4zDwiP4fbJ/vwDZboQXaOnvKEYlw+bjxnAjCbmI4/zCa5ec5yWJig2gvVBfcaTNlw9VnbUtw6P473WF+o6WTkT1cwE79OvwqwflPYTppy11Wclg2c4SJ/XY+kGGxuF7SN7tcXwDiw7b0sbgTl1g9VogCL/BoZFLP/O4gPWcs5cOmNj2VAyVg5mkK7L/BTigy1sjWGS6hvDWGNtX27rHXQdzSCnZoXqovyx7AgMBAAECggEAJIpQI5RkGtWX5+j7JxT0van4YD2X/5CNHogSKqKPutjcu6LJh+wSyqEUBm2JDGi23VzLIw/uimmyrHdaysb1oDdU/2Sw02fudOYRejvzFmlbxVan0YHlnVvYt7Tfcv+y2K0u0mMBRGDMzz3bv3LT4EHFORjjkAUVajkEIoUIw4PvoSFvzBNWYNHUBn546Tx+kVydGMMmbdM9WQ3/NB0+/JggkdMGWjfwgOoPBdmPbrAQSd9tUzsBYkqnJeoXzmC5b8FF422qrrIVgnRbKRO28cA00q2t+7IRbnC5uH1reBqLWEebFlfNwhnvCGA5s4SlkN2JPIf81CHP/2egaVZGAQKBgQDFXjbiJUv9OGrQhTdv4opOekpwDefngM6hUNgcKGOryW+wrMEXgn6pUjhYJcM707EQjW8y3w21MfFXs4wgoUiw6374rRT0l6XF9s+CDpoS6HsvLssESwV7an3aBZsOv6SvM4wwJwKo5BIvZIQY9BIcJa1FOxV5sv4X9iAik6TtYwKBgQC2zOeVIrOmyDlUJCvKY7E1TNhmC4ekjVM2RZQCXzuAXA703xMKLbLy2Ldlxi1yD+Zf1Hcm20MMXU7TEYtCOqblA9XRGzxEUnBpVQmJuzf0+pTczc9+X8c8ReX78ej3CwFrKims5+cB4xNUJ/sZJv4sT4sc7eNgAlvYf9W3SNQcCQKBgC67tkcqCao116T0RkIp5BHdBw8tW8IHT+YGnIVeUut0UQwGe9ozPgadv1Wv62CZKY3/z1q+UiKbZsgbbYy0Y9/wgyoi4Zlg5xHO9SeYiYb8oV50uAGWOgAVISOkvChr3HTXwdQNCKYxCtVJ+bVm5XrguPxxlw4wAdZuowFM8Hp9AoGBAK9CGtHYOGex1Yz/NODQ3chdSafkbALu4BXLdZEkntZ87HYHHakHkWbVMlgoPc/6wIOmHyqo00qadwVT77DqrLIrECdwNkLGyzGhrwhW79o3GNvtkn718v2tgkcgcpvP+Gc3QEee+tLLU+++eTZvNQdkp9pvlSyqdkZGoa8c6weJAoGAVS0HApVmPttsQHwR3c3UcbkwTK68lCFQrqeYEBguG8uewZ8iRzRxbAfOuOW4ND1ktxziFNMr1NMtPOBQvv2CZbVc4aGbMC+3YMqY1wOVL7D20qXN6DFpKIdmfbVaEzD2ifxxPZRtar8clEgIYk950wB6PNf4MJTM55sZ8rV/CGE=" /> -->
+
 
         <!-- 个推SDK配置开始 -->
         <!-- 配置的第三方参数属性 -->
@@ -108,7 +108,7 @@
             android:exported="false"
             android:process=":pushservice"
             android:taskAffinity="com.igexin.sdk.PushActivityTask"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"></activity>
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name="com.igexin.sdk.GActivity"
             android:excludeFromRecents="true"
@@ -123,7 +123,7 @@
             android:name=".DemoPushService"
             android:exported="true"
             android:label="PushService"
-            android:process=":pushservice"></service>
+            android:process=":pushservice" />
         <!-- android:permission在2.13.1.0版本后必须配置 -->
         <service
             android:name=".DemoIntentService"
@@ -370,13 +370,20 @@
         <activity android:name=".oaflow.activity.WillDoListActivity2" />
         <activity android:name=".exam.activity.DJDepartmentActivity" />
         <activity android:name=".exam.activity.ComparListActivity" />
-        <activity android:name=".main.activity.WillDoListTypeActivity"/>
-        <activity android:name=".fileapprove.activity.CapitalApprovalActivity"/>
-        <activity android:name=".fileapprove.activity.CapitalApprovalWillActivity"/>
-        <activity android:name=".fileapprove.activity.AdverBudgetActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
-        <activity android:name=".fileapprove.activity.AdverBudgeWillActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
+        <activity android:name=".main.activity.WillDoListTypeActivity" />
+        <activity android:name=".fileapprove.activity.CapitalApprovalActivity" />
+        <activity android:name=".fileapprove.activity.CapitalApprovalWillActivity" />
+        <activity
+            android:name=".fileapprove.activity.AdverBudgetActivity"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".fileapprove.activity.AdverBudgeWillActivity"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".checkup.activity.RCJCNewActivity"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity android:name=".checkup.activity.RCJCNewListActivity" />
+        <activity android:name=".checkup.activity.RCJCNewDetailActivity"></activity>
     </application>
 
 </manifest>

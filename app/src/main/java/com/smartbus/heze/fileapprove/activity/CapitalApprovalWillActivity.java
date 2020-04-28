@@ -143,10 +143,12 @@ public class CapitalApprovalWillActivity extends BaseActivity implements Capital
     @Override
     protected void rightClient() {
         if (etLeader.getVisibility() == View.VISIBLE || etLeader1.getVisibility() == View.VISIBLE
-                || etLeader2.getVisibility() == View.VISIBLE || etLeader3.getVisibility() == View.VISIBLE) {
+                || etLeader2.getVisibility() == View.VISIBLE || etLeader3.getVisibility() == View.VISIBLE
+                || etLeader4.getVisibility() == View.VISIBLE) {
             if (etLeader.getText().toString().equals("") && etLeader1.getText().toString().equals("")
-                    && etLeader2.getText().toString().equals("") && etLeader3.getText().toString().equals("")) {
-                Toast.makeText(this, "请填写意见", Toast.LENGTH_SHORT).show();
+                    && etLeader2.getText().toString().equals("") && etLeader3.getText().toString().equals("")
+                    && etLeader4.getText().toString().equals("")) {
+                Toast.makeText(this, "输入意见后再次点击驳回", Toast.LENGTH_SHORT).show();
             } else {
                 setDataBack();
                 map.put("back", "true");
@@ -454,18 +456,23 @@ public class CapitalApprovalWillActivity extends BaseActivity implements Capital
                 }
 
                 if (ksMove.equals("3")){
-                    tvLeader1.setTextColor(getResources().getColor(R.color.color_set_right));
+                    tvLeader1.setTextColor(getResources().getColor(R.color.holo_red_light));
+                    tvLeader2.setTextColor(getResources().getColor(R.color.holo_red_light));
+                    tvLeader3.setTextColor(getResources().getColor(R.color.holo_red_light));
+                    tvLeader4.setTextColor(getResources().getColor(R.color.holo_red_light));
                 }
                 if (cwMove.equals("3")){
-                    tvLeader2.setTextColor(getResources().getColor(R.color.color_set_right));
+                    tvLeader2.setTextColor(getResources().getColor(R.color.holo_red_light));
+                    tvLeader3.setTextColor(getResources().getColor(R.color.holo_red_light));
+                    tvLeader4.setTextColor(getResources().getColor(R.color.holo_red_light));
                 }
                 if (zjlMove.equals("3")){
-                    tvLeader3.setTextColor(getResources().getColor(R.color.color_set_right));
+                    tvLeader3.setTextColor(getResources().getColor(R.color.holo_red_light));
+                    tvLeader4.setTextColor(getResources().getColor(R.color.holo_red_light));
                 }
                 if (cwspMove.equals("3")){
-                    tvLeader3.setTextColor(getResources().getColor(R.color.color_set_right));
+                    tvLeader4.setTextColor(getResources().getColor(R.color.holo_red_light));
                 }
-
                 for (int i = 0; i < s.getTrans().size(); i++) {
                     destTypeList.add(s.getTrans().get(i));
                 }

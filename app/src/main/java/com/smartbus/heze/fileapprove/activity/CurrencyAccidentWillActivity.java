@@ -139,7 +139,7 @@ public class CurrencyAccidentWillActivity extends BaseActivity implements Curren
                 || etLeader2.getVisibility() == View.VISIBLE || etLeader3.getVisibility() == View.VISIBLE) {
             if (etLeader.getText().toString().equals("") && etLeader1.getText().toString().equals("")
                     && etLeader2.getText().toString().equals("") && etLeader3.getText().toString().equals("")) {
-                Toast.makeText(this, "请填写意见", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "输入意见后再次点击驳回", Toast.LENGTH_SHORT).show();
             } else {
                 setDataBack();
                 map.put("back", "true");
@@ -409,13 +409,16 @@ public class CurrencyAccidentWillActivity extends BaseActivity implements Curren
                 }
 
                 if (kzMove.equals("3")){
-                    tvLeader1.setTextColor(getResources().getColor(R.color.color_set_right));
+                    tvLeader1.setTextColor(getResources().getColor(R.color.holo_red_light));
+                    tvLeader2.setTextColor(getResources().getColor(R.color.holo_red_light));
+                    tvLeader3.setTextColor(getResources().getColor(R.color.holo_red_light));
                 }
                 if (fgMove.equals("3")){
-                    tvLeader2.setTextColor(getResources().getColor(R.color.color_set_right));
+                    tvLeader2.setTextColor(getResources().getColor(R.color.holo_red_light));
+                    tvLeader3.setTextColor(getResources().getColor(R.color.holo_red_light));
                 }
                 if (cwMove.equals("3")){
-                    tvLeader3.setTextColor(getResources().getColor(R.color.color_set_right));
+                    tvLeader3.setTextColor(getResources().getColor(R.color.holo_red_light));
                 }
 
                 for (int i = 0; i < s.getTrans().size(); i++) {

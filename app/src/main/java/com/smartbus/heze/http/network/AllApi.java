@@ -14,6 +14,7 @@ import com.smartbus.heze.checkup.bean.HealthItem;
 import com.smartbus.heze.checkup.bean.LineCode;
 import com.smartbus.heze.checkup.bean.RCJCHistory;
 import com.smartbus.heze.checkup.bean.RCJCHistoryItem;
+import com.smartbus.heze.checkup.bean.RCJCNewList;
 import com.smartbus.heze.checkup.bean.SafeHistoryItem;
 import com.smartbus.heze.checkup.bean.SaferHistory;
 import com.smartbus.heze.checkup.bean.UpData;
@@ -970,4 +971,16 @@ public interface AllApi {
             , @Field("jsdate") String endDate
             , @Field("carNo") String carNo
             , @Field("depId") String depId);
+
+    /**
+     * 新版日常检查录入
+     */
+    @POST(ApiAddress.rcjcnew)
+    Observable<BackData> getRcjcNew(@QueryMap Map<String, String> params);
+
+    /**
+     * 新版日常检查列表
+     */
+    @GET(ApiAddress.rcjcnewlist)
+    Observable<RCJCNewList> getRCJCNewList(@Query("start") int start,@Query("limit") int limit);
 }

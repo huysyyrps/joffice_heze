@@ -326,7 +326,7 @@ public class OAPublishActivity extends BaseActivity implements NoContract.View, 
                             MY_PERMISSIONS_MY_UP_IMAGE);
                 } else {
                     Matisse.from(OAPublishActivity.this)
-                            .choose(MimeType.allOf())//图片类型
+                            .choose(MimeType.ofAll(), false)//图片类型
                             .countable(true)//true:选中后显示数字;false:选中后显示对号
                             .maxSelectable(1)//可选的最大数
                             .capture(true)//选择照片时，是否显示拍照
@@ -350,7 +350,7 @@ public class OAPublishActivity extends BaseActivity implements NoContract.View, 
                         && grantResults[2] == PackageManager.PERMISSION_GRANTED) {
 //                    openCamera(this);
                     Matisse.from(OAPublishActivity.this)
-                            .choose(MimeType.allOf())//图片类型
+                            .choose(MimeType.ofAll(), false)//图片类型
                             .countable(true)//true:选中后显示数字;false:选中后显示对号
                             .maxSelectable(1)//可选的最大数
                             .capture(true)//选择照片时，是否显示拍照

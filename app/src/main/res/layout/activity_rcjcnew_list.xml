@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/ll"
+    tools:context="com.smartbus.heze.checkup.activity.RCJCNewListActivity">
+
+    <com.smartbus.heze.http.views.Header
+        android:id="@+id/header"
+        style="@style/Header"
+        app:header_title="@string/first_richang">
+    </com.smartbus.heze.http.views.Header>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.example.refreshview.CustomRefreshView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+        </com.example.refreshview.CustomRefreshView>
+
+        <include
+            android:id="@+id/noContent"
+            layout="@layout/no_content"
+            android:visibility="gone" />
+        <ImageView
+            android:id="@+id/ivAddRcjc"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:src="@drawable/ic_add_rcjc"
+            android:layout_gravity="bottom|right"
+            android:layout_margin="25dp"/>
+    </FrameLayout>
+</LinearLayout>

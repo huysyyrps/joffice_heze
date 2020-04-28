@@ -397,8 +397,10 @@ public class UserdLeaveWillActivity extends BaseActivity implements UserdLeaveWi
                 bigCodetemp1 = leaderCode.split(",");
                 bigNametemp2 = leaderName1.split(",");
                 bigCodetemp2 = leaderCode1.split(",");
-                bigNametemp = concat2(bigNametemp1, bigNametemp2);
-                bigCodetemp = concat2(bigCodetemp1, bigCodetemp2);
+                bigNametemp = bigNametemp2;
+                bigCodetemp = bigCodetemp2;
+//                bigNametemp = concat2(bigNametemp1, bigNametemp2);
+//                bigCodetemp = concat2(bigCodetemp1, bigCodetemp2);
 //                System.arraycopy(bigNametemp2, 0, bigNametemp1, 0, bigNametemp2.length - 1);
 //                System.arraycopy(bigCodetemp2, 0, bigCodetemp1, 0, bigCodetemp2.length - 1);
                 setDialog();
@@ -433,8 +435,8 @@ public class UserdLeaveWillActivity extends BaseActivity implements UserdLeaveWi
                 bigCodetemp1 = leaderCode.split(",");
                 bigNametemp2 = leaderName1.split(",");
                 bigCodetemp2 = leaderCode1.split(",");
-                bigNametemp = concat2(bigNametemp1, bigNametemp2);
-                bigCodetemp = concat2(bigCodetemp1, bigCodetemp2);
+                bigNametemp = bigNametemp2;
+                bigCodetemp = bigCodetemp2;
 //                System.arraycopy(bigNametemp2, 0, bigNametemp1, 0, bigNametemp2.length - 1);
 //                System.arraycopy(bigCodetemp2, 0, bigCodetemp1, 0, bigCodetemp2.length - 1);
                 setDialog();
@@ -451,7 +453,7 @@ public class UserdLeaveWillActivity extends BaseActivity implements UserdLeaveWi
     public void setNoHandlerPerson(NoHandlerPerson s) {
         setData();
         if (bmMove.equals("1") && fgMove.equals("1") && zjlMove.equals("1")) {
-            if (Integer.valueOf(tvDays.getText().toString()) > 1) {
+            if (Double.valueOf(tvDays.getText().toString()) > 1) {
                 map.put("flowAssignId", role1 + ":" + role2 + "|" + leaderCode + ":" + uId);
             } else {
                 map.put("flowAssignId", role1 + "|" + uId);
@@ -462,7 +464,7 @@ public class UserdLeaveWillActivity extends BaseActivity implements UserdLeaveWi
                 map.clear();
                 Toast.makeText(UserdLeaveWillActivity.this, "意见请填写同意或不同意", Toast.LENGTH_SHORT).show();
             } else {
-                if (Integer.valueOf(tvDays.getText().toString()) > 1) {
+                if (Double.valueOf(tvDays.getText().toString()) > 1) {
                     map.put("flowAssignId", role1 + ":" + role2 + "|" + leaderCode + ":" + uId);
                 } else {
                     map.put("flowAssignId", role1 + "|" + uId);
@@ -537,6 +539,9 @@ public class UserdLeaveWillActivity extends BaseActivity implements UserdLeaveWi
             @Override
             public void onClick(DialogInterface arg0, int arg1) {
                 //TODO 业务逻辑代码
+                if (bigCodetemp1!=null&&bigCodetemp1.length!=0){
+                    selectList.add(bigCodetemp1[0]);
+                }
                 for (int i = 0; i < checkedItems.length; i++) {
                     if (checkedItems[i]) {
                         selectList.add(bigCodetemp[i]);
@@ -547,7 +552,7 @@ public class UserdLeaveWillActivity extends BaseActivity implements UserdLeaveWi
                 // 关闭提示框
                 alertDialog3.dismiss();
                 if (bmMove.equals("1") && fgMove.equals("1") && zjlMove.equals("1")) {
-                    if (Integer.valueOf(tvDays.getText().toString()) > 1) {
+                    if (Double.valueOf(tvDays.getText().toString()) > 1) {
                         map.put("flowAssignId", role1 + ":" + role2 + "|" + leaderCode + ":" + uId);
                     } else {
                         map.put("flowAssignId", role1 + "|" + uId);
@@ -558,7 +563,7 @@ public class UserdLeaveWillActivity extends BaseActivity implements UserdLeaveWi
                         map.clear();
                         Toast.makeText(UserdLeaveWillActivity.this, "意见请填写同意或不同意", Toast.LENGTH_SHORT).show();
                     } else {
-                        if (Integer.valueOf(tvDays.getText().toString()) > 1) {
+                        if (Double.valueOf(tvDays.getText().toString()) > 1) {
                             map.put("flowAssignId", role1 + ":" + role2 + "|" + leaderCode + ":" + uId);
                         } else {
                             map.put("flowAssignId", role1 + "|" + uId);
@@ -586,7 +591,7 @@ public class UserdLeaveWillActivity extends BaseActivity implements UserdLeaveWi
             uId = selectList.get(0);
         }
         if (selectList.size() > 1) {
-            for (int i = 0; i < selectList.size(); i++) {
+            for (int i = 1; i < selectList.size(); i++) {
                 if (i == selectList.size() - 1) {
                     uId = uId + selectList.get(i);
                 } else {

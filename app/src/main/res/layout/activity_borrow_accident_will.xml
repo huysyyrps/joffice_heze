@@ -267,11 +267,13 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     style="@style/oaTextView"
+                    android:minHeight="45dp"
+                    android:layout_gravity="center"
                     android:text="同一事故借款次数: *" />
 
                 <View

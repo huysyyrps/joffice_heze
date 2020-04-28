@@ -60,10 +60,9 @@
 
             <RadioButton
                 android:id="@+id/rb5"
-                android:visibility="invisible"
                 style="@style/RadionButton"
                 android:drawableTop="@drawable/rb5"
-                android:text="@string/jianzi_yp" />
+                android:text="@string/first_richang" />
 
             <RadioButton
                 style="@style/RadionButton"
