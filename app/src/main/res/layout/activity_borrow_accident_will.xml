@@ -103,7 +103,7 @@
 
                 <TextView
                     android:id="@+id/tvAddress"
-                    style="@style/oaEditText"
+                    style="@style/textWrite"
                     android:hint="请填写地点" />
             </LinearLayout>
             <View style="@style/HourLine"></View>
@@ -191,7 +191,7 @@
 
                 <TextView
                     android:id="@+id/tvBlame"
-                    style="@style/oaEditText"
+                    style="@style/textWrite"
                     android:hint="请填写事故责任" />
             </LinearLayout>
             <View style="@style/HourLine"></View>
@@ -284,7 +284,7 @@
 
                 <TextView
                     android:id="@+id/tvNum"
-                    style="@style/oaEditText"
+                    style="@style/textWrite"
                     android:hint="请填写同一事故借款次数" />
             </LinearLayout>
             <View style="@style/HourLine"></View>
@@ -311,12 +311,12 @@
 
                 <TextView
                     android:id="@+id/tvLeader"
-                    style="@style/oaEditText"
+                    style="@style/textWrite"
                     android:hint="请填写科长意见" />
                 <EditText
                     android:id="@+id/etLeader"
                     android:visibility="gone"
-                    style="@style/oaEditText"
+                    style="@style/textWrite"
                     android:hint="请填写科长意见" />
             </LinearLayout>
             <View style="@style/HourLine"></View>
@@ -338,12 +338,12 @@
 
                 <TextView
                     android:id="@+id/tvLeader1"
-                    style="@style/oaEditText"
+                    style="@style/textWrite"
                     android:hint="分管经理意见" />
                 <EditText
                     android:id="@+id/etLeader1"
                     android:visibility="gone"
-                    style="@style/oaEditText"
+                    style="@style/textWrite"
                     android:hint="分管经理意见" />
             </LinearLayout>
             <View style="@style/HourLine"></View>
@@ -365,12 +365,12 @@
 
                 <TextView
                     android:id="@+id/tvLeader2"
-                    style="@style/oaEditText"
+                    style="@style/textWrite"
                     android:hint="财务经理意见" />
                 <EditText
                     android:id="@+id/etLeader2"
                     android:visibility="gone"
-                    style="@style/oaEditText"
+                    style="@style/textWrite"
                     android:hint="财务经理意见" />
             </LinearLayout>
             <View style="@style/HourLine"></View>
@@ -392,12 +392,12 @@
 
                 <TextView
                     android:id="@+id/tvLeader3"
-                    style="@style/oaEditText"
+                    style="@style/textWrite"
                     android:hint="总经理意见" />
                 <EditText
                     android:id="@+id/etLeader3"
                     android:visibility="gone"
-                    style="@style/oaEditText"
+                    style="@style/textWrite"
                     android:hint="总经理意见" />
             </LinearLayout>
 

@@ -25,6 +25,9 @@ public class Constant {
     //资金审批单
     public final static String CAPITALAPPROVAL_DEFID = "159" ;
     public final static String CAPITALAPPROVAL_FORMDEFIS = "54" ;
+    //资金审批单
+//    public final static String CAPITALAPPROVAL_DEFID = "185";
+//    public final static String CAPITALAPPROVAL_FORMDEFIS = "58";
     //事故借款单
     public final static String BORROWACCIDENT_DEFID = "87" ;
     public final static String BORROWACCIDENT_FORMDEFIS = "30" ;

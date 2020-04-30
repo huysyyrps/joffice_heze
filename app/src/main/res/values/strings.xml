@@ -64,7 +64,7 @@
     <string name="department_accident">通用借款单</string>
     <string name="department_file_huiqian">会签发文流程</string>
     <string name="department_file_chuanyue">文件传阅流程</string>
-    <string name="decoment_liuzhuan">部门文件流转</string>
+    <string name="decoment_liuzhuan">公文流转</string>
     <string name="zhijin_shenpi">财务资金审批单</string>
     <string name="notice_budget">广告预算单</string>
 
@@ -120,4 +120,5 @@
 
 
     <string name="flow_back">驳回</string>
+    <string name="flow_single">签字</string>
 </resources>

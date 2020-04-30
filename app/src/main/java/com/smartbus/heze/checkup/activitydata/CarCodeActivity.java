@@ -8,6 +8,8 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.smartbus.heze.R;
@@ -30,6 +32,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class CarCodeActivity extends BaseActivity implements CarCodeContract.View {
 
@@ -45,15 +48,19 @@ public class CarCodeActivity extends BaseActivity implements CarCodeContract.Vie
     CarCodePresenter carCodePresenter;
     List<CarCodeData> beanListData = new ArrayList<>();
     List<CarCodeData> beanListData1 = new ArrayList<>();
+    @BindView(R.id.llNoContent)
+    LinearLayout llNoContent;
+    @BindView(R.id.ivAddRcjc)
+    ImageView ivAddRcjc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         tag = getIntent().getStringExtra("tag");
-        if (tag.equals("carCode")){
+        if (tag.equals("carCode")) {
             header.setTvTitle(getResources().getString(R.string.car_code1));
-        }else if (tag.equals("carNo")){
+        } else if (tag.equals("carNo")) {
             header.setTvTitle(getResources().getString(R.string.car_no));
         }
         LinearLayoutManager manager = new LinearLayoutManager(this);
@@ -98,14 +105,14 @@ public class CarCodeActivity extends BaseActivity implements CarCodeContract.Vie
             setAdapter(mSortList);
         } else {
             mSortList.clear();
-            if (tag.equals("carCode")){
+            if (tag.equals("carCode")) {
                 for (CarCodeData sortModel : beanListData1) {
                     String name = sortModel.getBusCode();
                     if (name.toUpperCase().indexOf(filterStr.toString().toUpperCase()) != -1 || PinyinUtils.getPingYin(name).toUpperCase().startsWith(filterStr.toString().toUpperCase())) {
                         mSortList.add(sortModel);
                     }
                 }
-            }else if (tag.equals("carNo")){
+            } else if (tag.equals("carNo")) {
                 for (CarCodeData sortModel : beanListData1) {
                     String name = sortModel.getCarNo();
                     if (name.toUpperCase().indexOf(filterStr.toString().toUpperCase()) != -1 || PinyinUtils.getPingYin(name).toUpperCase().startsWith(filterStr.toString().toUpperCase())) {
@@ -168,9 +175,9 @@ public class CarCodeActivity extends BaseActivity implements CarCodeContract.Vie
         adapter = new BaseRecyclerAdapter<CarCodeData>(this, R.layout.adapter_easy_item, mSortList) {
             @Override
             public void convert(BaseViewHolder holder, final CarCodeData o) {
-                if (tag.equals("carCode")){
+                if (tag.equals("carCode")) {
                     holder.setText(R.id.textView, o.getBusCode());
-                }else if (tag.equals("carNo")){
+                } else if (tag.equals("carNo")) {
                     holder.setText(R.id.textView, o.getCarNo());
                 }
 
@@ -189,4 +196,12 @@ public class CarCodeActivity extends BaseActivity implements CarCodeContract.Vie
         adapter.notifyDataSetChanged();
     }
 
+    @OnClick(R.id.ivAddRcjc)
+    public void onViewClicked() {
+        DataSupport.deleteAll(CarCodeData.class);
+        beanListData.clear();
+        beanListData1.clear();
+        adapter.notifyDataSetChanged();
+        carCodePresenter.getCarCode();
+    }
 }

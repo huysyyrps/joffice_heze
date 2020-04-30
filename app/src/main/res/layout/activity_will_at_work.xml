@@ -176,12 +176,12 @@
 
                 <TextView
                     android:id="@+id/tvLeader"
-                    style="@style/oaEditText"
+                    style="@style/textWrite"
                     android:hint="部门领导签名" />
                 <EditText
                     android:id="@+id/etLeader"
                     android:visibility="gone"
-                    style="@style/oaEditText"
+                    style="@style/textWrite"
                     android:hint="部门领导签名" />
             </LinearLayout>
             <View style="@style/HourLine"></View>
@@ -203,12 +203,12 @@
 
                 <TextView
                     android:id="@+id/tvLeader1"
-                    style="@style/oaEditText"
+                    style="@style/textWrite"
                     android:hint="分管经理签名" />
                 <EditText
                     android:id="@+id/etLeader1"
                     android:visibility="gone"
-                    style="@style/oaEditText"
+                    style="@style/textWrite"
                     android:hint="分管经理签名" />
             </LinearLayout>
             <View style="@style/HourLine"></View>

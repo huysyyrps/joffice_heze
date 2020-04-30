@@ -8,6 +8,8 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.smartbus.heze.R;
@@ -30,6 +32,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class UserCodeActivity extends BaseActivity implements UserCodeContract.View {
 
@@ -44,15 +47,19 @@ public class UserCodeActivity extends BaseActivity implements UserCodeContract.V
     BaseRecyclerAdapter adapter;
     UserCodePresenter userCodePresenter;
     List<UserCodeData> beanListData = new ArrayList<>();
+    @BindView(R.id.llNoContent)
+    LinearLayout llNoContent;
+    @BindView(R.id.ivAddRcjc)
+    ImageView ivAddRcjc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         tag = getIntent().getStringExtra("tag");
-        if (tag.equals("userCode")){
+        if (tag.equals("userCode")) {
             header.setTvTitle(getResources().getString(R.string.user_code));
-        }else if (tag.equals("userName")){
+        } else if (tag.equals("userName")) {
             header.setTvTitle(getResources().getString(R.string.user_name));
         }
         LinearLayoutManager manager = new LinearLayoutManager(this);
@@ -127,9 +134,9 @@ public class UserCodeActivity extends BaseActivity implements UserCodeContract.V
         adapter = new BaseRecyclerAdapter<UserCodeData>(this, R.layout.adapter_easy_item, mSortList) {
             @Override
             public void convert(BaseViewHolder holder, final UserCodeData o) {
-                if (tag.equals("userCode")){
+                if (tag.equals("userCode")) {
                     holder.setText(R.id.textView, o.getECard());
-                }else if (tag.equals("userName")){
+                } else if (tag.equals("userName")) {
                     holder.setText(R.id.textView, o.getFullname());
                 }
 
@@ -150,6 +157,7 @@ public class UserCodeActivity extends BaseActivity implements UserCodeContract.V
 
     /**
      * 获取员工编号
+     *
      * @param s
      */
     @Override
@@ -173,8 +181,16 @@ public class UserCodeActivity extends BaseActivity implements UserCodeContract.V
         setAdapter(beanListData);
     }
 
-   @Override
+    @Override
     public void setUserCodeMessage(String s) {
-       Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
+    }
+
+    @OnClick(R.id.ivAddRcjc)
+    public void onViewClicked() {
+        DataSupport.deleteAll(UserCodeData.class);
+        beanListData.clear();
+        adapter.notifyDataSetChanged();
+        userCodePresenter.getUserCode();
     }
 }

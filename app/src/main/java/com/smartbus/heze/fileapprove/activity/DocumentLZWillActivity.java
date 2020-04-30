@@ -255,15 +255,28 @@ public class DocumentLZWillActivity extends BaseActivity implements DocumentLZWi
                 startActivityForResult(intent, TAG_ONE);
                 break;
             case R.id.btnUp:
-                if (etLeader.getVisibility() == View.VISIBLE || etLeader1.getVisibility() == View.VISIBLE || etLeader2.getVisibility() == View.VISIBLE) {
-                    if (etLeader.getText().toString().equals("") && etLeader1.getText().toString().equals("") && etLeader2.getText().toString().equals("")) {
+                if (etLeader.getVisibility() == View.VISIBLE) {
+                    if (etLeader.getText().toString().equals("")) {
                         Toast.makeText(this, "请填写意见", Toast.LENGTH_SHORT).show();
-                    } else {
-                        getSomeData();
+                        break;
                     }
-                } else {
-                    getSomeData();
                 }
+                if (etLeader1.getVisibility() == View.VISIBLE) {
+                    if (etLeader1.getText().toString().equals("")) {
+                        Toast.makeText(this, "请填写意见", Toast.LENGTH_SHORT).show();
+                        break;
+                    }
+                }
+                getSomeData();
+//                if (etLeader.getVisibility() == View.VISIBLE || etLeader1.getVisibility() == View.VISIBLE || etLeader2.getVisibility() == View.VISIBLE) {
+//                    if (etLeader.getText().toString().equals("") && etLeader1.getText().toString().equals("") && etLeader2.getText().toString().equals("")) {
+//                        Toast.makeText(this, "请填写意见", Toast.LENGTH_SHORT).show();
+//                    } else {
+//                        getSomeData();
+//                    }
+//                } else {
+//                    getSomeData();
+//                }
 
                 break;
         }
@@ -292,19 +305,42 @@ public class DocumentLZWillActivity extends BaseActivity implements DocumentLZWi
                     @Override
                     public void oneselect(final String data) {
                         destName = data;
-                        for (int i = 0; i < destTypeList.size(); i++) {
-                            if (destName.equals(destTypeList.get(i).getDestination())) {
-                                signaName = destTypeList.get(i).getName();
-                                destType = destTypeList.get(i).getDestType();
-                                destName = destTypeList.get(i).getDestination();
+                        if (data.equals("企管办")){
+                            if (etLeader2.getVisibility() == View.VISIBLE) {
+                                if (etLeader2.getText().toString().equals("")) {
+                                    Toast.makeText(DocumentLZWillActivity.this, "请填写承办结果", Toast.LENGTH_SHORT).show();
+                                }else {
+                                    for (int i = 0; i < destTypeList.size(); i++) {
+                                        if (destName.equals(destTypeList.get(i).getDestination())) {
+                                            signaName = destTypeList.get(i).getName();
+                                            destType = destTypeList.get(i).getDestType();
+                                            destName = destTypeList.get(i).getDestination();
+                                        }
+                                    }
+                                    if (destType.equals("decision") || destType.equals("fork") || destType.equals("join")) {
+                                        normalPresenter.getNormalPerson(taskId, destName, "false");
+                                    } else if (destType.indexOf("end") == -1) {
+                                        noEndPersenter.getNoEndPerson(taskId, destName, "false");
+                                    } else {
+                                        noHandlerPresenter.getNoHandlerPerson(taskId);
+                                    }
+                                }
                             }
-                        }
-                        if (destType.equals("decision") || destType.equals("fork") || destType.equals("join")) {
-                            normalPresenter.getNormalPerson(taskId, destName, "false");
-                        } else if (destType.indexOf("end") == -1) {
-                            noEndPersenter.getNoEndPerson(taskId, destName, "false");
-                        } else {
-                            noHandlerPresenter.getNoHandlerPerson(taskId);
+                        }else {
+                            for (int i = 0; i < destTypeList.size(); i++) {
+                                if (destName.equals(destTypeList.get(i).getDestination())) {
+                                    signaName = destTypeList.get(i).getName();
+                                    destType = destTypeList.get(i).getDestType();
+                                    destName = destTypeList.get(i).getDestination();
+                                }
+                            }
+                            if (destType.equals("decision") || destType.equals("fork") || destType.equals("join")) {
+                                normalPresenter.getNormalPerson(taskId, destName, "false");
+                            } else if (destType.indexOf("end") == -1) {
+                                noEndPersenter.getNoEndPerson(taskId, destName, "false");
+                            } else {
+                                noHandlerPresenter.getNoHandlerPerson(taskId);
+                            }
                         }
                     }
 
@@ -563,7 +599,7 @@ public class DocumentLZWillActivity extends BaseActivity implements DocumentLZWi
                     tvLeader2.setVisibility(View.GONE);
                     etLeader2.setVisibility(View.VISIBLE);
                     if (leader2 != null && leader2.length() != 0) {
-//                        etLeader2.setText(leader2);
+                        etLeader2.setText(leader2);
                     }
                 } else {
                     tvLeader2.setVisibility(View.VISIBLE);
@@ -690,6 +726,9 @@ public class DocumentLZWillActivity extends BaseActivity implements DocumentLZWi
     @Override
     public void setWillDoMessage(String s) {
         Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
+        if (s.equals("失败了----->发起人无法驳回!")){
+            finish();
+        }
     }
 
     private void setDialog() {
@@ -746,8 +785,18 @@ public class DocumentLZWillActivity extends BaseActivity implements DocumentLZWi
 //                    map.clear();
 //                    Toast.makeText(DocumentLZWillActivity.this, "意见请填写同意或不同意", Toast.LENGTH_SHORT).show();
 //                } else {
+                if (etLeader2.getVisibility() == View.VISIBLE) {
+                    if (etLeader2.getText().toString().equals("")) {
+                        Toast.makeText(DocumentLZWillActivity.this, "请填写承办结果", Toast.LENGTH_SHORT).show();
+                    }else {
+                        map.put("flowAssignId", destName + "|" + uId);
+                        willDoPresenter.getWillDo(map);
+                    }
+                }else {
                     map.put("flowAssignId", destName + "|" + uId);
                     willDoPresenter.getWillDo(map);
+                }
+
 //                }
             }
         }).setNegativeButton("取消", new DialogInterface.OnClickListener() {

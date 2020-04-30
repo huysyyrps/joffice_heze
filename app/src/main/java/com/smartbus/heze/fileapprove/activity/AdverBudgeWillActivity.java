@@ -976,14 +976,14 @@ public class AdverBudgeWillActivity extends BaseActivity implements DepartBudget
                 Toast.makeText(this, "输入意见后再次点击驳回", Toast.LENGTH_SHORT).show();
             } else {
                 setDataBack();
-                map.put("back", "true");
-                map.put("useTemplate", "");
+//                map.put("back", "true");
+//                map.put("useTemplate", "");
                 willDoPresenter.getWillDo(map);
             }
         } else {
             setDataBack();
-            map.put("back", "true");
-            map.put("useTemplate", "");
+//            map.put("back", "true");
+//            map.put("useTemplate", "");
             willDoPresenter.getWillDo(map);
         }
     }
@@ -1094,6 +1094,7 @@ public class AdverBudgeWillActivity extends BaseActivity implements DepartBudget
     }
 
     private void setData() {
+        map.clear();
         map.put("defId", Constant.ADVER_DEFID);
         map.put("startFlow", "true");
         map.put("formDefId", Constant.ADVER_FORMDEFIS);
@@ -1190,6 +1191,9 @@ public class AdverBudgeWillActivity extends BaseActivity implements DepartBudget
     }
 
     private void setDataBack() {
+        map.clear();
+        map.put("back", "true");
+        map.put("useTemplate", "");
         map.put("defId", Constant.ADVER_DEFID);
         map.put("startFlow", "true");
         map.put("formDefId", Constant.ADVER_FORMDEFIS);
@@ -1522,6 +1526,9 @@ public class AdverBudgeWillActivity extends BaseActivity implements DepartBudget
     @Override
     public void setWillDoMessage(String s) {
         Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
+        if (s.equals("失败了----->发起人无法驳回!")){
+            finish();
+        }
     }
 
     private void setDialog() {

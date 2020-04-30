@@ -533,6 +533,9 @@ public class BorrowAccidentWillActivity extends BaseActivity implements BorrowAc
     @Override
     public void setWillDoMessage(String s) {
         Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
+        if (s.equals("失败了----->发起人无法驳回!")){
+            finish();
+        }
     }
 
     private void setDialog() {

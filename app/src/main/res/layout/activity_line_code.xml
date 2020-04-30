@@ -26,10 +26,26 @@
         android:singleLine="true"
         android:textSize="14dp" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </android.support.v7.widget.RecyclerView>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </android.support.v7.widget.RecyclerView>
+
+        <include
+            android:id="@+id/noContent"
+            layout="@layout/no_content"
+            android:visibility="gone" />
+        <ImageView
+            android:id="@+id/ivAddRcjc"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:src="@drawable/ic_again"
+            android:layout_gravity="bottom|right"
+            android:layout_margin="25dp"/>
+    </FrameLayout>
 
 </LinearLayout>

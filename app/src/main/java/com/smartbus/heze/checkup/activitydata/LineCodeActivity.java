@@ -53,11 +53,11 @@ public class LineCodeActivity extends BaseActivity implements LineCodeContract.V
         recyclerView.setLayoutManager(manager);
         lineCodePresenter = new LineCodePresenter(this, this);
         beanListData = DataSupport.findAll(LineCodeData.class);
-        if (beanListData.size() != 0) {
-            setAdapter(beanListData);
-        } else {
+//        if (beanListData.size() != 0) {
+//            setAdapter(beanListData);
+//        } else {
             lineCodePresenter.getLineCode();
-        }
+//        }
 
         //根据输入框输入值的改变来过滤搜索
         etSearch.addTextChangedListener(new TextWatcher() {
@@ -81,7 +81,6 @@ public class LineCodeActivity extends BaseActivity implements LineCodeContract.V
 
     /**
      * 根据输入框中的值来过滤数据并更新ListView
-     *
      * @param filterStr
      */
     private void filterData(String filterStr) {
