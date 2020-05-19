@@ -60,6 +60,8 @@ import com.smartbus.heze.fileapprove.bean.NoEndPerson;
 import com.smartbus.heze.fileapprove.bean.NoHandlerPerson;
 import com.smartbus.heze.fileapprove.bean.NormalPerson;
 import com.smartbus.heze.fileapprove.bean.OnePerson;
+import com.smartbus.heze.fileapprove.bean.QZHQ;
+import com.smartbus.heze.fileapprove.bean.QZLR;
 import com.smartbus.heze.fileapprove.bean.TwoPerson;
 import com.smartbus.heze.fileapprove.bean.WillDoUp;
 import com.smartbus.heze.fileapprove.bean.WorkOnePerson;
@@ -983,4 +985,16 @@ public interface AllApi {
      */
     @GET(ApiAddress.rcjcnewlist)
     Observable<RCJCNewList> getRCJCNewList(@Query("start") int start,@Query("limit") int limit);
+
+    /**
+     * 签章录入
+     */
+    @POST(ApiAddress.qzlr)
+    Observable<QZLR> getqzlr(@QueryMap Map<String, String> params);
+
+    /**
+     * 签章获取
+     */
+    @GET(ApiAddress.qzhq)
+    Observable<QZHQ> getqzhq(@Query("runId") String runId);
 }

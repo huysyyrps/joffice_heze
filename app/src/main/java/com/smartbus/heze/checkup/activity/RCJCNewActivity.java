@@ -1227,8 +1227,8 @@ public class RCJCNewActivity extends BaseActivity implements AboutDataContract.V
         foundAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spFound.setAdapter(foundAdapter);
 
-        listFH.add("复合");
-        listFH.add("未复合");
+        listFH.add("已复核");
+        listFH.add("未复核");
         fhAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listFH);
         fhAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spFH.setAdapter(fhAdapter);
@@ -1318,7 +1318,7 @@ public class RCJCNewActivity extends BaseActivity implements AboutDataContract.V
                             .choose(MimeType.ofAll(), false)//图片类型
                             .countable(true)//true:选中后显示数字;false:选中后显示对号
                             .maxSelectable(3)//可选的最大数
-                            .capture(true)//选择照片时，是否显示拍照
+//                            .capture(true)//选择照片时，是否显示拍照
                             .captureStrategy(new CaptureStrategy(true, "com.smartbus.heze.fileprovider"))//参数1 true表示拍照存储在共有目录，false表示存储在私有目录；参数2与 AndroidManifest中authorities值相同，用于适配7.0系统 必须设置
                             .thumbnailScale(0.5f)  //图片缩放比例
                             .imageEngine(new GlideEngine())//图片加载引擎
@@ -1382,7 +1382,7 @@ public class RCJCNewActivity extends BaseActivity implements AboutDataContract.V
         }
         map.put("way", spFound.getSelectedItem().toString());
         map.put("result", etResult.getText().toString());
-        if (spFH.getSelectedItem().toString().equals("复核")) {
+        if (spFH.getSelectedItem().toString().equals("已复核")) {
             map.put("checkzt", "1");
         } else {
             map.put("checkzt", "0");
@@ -1432,7 +1432,7 @@ public class RCJCNewActivity extends BaseActivity implements AboutDataContract.V
                             .choose(MimeType.ofAll(), false)//图片类型
                             .countable(true)//true:选中后显示数字;false:选中后显示对号
                             .maxSelectable(3)//可选的最大数
-                            .capture(true)//选择照片时，是否显示拍照
+//                            .capture(true)//选择照片时，是否显示拍照
                             .captureStrategy(new CaptureStrategy(true, "com.smartbus.heze.fileprovider"))//参数1 true表示拍照存储在共有目录，false表示存储在私有目录；参数2与 AndroidManifest中authorities值相同，用于适配7.0系统 必须设置
                             .thumbnailScale(0.5f)  //图片缩放比例
                             .imageEngine(new GlideEngine())//图片加载引擎
