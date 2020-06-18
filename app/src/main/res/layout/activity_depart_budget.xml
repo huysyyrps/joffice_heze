@@ -18,8 +18,81 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <LinearLayout
+            android:id="@+id/llSingle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="4dp"
+            android:background="@drawable/linearlayout_radius"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="签字"
+                android:textColor="#222222"
+                android:textSize="16sp" />
+
+            <View style="@style/HourLine" />
+
+            <com.smartbus.heze.http.base.SignatureView
+                android:id="@+id/id_sign"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:layout_marginTop="10px" />
+
+            <View
+                style="@style/HourLine"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/no"
+                    android:layout_width="0px"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="取消"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:background="@color/shouye" />
+
+                <TextView
+                    android:id="@+id/yes"
+                    android:layout_width="0px"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="同意"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </LinearLayout>
+            <LinearLayout
+            android:id="@+id/llData"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -511,11 +584,23 @@
             </LinearLayout>
             <View style="@style/HourLine"></View>
 
-            <TextView
-                android:id="@+id/textView8"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:background="@color/shouye" />
+                android:background="@color/shouye">
+
+                <TextView
+                    android:id="@+id/tvSingle"
+                    android:layout_width="60dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/linearlayout_colore_radius"
+                    android:gravity="center"
+                    android:text="@string/flow_single"
+                    android:textColor="@color/white" />
+            </RelativeLayout>
 
             <View style="@style/HourLine"></View>
 
@@ -638,8 +723,29 @@
                     style="@style/textWrite"
                     android:hint="总经理意见" />
             </LinearLayout>
+                <View style="@style/HourLine"></View>
 
-            <View style="@style/HourLine"></View>
+                <LinearLayout
+                    android:id="@+id/llLeader2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <TextView
+                        style="@style/oaTextView"
+                        android:text="总经理签字:" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="15dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@color/shouye" />
+
+                    <ImageView
+                        android:id="@+id/imLeader2"
+                        style="@style/oaEditText" />
+                </LinearLayout>
 
             <View
                 style="@style/HourLine"
@@ -665,6 +771,7 @@
                 android:gravity="center"
                 android:text="提交"
                 android:textColor="@color/whith" />
+        </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

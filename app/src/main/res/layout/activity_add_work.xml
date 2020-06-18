@@ -39,6 +39,7 @@
                     android:id="@+id/tvPerson"
                     style="@style/oaEditText" />
             </LinearLayout>
+
             <View style="@style/HourLine"></View>
 
             <LinearLayout
@@ -60,6 +61,7 @@
                     android:id="@+id/tvTime"
                     style="@style/oaEditText" />
             </LinearLayout>
+
             <View style="@style/HourLine"></View>
 
             <LinearLayout
@@ -79,9 +81,10 @@
 
                 <TextView
                     android:id="@+id/tvDepartment"
-                    android:hint="请选择申请部门"
-                    style="@style/oaEditText" />
+                    style="@style/oaEditText"
+                    android:hint="请选择申请部门" />
             </LinearLayout>
+
             <View style="@style/HourLine"></View>
 
             <LinearLayout
@@ -105,6 +108,7 @@
                     android:hint="请填写天数"
                     android:inputType="number|numberDecimal" />
             </LinearLayout>
+
             <View style="@style/HourLine"></View>
 
             <LinearLayout
@@ -129,6 +133,7 @@
                     style="@style/textWrite"
                     android:hint="请填写内容" />
             </LinearLayout>
+
             <View style="@style/HourLine"></View>
 
             <LinearLayout
@@ -153,6 +158,7 @@
                     style="@style/textWrite"
                     android:hint="请填写加班内容" />
             </LinearLayout>
+
             <View style="@style/HourLine"></View>
 
             <LinearLayout
@@ -177,6 +183,7 @@
                     style="@style/textWrite"
                     android:hint="请填写地点" />
             </LinearLayout>
+
             <View style="@style/HourLine"></View>
 
             <LinearLayout
@@ -212,6 +219,7 @@
                     android:layout_width="120dp"
                     android:layout_height="match_parent"></Spinner>
             </LinearLayout>
+
             <View style="@style/HourLine"></View>
 
             <LinearLayout
@@ -247,13 +255,14 @@
                     android:layout_width="120dp"
                     android:layout_height="match_parent" />
             </LinearLayout>
+
             <View style="@style/HourLine"></View>
 
             <LinearLayout
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <TextView
                     style="@style/oaTextView"
@@ -297,6 +306,7 @@
                     style="@style/oaEditText"
                     android:hint="部门领导签名" />
             </LinearLayout>
+
             <View style="@style/HourLine"></View>
 
             <LinearLayout
@@ -319,6 +329,7 @@
                     style="@style/oaEditText"
                     android:hint="分管经理签名" />
             </LinearLayout>
+
             <View style="@style/HourLine"></View>
 
             <LinearLayout
@@ -341,6 +352,7 @@
                     style="@style/oaEditText"
                     android:hint="总经理签名" />
             </LinearLayout>
+
             <View
                 style="@style/HourLine"
                 android:layout_marginBottom="45dp"></View>
@@ -354,6 +366,7 @@
                 android:gravity="center"
                 android:text="录入"
                 android:textColor="@color/whith" />
+
             <Button
                 android:id="@+id/btnUp"
                 android:layout_width="match_parent"

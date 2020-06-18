@@ -7,6 +7,8 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +32,7 @@ import com.smartbus.heze.fileapprove.presenter.UPYSDPresenter;
 import com.smartbus.heze.http.base.AlertDialogCallBackP;
 import com.smartbus.heze.http.base.BaseActivity;
 import com.smartbus.heze.http.base.Constant;
+import com.smartbus.heze.http.base.SignatureView;
 import com.smartbus.heze.http.utils.time_select.CustomDatePickerDay;
 import com.smartbus.heze.http.views.Header;
 import com.smartbus.heze.http.views.MyAlertDialog;
@@ -166,8 +169,6 @@ public class AdverBudgetActivity extends BaseActivity implements OneContract.Vie
     EditText etWide4;
     @BindView(R.id.etWide5)
     EditText etWide5;
-    @BindView(R.id.textView8)
-    TextView textView8;
     @BindView(R.id.tvLeader1)
     TextView tvLeader1;
     @BindView(R.id.tvLeader)
@@ -177,6 +178,34 @@ public class AdverBudgetActivity extends BaseActivity implements OneContract.Vie
     @BindView(R.id.btnLR)
     Button btnLR;
     Map<String, String> firstmap = new HashMap<>();
+    @BindView(R.id.title)
+    TextView title;
+    @BindView(R.id.id_sign)
+    SignatureView idSign;
+    @BindView(R.id.no)
+    TextView no;
+    @BindView(R.id.yes)
+    TextView yes;
+    @BindView(R.id.llSingle)
+    LinearLayout llSingle;
+    @BindView(R.id.tvSingle)
+    TextView tvSingle;
+    @BindView(R.id.etLeader0)
+    EditText etLeader0;
+    @BindView(R.id.tvLeader0)
+    TextView tvLeader0;
+    @BindView(R.id.llLeader0)
+    LinearLayout llLeader0;
+    @BindView(R.id.llLeader1)
+    LinearLayout llLeader1;
+    @BindView(R.id.llLeader)
+    LinearLayout llLeader;
+    @BindView(R.id.imLeader2)
+    ImageView imLeader2;
+    @BindView(R.id.llLeader2)
+    LinearLayout llLeader2;
+    @BindView(R.id.llData)
+    LinearLayout llData;
     private CustomDatePickerDay customDatePicker1;
     DepartBudgetLRPresenter departBudgetLRPresenter;
     DepartBudgeCheckTypePresenter departBudgeCheckTypePresenter;
@@ -192,6 +221,7 @@ public class AdverBudgetActivity extends BaseActivity implements OneContract.Vie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        tvSingle.setVisibility(View.GONE);
         header.setRightTv(false);
         initDatePicker();
         departBudgetLRPresenter = new DepartBudgetLRPresenter(this, this);
@@ -373,7 +403,7 @@ public class AdverBudgetActivity extends BaseActivity implements OneContract.Vie
                 if (!s.toString().equals("")) {
                     allNum1 = (Integer.valueOf(s.toString()));
                     tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
-                    if (!etMoney1.getText().toString().equals("")&&!etLong1.getText().toString().equals("") &&!etWide1.getText().toString().equals("")) {
+                    if (!etMoney1.getText().toString().equals("") && !etLong1.getText().toString().equals("") && !etWide1.getText().toString().equals("")) {
                         etAllMoney1.setText(String.valueOf(Double.valueOf(etMoney1.getText().toString()) * allNum1 * Double.valueOf(etLong1.getText().toString()) * Double.valueOf(etWide1.getText().toString())));
                     } else {
                         etAllMoney1.setText(String.valueOf(0 * allNum1));
@@ -401,9 +431,9 @@ public class AdverBudgetActivity extends BaseActivity implements OneContract.Vie
                 if (!s.toString().equals("")) {
                     allNum2 = (Integer.valueOf(s.toString()));
                     tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
-                    if (!etMoney2.getText().toString().equals("")&&!etLong2.getText().toString().equals("") &&!etWide2.getText().toString().equals("")) {
+                    if (!etMoney2.getText().toString().equals("") && !etLong2.getText().toString().equals("") && !etWide2.getText().toString().equals("")) {
                         etAllMoney2.setText(String.valueOf(Double.valueOf(etMoney2.getText().toString())
-                                * allNum2*Double.valueOf(etLong2.getText().toString())*Double.valueOf(etWide2.getText().toString())));
+                                * allNum2 * Double.valueOf(etLong2.getText().toString()) * Double.valueOf(etWide2.getText().toString())));
                     } else {
                         etAllMoney2.setText(String.valueOf(0 * allNum2));
                     }
@@ -430,9 +460,9 @@ public class AdverBudgetActivity extends BaseActivity implements OneContract.Vie
                 if (!s.toString().equals("")) {
                     allNum3 = (Integer.valueOf(s.toString()));
                     tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
-                    if (!etMoney3.getText().toString().equals("")&&!etLong3.getText().toString().equals("") &&!etWide3.getText().toString().equals("")) {
+                    if (!etMoney3.getText().toString().equals("") && !etLong3.getText().toString().equals("") && !etWide3.getText().toString().equals("")) {
                         etAllMoney3.setText(String.valueOf(Double.valueOf(etMoney3.getText().toString())
-                                * allNum3*Double.valueOf(etLong3.getText().toString())*Double.valueOf(etWide3.getText().toString())));
+                                * allNum3 * Double.valueOf(etLong3.getText().toString()) * Double.valueOf(etWide3.getText().toString())));
                     } else {
                         etAllMoney3.setText(String.valueOf(0 * allNum3));
                     }
@@ -459,9 +489,9 @@ public class AdverBudgetActivity extends BaseActivity implements OneContract.Vie
                 if (!s.toString().equals("")) {
                     allNum4 = (Integer.valueOf(s.toString()));
                     tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
-                    if (!etMoney4.getText().toString().equals("")&&!etLong4.getText().toString().equals("") &&!etWide4.getText().toString().equals("")) {
+                    if (!etMoney4.getText().toString().equals("") && !etLong4.getText().toString().equals("") && !etWide4.getText().toString().equals("")) {
                         etAllMoney4.setText(String.valueOf(Double.valueOf(etMoney4.getText().toString())
-                                * allNum4*Double.valueOf(etLong4.getText().toString())*Double.valueOf(etWide4.getText().toString())));
+                                * allNum4 * Double.valueOf(etLong4.getText().toString()) * Double.valueOf(etWide4.getText().toString())));
                     } else {
                         etAllMoney4.setText(String.valueOf(0 * allNum4));
                     }
@@ -488,9 +518,9 @@ public class AdverBudgetActivity extends BaseActivity implements OneContract.Vie
                 if (!s.toString().equals("")) {
                     allNum5 = (Integer.valueOf(s.toString()));
                     tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
-                    if (!etMoney5.getText().toString().equals("")&&!etLong5.getText().toString().equals("") &&!etWide5.getText().toString().equals("")) {
+                    if (!etMoney5.getText().toString().equals("") && !etLong5.getText().toString().equals("") && !etWide5.getText().toString().equals("")) {
                         etAllMoney5.setText(String.valueOf(Double.valueOf(etMoney5.getText().toString())
-                                * allNum5*Double.valueOf(etLong5.getText().toString())*Double.valueOf(etWide5.getText().toString())));
+                                * allNum5 * Double.valueOf(etLong5.getText().toString()) * Double.valueOf(etWide5.getText().toString())));
                     } else {
                         etAllMoney5.setText(String.valueOf(0 * allNum5));
                     }
@@ -527,9 +557,9 @@ public class AdverBudgetActivity extends BaseActivity implements OneContract.Vie
                 }
                 if (!s.toString().equals("")) {
                     moneyS1 = (Double.valueOf(s.toString()));
-                    if (!etNum1.getText().toString().equals("")&&!etLong1.getText().toString().equals("") &&!etWide1.getText().toString().equals("")) {
+                    if (!etNum1.getText().toString().equals("") && !etLong1.getText().toString().equals("") && !etWide1.getText().toString().equals("")) {
                         etAllMoney1.setText(String.valueOf(Double.valueOf(etNum1.getText().toString())
-                                * moneyS1*Double.valueOf(etLong1.getText().toString())*Double.valueOf(etWide1.getText().toString())));
+                                * moneyS1 * Double.valueOf(etLong1.getText().toString()) * Double.valueOf(etWide1.getText().toString())));
                     } else {
                         etAllMoney1.setText(String.valueOf(0 * moneyS1));
                     }
@@ -563,9 +593,9 @@ public class AdverBudgetActivity extends BaseActivity implements OneContract.Vie
                 }
                 if (!s.toString().equals("")) {
                     moneyS2 = (Double.valueOf(s.toString()));
-                    if (!etNum2.getText().toString().equals("")&&!etLong2.getText().toString().equals("") &&!etWide2.getText().toString().equals("")) {
+                    if (!etNum2.getText().toString().equals("") && !etLong2.getText().toString().equals("") && !etWide2.getText().toString().equals("")) {
                         etAllMoney2.setText(String.valueOf(Double.valueOf(etNum2.getText().toString())
-                                * moneyS2*Double.valueOf(etLong2.getText().toString())*Double.valueOf(etWide2.getText().toString())));
+                                * moneyS2 * Double.valueOf(etLong2.getText().toString()) * Double.valueOf(etWide2.getText().toString())));
                     } else {
                         etAllMoney2.setText(String.valueOf(0 * moneyS2));
                     }
@@ -599,9 +629,9 @@ public class AdverBudgetActivity extends BaseActivity implements OneContract.Vie
                 }
                 if (!s.toString().equals("")) {
                     moneyS3 = (Double.valueOf(s.toString()));
-                    if (!etNum3.getText().toString().equals("")&&!etLong3.getText().toString().equals("") &&!etWide3.getText().toString().equals("")) {
+                    if (!etNum3.getText().toString().equals("") && !etLong3.getText().toString().equals("") && !etWide3.getText().toString().equals("")) {
                         etAllMoney3.setText(String.valueOf(Double.valueOf(etNum3.getText().toString())
-                                * moneyS3*Double.valueOf(etLong3.getText().toString())*Double.valueOf(etWide3.getText().toString())));
+                                * moneyS3 * Double.valueOf(etLong3.getText().toString()) * Double.valueOf(etWide3.getText().toString())));
                     } else {
                         etAllMoney3.setText(String.valueOf(0 * moneyS3));
                     }
@@ -635,9 +665,9 @@ public class AdverBudgetActivity extends BaseActivity implements OneContract.Vie
                 }
                 if (!s.toString().equals("")) {
                     moneyS4 = (Double.valueOf(s.toString()));
-                    if (!etNum4.getText().toString().equals("")&&!etLong4.getText().toString().equals("") &&!etWide4.getText().toString().equals("")) {
+                    if (!etNum4.getText().toString().equals("") && !etLong4.getText().toString().equals("") && !etWide4.getText().toString().equals("")) {
                         etAllMoney4.setText(String.valueOf(Double.valueOf(etNum4.getText().toString())
-                                * moneyS4*Double.valueOf(etLong4.getText().toString())*Double.valueOf(etWide4.getText().toString())));
+                                * moneyS4 * Double.valueOf(etLong4.getText().toString()) * Double.valueOf(etWide4.getText().toString())));
                     } else {
                         etAllMoney4.setText(String.valueOf(0 * moneyS4));
                     }
@@ -671,9 +701,9 @@ public class AdverBudgetActivity extends BaseActivity implements OneContract.Vie
                 }
                 if (!s.toString().equals("")) {
                     moneyS5 = (Double.valueOf(s.toString()));
-                    if (!etNum5.getText().toString().equals("")&&!etLong5.getText().toString().equals("") &&!etWide5.getText().toString().equals("")) {
+                    if (!etNum5.getText().toString().equals("") && !etLong5.getText().toString().equals("") && !etWide5.getText().toString().equals("")) {
                         etAllMoney5.setText(String.valueOf(Double.valueOf(etNum4.getText().toString())
-                                * moneyS4*Double.valueOf(etLong5.getText().toString())*Double.valueOf(etWide5.getText().toString())));
+                                * moneyS4 * Double.valueOf(etLong5.getText().toString()) * Double.valueOf(etWide5.getText().toString())));
                     } else {
                         etAllMoney5.setText(String.valueOf(0 * moneyS5));
                     }
@@ -708,9 +738,9 @@ public class AdverBudgetActivity extends BaseActivity implements OneContract.Vie
                 }
                 if (!s.toString().equals("")) {
                     longS1 = (Double.valueOf(s.toString()));
-                    if (!etNum1.getText().toString().equals("")&&!etMoney1.getText().toString().equals("")&&!etWide1.getText().toString().equals("")) {
+                    if (!etNum1.getText().toString().equals("") && !etMoney1.getText().toString().equals("") && !etWide1.getText().toString().equals("")) {
                         etAllMoney1.setText(String.valueOf(Double.valueOf(etNum1.getText().toString())
-                                * longS1*Double.valueOf(etMoney1.getText().toString())*Double.valueOf(etWide1.getText().toString())));
+                                * longS1 * Double.valueOf(etMoney1.getText().toString()) * Double.valueOf(etWide1.getText().toString())));
                     } else {
                         etAllMoney1.setText(String.valueOf(0 * moneyS1));
                     }
@@ -744,9 +774,9 @@ public class AdverBudgetActivity extends BaseActivity implements OneContract.Vie
                 }
                 if (!s.toString().equals("")) {
                     longS2 = (Double.valueOf(s.toString()));
-                    if (!etNum2.getText().toString().equals("")&&!etMoney2.getText().toString().equals("")&&!etWide2.getText().toString().equals("")) {
+                    if (!etNum2.getText().toString().equals("") && !etMoney2.getText().toString().equals("") && !etWide2.getText().toString().equals("")) {
                         etAllMoney2.setText(String.valueOf(Double.valueOf(etNum2.getText().toString())
-                                * longS2*Double.valueOf(etMoney2.getText().toString())*Double.valueOf(etWide2.getText().toString())));
+                                * longS2 * Double.valueOf(etMoney2.getText().toString()) * Double.valueOf(etWide2.getText().toString())));
                     } else {
                         etAllMoney2.setText(String.valueOf(0 * moneyS2));
                     }
@@ -780,9 +810,9 @@ public class AdverBudgetActivity extends BaseActivity implements OneContract.Vie
                 }
                 if (!s.toString().equals("")) {
                     longS3 = (Double.valueOf(s.toString()));
-                    if (!etNum3.getText().toString().equals("")&&!etMoney3.getText().toString().equals("")&&!etWide3.getText().toString().equals("")) {
+                    if (!etNum3.getText().toString().equals("") && !etMoney3.getText().toString().equals("") && !etWide3.getText().toString().equals("")) {
                         etAllMoney3.setText(String.valueOf(Double.valueOf(etNum3.getText().toString())
-                                * longS3*Double.valueOf(etMoney3.getText().toString())*Double.valueOf(etWide3.getText().toString())));
+                                * longS3 * Double.valueOf(etMoney3.getText().toString()) * Double.valueOf(etWide3.getText().toString())));
                     } else {
                         etAllMoney3.setText(String.valueOf(0 * moneyS3));
                     }
@@ -816,9 +846,9 @@ public class AdverBudgetActivity extends BaseActivity implements OneContract.Vie
                 }
                 if (!s.toString().equals("")) {
                     longS4 = (Double.valueOf(s.toString()));
-                    if (!etNum4.getText().toString().equals("")&&!etMoney4.getText().toString().equals("")&&!etWide4.getText().toString().equals("")) {
+                    if (!etNum4.getText().toString().equals("") && !etMoney4.getText().toString().equals("") && !etWide4.getText().toString().equals("")) {
                         etAllMoney4.setText(String.valueOf(Double.valueOf(etNum4.getText().toString())
-                                * longS4*Double.valueOf(etMoney4.getText().toString())*Double.valueOf(etWide4.getText().toString())));
+                                * longS4 * Double.valueOf(etMoney4.getText().toString()) * Double.valueOf(etWide4.getText().toString())));
                     } else {
                         etAllMoney4.setText(String.valueOf(0 * moneyS4));
                     }
@@ -852,10 +882,10 @@ public class AdverBudgetActivity extends BaseActivity implements OneContract.Vie
                 }
                 if (!s.toString().equals("")) {
                     longS5 = (Double.valueOf(s.toString()));
-                    if (!etNum5.getText().toString().equals("")&&!etMoney5.getText().toString().equals("")&&!etWide5.getText().toString().equals("")) {
+                    if (!etNum5.getText().toString().equals("") && !etMoney5.getText().toString().equals("") && !etWide5.getText().toString().equals("")) {
                         etAllMoney5.setText(String.valueOf(Double.valueOf(etNum5.getText().toString())
-                                * longS5*Double.valueOf(etMoney5.getText().toString())*Double.valueOf(etWide5.getText().toString())));
-                    }  else {
+                                * longS5 * Double.valueOf(etMoney5.getText().toString()) * Double.valueOf(etWide5.getText().toString())));
+                    } else {
                         etAllMoney5.setText(String.valueOf(0 * moneyS5));
                     }
                 } else {
@@ -889,9 +919,9 @@ public class AdverBudgetActivity extends BaseActivity implements OneContract.Vie
                 }
                 if (!s.toString().equals("")) {
                     wideS1 = (Double.valueOf(s.toString()));
-                    if (!etNum1.getText().toString().equals("")&&!etMoney1.getText().toString().equals("")&&!etLong1.getText().toString().equals("")) {
+                    if (!etNum1.getText().toString().equals("") && !etMoney1.getText().toString().equals("") && !etLong1.getText().toString().equals("")) {
                         etAllMoney1.setText(String.valueOf(Double.valueOf(etNum1.getText().toString())
-                                * wideS1*Double.valueOf(etMoney1.getText().toString())*Double.valueOf(etLong1.getText().toString())));
+                                * wideS1 * Double.valueOf(etMoney1.getText().toString()) * Double.valueOf(etLong1.getText().toString())));
                     } else {
                         etAllMoney1.setText(String.valueOf(0 * moneyS1));
                     }
@@ -925,9 +955,9 @@ public class AdverBudgetActivity extends BaseActivity implements OneContract.Vie
                 }
                 if (!s.toString().equals("")) {
                     wideS2 = (Double.valueOf(s.toString()));
-                    if (!etNum2.getText().toString().equals("")&&!etMoney2.getText().toString().equals("")&&!etLong2.getText().toString().equals("")) {
+                    if (!etNum2.getText().toString().equals("") && !etMoney2.getText().toString().equals("") && !etLong2.getText().toString().equals("")) {
                         etAllMoney2.setText(String.valueOf(Double.valueOf(etNum2.getText().toString())
-                                * wideS2*Double.valueOf(etMoney2.getText().toString())*Double.valueOf(etLong2.getText().toString())));
+                                * wideS2 * Double.valueOf(etMoney2.getText().toString()) * Double.valueOf(etLong2.getText().toString())));
                     } else {
                         etAllMoney2.setText(String.valueOf(0 * moneyS2));
                     }
@@ -961,9 +991,9 @@ public class AdverBudgetActivity extends BaseActivity implements OneContract.Vie
                 }
                 if (!s.toString().equals("")) {
                     wideS3 = (Double.valueOf(s.toString()));
-                    if (!etNum3.getText().toString().equals("")&&!etMoney3.getText().toString().equals("")&&!etLong3.getText().toString().equals("")) {
+                    if (!etNum3.getText().toString().equals("") && !etMoney3.getText().toString().equals("") && !etLong3.getText().toString().equals("")) {
                         etAllMoney3.setText(String.valueOf(Double.valueOf(etNum3.getText().toString())
-                                * wideS3*Double.valueOf(etMoney3.getText().toString())*Double.valueOf(etLong3.getText().toString())));
+                                * wideS3 * Double.valueOf(etMoney3.getText().toString()) * Double.valueOf(etLong3.getText().toString())));
                     } else {
                         etAllMoney3.setText(String.valueOf(0 * moneyS3));
                     }
@@ -997,9 +1027,9 @@ public class AdverBudgetActivity extends BaseActivity implements OneContract.Vie
                 }
                 if (!s.toString().equals("")) {
                     wideS4 = (Double.valueOf(s.toString()));
-                    if (!etNum4.getText().toString().equals("")&&!etMoney4.getText().toString().equals("")&&!etLong4.getText().toString().equals("")) {
+                    if (!etNum4.getText().toString().equals("") && !etMoney4.getText().toString().equals("") && !etLong4.getText().toString().equals("")) {
                         etAllMoney4.setText(String.valueOf(Double.valueOf(etNum4.getText().toString())
-                                * wideS4*Double.valueOf(etMoney4.getText().toString())*Double.valueOf(etLong4.getText().toString())));
+                                * wideS4 * Double.valueOf(etMoney4.getText().toString()) * Double.valueOf(etLong4.getText().toString())));
                     } else {
                         etAllMoney4.setText(String.valueOf(0 * moneyS4));
                     }
@@ -1033,10 +1063,10 @@ public class AdverBudgetActivity extends BaseActivity implements OneContract.Vie
                 }
                 if (!s.toString().equals("")) {
                     wideS5 = (Double.valueOf(s.toString()));
-                    if (!etNum5.getText().toString().equals("")&&!etMoney5.getText().toString().equals("")&&!etLong5.getText().toString().equals("")) {
+                    if (!etNum5.getText().toString().equals("") && !etMoney5.getText().toString().equals("") && !etLong5.getText().toString().equals("")) {
                         etAllMoney5.setText(String.valueOf(Double.valueOf(etNum5.getText().toString())
-                                * wideS5*Double.valueOf(etMoney5.getText().toString())*Double.valueOf(etLong5.getText().toString())));
-                    }  else {
+                                * wideS5 * Double.valueOf(etMoney5.getText().toString()) * Double.valueOf(etLong5.getText().toString())));
+                    } else {
                         etAllMoney5.setText(String.valueOf(0 * moneyS5));
                     }
                 } else {
@@ -1118,7 +1148,7 @@ public class AdverBudgetActivity extends BaseActivity implements OneContract.Vie
                     Toast.makeText(this, "请填写数量", Toast.LENGTH_SHORT).show();
                     break;
                 }
-                if (etLong1.getText().toString().equals("")||etWide1.getText().toString().equals("")) {
+                if (etLong1.getText().toString().equals("") || etWide1.getText().toString().equals("")) {
                     Toast.makeText(this, "长和宽不能为空", Toast.LENGTH_SHORT).show();
                     break;
                 }

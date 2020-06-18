@@ -3,35 +3,50 @@ package com.smartbus.heze.fileapprove.activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.smartbus.heze.R;
+import com.smartbus.heze.SharedPreferencesHelper;
 import com.smartbus.heze.fileapprove.bean.CurrencyAccidentWill;
 import com.smartbus.heze.fileapprove.bean.NoEndPerson;
 import com.smartbus.heze.fileapprove.bean.NoHandlerPerson;
 import com.smartbus.heze.fileapprove.bean.NormalPerson;
+import com.smartbus.heze.fileapprove.bean.QZHQ;
+import com.smartbus.heze.fileapprove.bean.QZLR;
 import com.smartbus.heze.fileapprove.bean.WillDoUp;
 import com.smartbus.heze.fileapprove.module.AccidentWillCheckTypeContract;
 import com.smartbus.heze.fileapprove.module.CurrencyAccidentWillContract;
 import com.smartbus.heze.fileapprove.module.NoEndContract;
 import com.smartbus.heze.fileapprove.module.NoHandlerContract;
 import com.smartbus.heze.fileapprove.module.NormalContract;
+import com.smartbus.heze.fileapprove.module.QZHQContract;
+import com.smartbus.heze.fileapprove.module.QZLRContract;
 import com.smartbus.heze.fileapprove.module.WillDoContract;
 import com.smartbus.heze.fileapprove.presenter.AccidentWillCheckTypePresenter;
 import com.smartbus.heze.fileapprove.presenter.CurrencyAccidentWillPresenter;
 import com.smartbus.heze.fileapprove.presenter.NoEndPresenter;
 import com.smartbus.heze.fileapprove.presenter.NoHandlerPresenter;
 import com.smartbus.heze.fileapprove.presenter.NormalPresenter;
+import com.smartbus.heze.fileapprove.presenter.QZHQPresenter;
+import com.smartbus.heze.fileapprove.presenter.QZLRPresenter;
 import com.smartbus.heze.fileapprove.presenter.WillDoPresenter;
 import com.smartbus.heze.http.base.AlertDialogCallBackP;
 import com.smartbus.heze.http.base.BaseActivity;
 import com.smartbus.heze.http.base.Constant;
+import com.smartbus.heze.http.base.SignatureView;
 import com.smartbus.heze.http.views.Header;
 import com.smartbus.heze.http.views.MyAlertDialog;
 import com.smartbus.heze.oaflow.bean.CheckType;
@@ -39,6 +54,9 @@ import com.smartbus.heze.oaflow.bean.CheckType;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -52,7 +70,8 @@ import butterknife.OnClick;
  * 通用借款单
  */
 public class CurrencyAccidentWillActivity extends BaseActivity implements CurrencyAccidentWillContract.View
-        , NormalContract.View, NoEndContract.View, NoHandlerContract.View, WillDoContract.View, AccidentWillCheckTypeContract.View {
+        , NormalContract.View, NoEndContract.View, NoHandlerContract.View, WillDoContract.View
+        , AccidentWillCheckTypeContract.View , QZLRContract.View, QZHQContract.View{
     @BindView(R.id.header)
     Header header;
     @BindView(R.id.tvTime)
@@ -81,6 +100,24 @@ public class CurrencyAccidentWillActivity extends BaseActivity implements Curren
     EditText etLeader3;
     @BindView(R.id.btnUp)
     Button btnUp;
+    @BindView(R.id.imLeader2)
+    ImageView imLeader2;
+    @BindView(R.id.llLeader2)
+    LinearLayout llLeader2;
+    @BindView(R.id.tvSingle)
+    TextView tvSingle;
+    @BindView(R.id.title)
+    TextView title;
+    @BindView(R.id.id_sign)
+    SignatureView idSign;
+    @BindView(R.id.no)
+    TextView no;
+    @BindView(R.id.yes)
+    TextView yes;
+    @BindView(R.id.llData)
+    LinearLayout llData;
+    @BindView(R.id.llSingle)
+    LinearLayout llSingle;
     @BindView(R.id.btnLR)
     Button btnLR;
 
@@ -90,10 +127,21 @@ public class CurrencyAccidentWillActivity extends BaseActivity implements Curren
     String leaderCode = "";
     String leaderName = "";
     String mycomments = "";
+    String tag = "";
+    String qzList = "";
+    String userId = "";
+    String fullname = "";
+    String kzMove,fgMove,cwMove,psMove;
+    Map<String, String> mapqz = new HashMap<>();
+    private List<Bitmap> bitmaps = new ArrayList<>();
+    private List<File> uploadFiles = new ArrayList<>();
+    public static boolean makeImahe = false;
     String destName, uId, signaName;
     String activityName, taskId;
     String[] bigNametemp = null;
     String[] bigCodetemp = null;
+    QZLRPresenter qzlrpresenter;
+    QZHQPresenter qzhqPresenter;
     NormalPresenter normalPresenter;
     NoEndPresenter noEndPersenter;
     NoHandlerPresenter noHandlerPresenter;
@@ -109,6 +157,11 @@ public class CurrencyAccidentWillActivity extends BaseActivity implements Curren
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        userId = new SharedPreferencesHelper(this, "login").getData(this, "userId", "");
+        fullname = new SharedPreferencesHelper(this, "login").getData(this, "userName1", "");
+        if (!fullname.equals("殷正红")) {
+            tvSingle.setVisibility(View.GONE);
+        }
         btnLR.setVisibility(View.GONE);
         Intent intent = getIntent();
         activityName = intent.getStringExtra("activityName");
@@ -120,7 +173,28 @@ public class CurrencyAccidentWillActivity extends BaseActivity implements Curren
         Log.e("sessionLogin ", taskId + "-" + activityName);
         accidentWillCheckTypePresenter = new AccidentWillCheckTypePresenter(this, this);
         currencyAccidentWillPresenter = new CurrencyAccidentWillPresenter(this, this);
+        qzlrpresenter = new QZLRPresenter(this, this);
+        qzhqPresenter = new QZHQPresenter(this, this);
         currencyAccidentWillPresenter.getCurrencyAccidentWill(activityName, taskId, Constant.HUIQIAN_DEFID);
+        idSign.setSignatureCallBack(new SignatureView.ISignatureCallBack() {
+            @Override
+            public void onSignCompeleted(View view, Bitmap bitmap) {
+                String fileDir = getExternalCacheDir() + "signature/";
+                String path = fileDir + "sign.png";
+                File file = new File(fileDir);
+                if (!file.exists()) {
+                    file.mkdir();
+                }
+                bitmaps.add(bitmap);
+                try {
+                    idSign.save(path);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                uploadFiles.add(new File(path));
+                drawBitmaps(bitmap);
+            }
+        });
     }
 
     @Override
@@ -154,22 +228,54 @@ public class CurrencyAccidentWillActivity extends BaseActivity implements Curren
         }
     }
 
-    @OnClick(R.id.btnUp)
-    public void onViewClicked() {
-        if (etLeader.getVisibility() == View.VISIBLE
-                || etLeader1.getVisibility() == View.VISIBLE
-                || etLeader2.getVisibility() == View.VISIBLE
-                || etLeader3.getVisibility() == View.VISIBLE) {
-            if (etLeader.getText().toString().equals("")
-                    && etLeader1.getText().toString().equals("")
-                    && etLeader2.getText().toString().equals("")
-                    && etLeader3.getText().toString().equals("")) {
-                Toast.makeText(this, "请填写意见", Toast.LENGTH_SHORT).show();
-            } else {
-                getSomeData();
-            }
-        } else {
-            getSomeData();
+    private void drawBitmaps(Bitmap bitmap) {
+        if (psMove.equals("3")) {
+//            tvLeader2.setVisibility(View.GONE);
+//            etLeader2.setVisibility(View.VISIBLE);
+//            llLeader2.setVisibility(View.VISIBLE);
+//            imLeader2.setImageBitmap(bitmap);
+            tvLeader3.setVisibility(View.GONE);
+            etLeader3.setVisibility(View.VISIBLE);
+            llLeader2.setVisibility(View.VISIBLE);
+            imLeader2.setImageBitmap(bitmap);
+        }
+    }
+
+    @OnClick({R.id.btnUp, R.id.tvSingle, R.id.no, R.id.yes})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.btnUp:
+                if (etLeader.getVisibility() == View.VISIBLE
+                        || etLeader1.getVisibility() == View.VISIBLE
+                        || etLeader2.getVisibility() == View.VISIBLE
+                        || etLeader3.getVisibility() == View.VISIBLE) {
+                    if (etLeader.getText().toString().equals("")
+                            && etLeader1.getText().toString().equals("")
+                            && etLeader2.getText().toString().equals("")
+                            && etLeader3.getText().toString().equals("")) {
+                        Toast.makeText(this, "请填写意见", Toast.LENGTH_SHORT).show();
+                    } else {
+                        getSomeData();
+                    }
+                } else {
+                    getSomeData();
+                }
+                break;
+            case R.id.tvSingle:
+                llSingle.setVisibility(View.VISIBLE);
+                llData.setVisibility(View.GONE);
+                getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+                makeImahe = false;
+                break;
+            case R.id.no:
+                llSingle.setVisibility(View.GONE);
+                llData.setVisibility(View.VISIBLE);
+                break;
+            case R.id.yes:
+                llSingle.setVisibility(View.GONE);
+                llData.setVisibility(View.VISIBLE);
+                idSign.setMakeImage();
+                break;
         }
     }
 
@@ -231,7 +337,7 @@ public class CurrencyAccidentWillActivity extends BaseActivity implements Curren
         }
     }
 
-    private void setData() {
+    private void setData(String tag) {
         map.put("defId", Constant.CURRENCYACCIDENT_DEFID);
         map.put("startFlow", "true");
         map.put("formDefId", Constant.CURRENCYACCIDENT_FORMDEFIS);
@@ -278,6 +384,9 @@ public class CurrencyAccidentWillActivity extends BaseActivity implements Curren
             map.put("ldps", etLeader3.getText().toString());
             map.put("comments", etLeader3.getText().toString());
             mycomments = etLeader3.getText().toString();
+            if (tag.equals("2")) {
+                map.put("zjlqz", qzList);
+            }
         }
     }
 
@@ -348,10 +457,10 @@ public class CurrencyAccidentWillActivity extends BaseActivity implements Curren
             String move = s.getFormRights();
             try {
                 JSONObject jsonObject = new JSONObject(move);
-                String kzMove = jsonObject.getString("kezhang");
-                String fgMove = jsonObject.getString("fenguanlingdao");
-                String cwMove = jsonObject.getString("caiwujingli");
-                String psMove = jsonObject.getString("ldps");
+                kzMove = jsonObject.getString("kezhang");
+                fgMove = jsonObject.getString("fenguanlingdao");
+                cwMove = jsonObject.getString("caiwujingli");
+                psMove = jsonObject.getString("ldps");
                 if (kzMove.equals("3")) {
                     tvLeader.setVisibility(View.GONE);
                     etLeader.setVisibility(View.VISIBLE);
@@ -424,6 +533,7 @@ public class CurrencyAccidentWillActivity extends BaseActivity implements Curren
                 for (int i = 0; i < s.getTrans().size(); i++) {
                     destTypeList.add(s.getTrans().get(i));
                 }
+                qzhqPresenter.getQZHQ(runId);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -469,13 +579,25 @@ public class CurrencyAccidentWillActivity extends BaseActivity implements Curren
 
     @Override
     public void setNoHandlerPerson(NoHandlerPerson s) {
-        setData();
-        if (!mycomments.equals("同意")&&!mycomments.equals("不同意")){
-            map.clear();
-            Toast.makeText(CurrencyAccidentWillActivity.this, "意见请填写同意或不同意", Toast.LENGTH_SHORT).show();
-        }else {
-            map.put("flowAssignId", destName + "|" + uId);
-            willDoPresenter.getWillDo(map);
+        if (imLeader2.getDrawable() != null) {
+            tag = "2";
+            mapqz.clear();
+            mapqz.put("userId", userId);
+            mapqz.put("fullname", fullname);
+            mapqz.put("runId", runId);
+            mapqz.put("picString", bitmapToBase64(((BitmapDrawable) ((ImageView) imLeader2).getDrawable()).getBitmap()));
+            mapqz.put("activityName", activityName);
+            mapqz.put("fieldName", "zjlqz");
+            qzlrpresenter.getQZLR(mapqz);
+        } else {
+            setData(tag);
+            if (!mycomments.equals("同意") && !mycomments.equals("不同意")) {
+                map.clear();
+                Toast.makeText(CurrencyAccidentWillActivity.this, "意见请填写同意或不同意", Toast.LENGTH_SHORT).show();
+            } else {
+                map.put("flowAssignId", destName + "|" + uId);
+                willDoPresenter.getWillDo(map);
+            }
         }
     }
 
@@ -540,15 +662,25 @@ public class CurrencyAccidentWillActivity extends BaseActivity implements Curren
                     }
                 }
                 getListData();
-                setData();
-                // 关闭提示框
-                alertDialog3.dismiss();
-                if (!mycomments.equals("同意")&&!mycomments.equals("不同意")){
-                    map.clear();
-                    Toast.makeText(CurrencyAccidentWillActivity.this, "意见请填写同意或不同意", Toast.LENGTH_SHORT).show();
-                }else {
+                if (imLeader2.getDrawable() != null) {
+                    tag = "2";
+                    mapqz.clear();
+                    mapqz.put("userId", userId);
+                    mapqz.put("fullname", fullname);
+                    mapqz.put("runId", runId);
+                    mapqz.put("picString", bitmapToBase64(((BitmapDrawable) ((ImageView) imLeader2).getDrawable()).getBitmap()));
+                    mapqz.put("activityName", activityName);
+                    mapqz.put("fieldName", "zjlqz");
+                    qzlrpresenter.getQZLR(mapqz);
+                } else {
+                    setData(tag);
                     map.put("flowAssignId", destName + "|" + uId);
-                    willDoPresenter.getWillDo(map);
+                    if (!mycomments.equals("同意") && !mycomments.equals("不同意")) {
+                        map.clear();
+                        Toast.makeText(CurrencyAccidentWillActivity.this, "意见请填写同意或不同意", Toast.LENGTH_SHORT).show();
+                    } else {
+                        willDoPresenter.getWillDo(map);
+                    }
                 }
             }
         }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -593,5 +725,99 @@ public class CurrencyAccidentWillActivity extends BaseActivity implements Curren
     @Override
     public void setAccidentWillCheckTypeMessage(String s) {
         Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * 签章录入
+     * @param s
+     */
+    @Override
+    public void setQZLR(QZLR s) {
+        if (s.isSuccess()) {
+            qzList = s.getPicId();
+        }
+        setData(tag);
+        map.put("flowAssignId", destName + "|" + uId);
+        willDoPresenter.getWillDo(map);
+//        if (tag.equals("")){
+//            setData(tag);
+//            map.put("flowAssignId", destName + "|" + uId);
+//        }else if (tag.equals("1")){
+//            setData(tag);
+//            map.put("flowAssignId", destName + "|" + uId);
+//        }else if (tag.equals("2")){
+//            setData(tag);
+//            map.put("flowAssignId", destName + "|" + uId);
+//        }
+    }
+
+    @Override
+    public void setQZLRMessage(String s) {
+        Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * 获取签章
+     *
+     * @param s
+     */
+    @Override
+    public void setQZHQ(QZHQ s) {
+        if (s.isSuccess()) {
+            for (int i = 0; i < s.getData().size(); i++) {
+                if (s.getData().get(i).getFieldName().equals("zjlqz")
+                        && s.getData().get(i).getPicString() != null
+                        && !s.getData().get(i).getPicString().equals("")) {
+                    imLeader2.setImageBitmap(base64ToBitmap(s.getData().get(i).getPicString()));
+                    llLeader2.setVisibility(View.VISIBLE);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void setQZHQMessage(String s) {
+        Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
+    }
+    /**
+     * bitmap转base64
+     * */
+    private static String bitmapToBase64(Bitmap bitmap) {
+        String result = null;
+        ByteArrayOutputStream baos = null;
+        try {
+            if (bitmap != null) {
+                baos = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 80, baos);
+
+                baos.flush();
+                baos.close();
+
+                byte[] bitmapBytes = baos.toByteArray();
+                result = Base64.encodeToString(bitmapBytes, Base64.DEFAULT);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (baos != null) {
+                    baos.flush();
+                    baos.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
+    /**
+     * base64转为bitmap
+     *
+     * @param base64Data
+     * @return
+     */
+    public static Bitmap base64ToBitmap(String base64Data) {
+        byte[] bytes = Base64.decode(base64Data, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
     }
 }

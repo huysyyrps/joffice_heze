@@ -292,9 +292,13 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 
                 @Override
                 public void confirm() {
+//                    Intent intent = new Intent(Intent.ACTION_VIEW);
+//                    Uri content_url = Uri.parse(downUrl);
+//                    intent.setData(content_url);
+//                    startActivity(intent);
                     Intent intent = new Intent(Intent.ACTION_VIEW);
-                    Uri content_url = Uri.parse(downUrl);
-                    intent.setData(content_url);
+                    intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                    intent.setData(Uri.parse(downUrl));
                     startActivity(intent);
                 }
 

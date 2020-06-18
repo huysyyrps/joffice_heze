@@ -7,6 +7,8 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +32,7 @@ import com.smartbus.heze.fileapprove.presenter.UPYSDPresenter;
 import com.smartbus.heze.http.base.AlertDialogCallBackP;
 import com.smartbus.heze.http.base.BaseActivity;
 import com.smartbus.heze.http.base.Constant;
+import com.smartbus.heze.http.base.SignatureView;
 import com.smartbus.heze.http.utils.time_select.CustomDatePickerDay;
 import com.smartbus.heze.http.views.Header;
 import com.smartbus.heze.http.views.MyAlertDialog;
@@ -142,8 +145,6 @@ public class DepartBudgetActivity extends BaseActivity implements OneContract.Vi
     List<String> selectList = new ArrayList<>();
     List<String> namelist1 = new ArrayList<>();
     List<TwoPerson.DataBean> dataList = new ArrayList<>();
-    @BindView(R.id.textView8)
-    TextView textView8;
     @BindView(R.id.tvLeader1)
     TextView tvLeader1;
     @BindView(R.id.tvLeader)
@@ -157,6 +158,28 @@ public class DepartBudgetActivity extends BaseActivity implements OneContract.Vi
     Map<String, String> firstmap = new HashMap<>();
     @BindView(R.id.etName)
     EditText etName;
+    @BindView(R.id.title)
+    TextView title;
+    @BindView(R.id.id_sign)
+    SignatureView idSign;
+    @BindView(R.id.no)
+    TextView no;
+    @BindView(R.id.yes)
+    TextView yes;
+    @BindView(R.id.llData)
+    LinearLayout llData;
+    @BindView(R.id.tvSingle)
+    TextView tvSingle;
+    @BindView(R.id.etLeader0)
+    EditText etLeader0;
+    @BindView(R.id.tvLeader0)
+    TextView tvLeader0;
+    @BindView(R.id.imLeader2)
+    ImageView imLeader2;
+    @BindView(R.id.llLeader2)
+    LinearLayout llLeader2;
+    @BindView(R.id.llSingle)
+    LinearLayout llSingle;
     private CustomDatePickerDay customDatePicker1;
     DepartBudgetLRPresenter departBudgetLRPresenter;
     DepartBudgeCheckTypePresenter departBudgeCheckTypePresenter;
@@ -168,6 +191,7 @@ public class DepartBudgetActivity extends BaseActivity implements OneContract.Vi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        tvSingle.setVisibility(View.GONE);
         header.setRightTv(false);
         initDatePicker();
         btnLR.setVisibility(View.VISIBLE);

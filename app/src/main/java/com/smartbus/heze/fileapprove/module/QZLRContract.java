@@ -1,7 +1,7 @@
 package com.smartbus.heze.fileapprove.module;
 
 import com.smartbus.heze.fileapprove.bean.QZLR;
-import com.smartbus.heze.http.base.BaseDSixView;
+import com.smartbus.heze.http.base.BaseDNineView;
 import com.smartbus.heze.http.base.BasePresenter;
 
 import java.util.Map;
@@ -11,7 +11,7 @@ import java.util.Map;
  */
 
 public interface QZLRContract {
-    interface View extends BaseDSixView<presenter> {
+    interface View extends BaseDNineView<presenter> {
         //通用借款修改状态
         void setQZLR(QZLR s);
         void setQZLRMessage(String s);

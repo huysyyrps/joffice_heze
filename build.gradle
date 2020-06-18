@@ -20,7 +20,7 @@ allprojects {
     repositories {
         jcenter()
         maven {
-            url 'http://maven.aliyun.com/nexus/content/repositories/releases/'
+            url 'http://maven.aliyun.com/nexus/content/repositories/releases'
         }
     }
 }

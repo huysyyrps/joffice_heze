@@ -3,38 +3,52 @@ package com.smartbus.heze.fileapprove.activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.smartbus.heze.R;
+import com.smartbus.heze.SharedPreferencesHelper;
 import com.smartbus.heze.fileapprove.bean.DepartBudgetWill;
 import com.smartbus.heze.fileapprove.bean.NoEndPerson;
 import com.smartbus.heze.fileapprove.bean.NoHandlerPerson;
 import com.smartbus.heze.fileapprove.bean.NormalPerson;
+import com.smartbus.heze.fileapprove.bean.QZHQ;
+import com.smartbus.heze.fileapprove.bean.QZLR;
 import com.smartbus.heze.fileapprove.bean.WillDoUp;
 import com.smartbus.heze.fileapprove.module.DepartBudgetWillCheckTypeContract;
 import com.smartbus.heze.fileapprove.module.DepartBudgetWillContract;
 import com.smartbus.heze.fileapprove.module.NoEndContract;
 import com.smartbus.heze.fileapprove.module.NoHandlerContract;
 import com.smartbus.heze.fileapprove.module.NormalContract;
+import com.smartbus.heze.fileapprove.module.QZHQContract;
+import com.smartbus.heze.fileapprove.module.QZLRContract;
 import com.smartbus.heze.fileapprove.module.WillDoContract;
 import com.smartbus.heze.fileapprove.presenter.DepartBudgetWillCheckTypePresenter;
 import com.smartbus.heze.fileapprove.presenter.DepartBudgetWillPresenter;
 import com.smartbus.heze.fileapprove.presenter.NoEndPresenter;
 import com.smartbus.heze.fileapprove.presenter.NoHandlerPresenter;
 import com.smartbus.heze.fileapprove.presenter.NormalPresenter;
+import com.smartbus.heze.fileapprove.presenter.QZHQPresenter;
+import com.smartbus.heze.fileapprove.presenter.QZLRPresenter;
 import com.smartbus.heze.fileapprove.presenter.WillDoPresenter;
 import com.smartbus.heze.http.base.AlertDialogCallBackP;
 import com.smartbus.heze.http.base.BaseActivity;
 import com.smartbus.heze.http.base.Constant;
+import com.smartbus.heze.http.base.SignatureView;
 import com.smartbus.heze.http.views.Header;
 import com.smartbus.heze.http.views.MyAlertDialog;
 import com.smartbus.heze.oaflow.bean.CheckType;
@@ -42,6 +56,9 @@ import com.smartbus.heze.oaflow.bean.CheckType;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -56,7 +73,7 @@ import butterknife.OnClick;
  */
 public class AdverBudgeWillActivity extends BaseActivity implements DepartBudgetWillContract.View
         , NormalContract.View, NoEndContract.View, NoHandlerContract.View, WillDoContract.View
-        , DepartBudgetWillCheckTypeContract.View {
+        , DepartBudgetWillCheckTypeContract.View, QZLRContract.View, QZHQContract.View {
 
     @BindView(R.id.header)
     Header header;
@@ -132,6 +149,22 @@ public class AdverBudgeWillActivity extends BaseActivity implements DepartBudget
     TextView tvLeader1;
     @BindView(R.id.tvLeader2)
     TextView tvLeader2;
+    @BindView(R.id.tvSingle)
+    TextView tvSingle;
+    @BindView(R.id.title)
+    TextView title;
+    @BindView(R.id.id_sign)
+    SignatureView idSign;
+    @BindView(R.id.no)
+    TextView no;
+    @BindView(R.id.yes)
+    TextView yes;
+    @BindView(R.id.llData)
+    LinearLayout llData;
+    @BindView(R.id.llSingle)
+    LinearLayout llSingle;
+    @BindView(R.id.imLeader2)
+    ImageView imLeader2;
     @BindView(R.id.btnUp)
     Button btnUp;
 
@@ -139,7 +172,7 @@ public class AdverBudgeWillActivity extends BaseActivity implements DepartBudget
     String destType = "";
     String leaderCode = "";
     String leaderName = "";
-    String  qgMove, cwMove, fgMove,zjlMove;
+    String qgMove, cwMove, fgMove, zjlMove;
     String zhibiao;
     String destName, uId, signaName;
     String activityName, taskId;
@@ -149,6 +182,8 @@ public class AdverBudgeWillActivity extends BaseActivity implements DepartBudget
     NoEndPresenter noEndPersenter;
     NoHandlerPresenter noHandlerPresenter;
     WillDoPresenter willDoPresenter;
+    QZLRPresenter qzlrpresenter;
+    QZHQPresenter qzhqPresenter;
     DepartBudgetWillPresenter departBudgetWillPresenter;
     List<String> selectList = new ArrayList<>();
     List<String> namelist = new ArrayList<>();
@@ -157,6 +192,16 @@ public class AdverBudgeWillActivity extends BaseActivity implements DepartBudget
     DepartBudgetWillCheckTypePresenter departBudgetWillCheckTypePresenter;
     String runId, accidentLoanId;
     String mycomments = "";
+    String tag = "";
+    String qzList = "";
+    String userId = "";
+    String fullname = "";
+    Map<String, String> mapqz = new HashMap<>();
+    @BindView(R.id.llLeader22)
+    LinearLayout llLeader22;
+    private List<Bitmap> bitmaps = new ArrayList<>();
+    private List<File> uploadFiles = new ArrayList<>();
+    public static boolean makeImahe = false;
     int allNum1 = 0, allNum2 = 0, allNum3 = 0, allNum4 = 0, allNum5 = 0;
     double moneyS1 = 0.0, moneyS2 = 0.0, moneyS3 = 0.0, moneyS4 = 0.0, moneyS5 = 0.0;
     double longS1 = 0.0, longS2 = 0.0, longS3 = 0.0, longS4 = 0.0, longS5 = 0.0;
@@ -186,8 +231,6 @@ public class AdverBudgeWillActivity extends BaseActivity implements DepartBudget
     EditText etWide4;
     @BindView(R.id.etWide5)
     EditText etWide5;
-    @BindView(R.id.textView8)
-    TextView textView8;
     @BindView(R.id.btnLR)
     Button btnLR;
     @BindView(R.id.etLeader0)
@@ -207,6 +250,11 @@ public class AdverBudgeWillActivity extends BaseActivity implements DepartBudget
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        userId = new SharedPreferencesHelper(this, "login").getData(this, "userId", "");
+        fullname = new SharedPreferencesHelper(this, "login").getData(this, "userName1", "");
+        if (!fullname.equals("殷正红")) {
+            tvSingle.setVisibility(View.GONE);
+        }
         btnLR.setVisibility(View.GONE);
         etAllMoney1.addTextChangedListener(new TextWatcher() {
             @Override
@@ -914,10 +962,31 @@ public class AdverBudgeWillActivity extends BaseActivity implements DepartBudget
         noEndPersenter = new NoEndPresenter(this, this);
         noHandlerPresenter = new NoHandlerPresenter(this, this);
         willDoPresenter = new WillDoPresenter(this, this);
+        qzlrpresenter = new QZLRPresenter(this, this);
+        qzhqPresenter = new QZHQPresenter(this, this);
         Log.e("sessionLogin ", taskId + "-" + activityName);
         departBudgetWillPresenter = new DepartBudgetWillPresenter(this, this);
         departBudgetWillCheckTypePresenter = new DepartBudgetWillCheckTypePresenter(this, this);
         departBudgetWillPresenter.getDepartBudgetWill(activityName, taskId, Constant.ADVER_DEFID);
+        idSign.setSignatureCallBack(new SignatureView.ISignatureCallBack() {
+            @Override
+            public void onSignCompeleted(View view, Bitmap bitmap) {
+                String fileDir = getExternalCacheDir() + "signature/";
+                String path = fileDir + "sign.png";
+                File file = new File(fileDir);
+                if (!file.exists()) {
+                    file.mkdir();
+                }
+                bitmaps.add(bitmap);
+                try {
+                    idSign.save(path);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                uploadFiles.add(new File(path));
+                drawBitmaps(bitmap);
+            }
+        });
     }
 
     @Override
@@ -969,9 +1038,9 @@ public class AdverBudgeWillActivity extends BaseActivity implements DepartBudget
 //                willDoPresenter.getWillDo(map);
 //            }
 //        }
-        if (etLeader0.getVisibility() == View.VISIBLE ||etLeader.getVisibility() == View.VISIBLE
+        if (etLeader0.getVisibility() == View.VISIBLE || etLeader.getVisibility() == View.VISIBLE
                 || etLeader1.getVisibility() == View.VISIBLE || etLeader2.getVisibility() == View.VISIBLE) {
-            if (etLeader0.getText().toString().equals("") &&etLeader.getText().toString().equals("")
+            if (etLeader0.getText().toString().equals("") && etLeader.getText().toString().equals("")
                     && etLeader1.getText().toString().equals("") && etLeader2.getText().toString().equals("")) {
                 Toast.makeText(this, "输入意见后再次点击驳回", Toast.LENGTH_SHORT).show();
             } else {
@@ -988,7 +1057,7 @@ public class AdverBudgeWillActivity extends BaseActivity implements DepartBudget
         }
     }
 
-    @OnClick({R.id.btnUp})
+    @OnClick({R.id.btnUp, R.id.tvSingle, R.id.no, R.id.yes})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btnUp:
@@ -1031,6 +1100,21 @@ public class AdverBudgeWillActivity extends BaseActivity implements DepartBudget
 //                } else {
 //                    getSomeData();
 //                }
+                break;
+            case R.id.tvSingle:
+                llSingle.setVisibility(View.VISIBLE);
+                llData.setVisibility(View.GONE);
+                getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+                makeImahe = false;
+                break;
+            case R.id.no:
+                llSingle.setVisibility(View.GONE);
+                llData.setVisibility(View.VISIBLE);
+                break;
+            case R.id.yes:
+                llSingle.setVisibility(View.GONE);
+                llData.setVisibility(View.VISIBLE);
+                idSign.setMakeImage();
                 break;
         }
     }
@@ -1093,7 +1177,7 @@ public class AdverBudgeWillActivity extends BaseActivity implements DepartBudget
         }
     }
 
-    private void setData() {
+    private void setData(String tag) {
         map.clear();
         map.put("defId", Constant.ADVER_DEFID);
         map.put("startFlow", "true");
@@ -1186,6 +1270,9 @@ public class AdverBudgeWillActivity extends BaseActivity implements DepartBudget
             map.put("jlyj", etLeader2.getText().toString());
             map.put("comments", etLeader2.getText().toString());
             mycomments = etLeader2.getText().toString();
+            if (tag.equals("2")) {
+                map.put("zjlqz", qzList);
+            }
         }
 
     }
@@ -1427,19 +1514,19 @@ public class AdverBudgeWillActivity extends BaseActivity implements DepartBudget
             cwMove = jsonObject.getString("cwk");
             fgMove = jsonObject.getString("fgyj");
             zjlMove = jsonObject.getString("jlyj");
-            if (qgMove.equals("1")&&cwMove.equals("1")&&fgMove.equals("1")&&zjlMove.equals("1")){
+            if (qgMove.equals("1") && cwMove.equals("1") && fgMove.equals("1") && zjlMove.equals("1")) {
                 tvLeader0.setTextColor(0xffff3030);
             }
 
-            if (qgMove.equals("3")){
+            if (qgMove.equals("3")) {
                 tvLeader1.setTextColor(0xffff3030);
                 tvLeader2.setTextColor(0xffff3030);
                 tvLeader.setTextColor(0xffff3030);
             }
-            if (cwMove.equals("3")){
+            if (cwMove.equals("3")) {
                 tvLeader2.setTextColor(0xffff3030);
             }
-            if (fgMove.equals("3")){
+            if (fgMove.equals("3")) {
                 tvLeader.setTextColor(0xffff3030);
                 tvLeader2.setTextColor(0xffff3030);
             }
@@ -1447,6 +1534,7 @@ public class AdverBudgeWillActivity extends BaseActivity implements DepartBudget
             for (int i = 0; i < s.getTrans().size(); i++) {
                 destTypeList.add(s.getTrans().get(i));
             }
+            qzhqPresenter.getQZHQ(runId);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -1491,17 +1579,42 @@ public class AdverBudgeWillActivity extends BaseActivity implements DepartBudget
 
     @Override
     public void setNoHandlerPerson(NoHandlerPerson s) {
-        setData();
-        if (qgMove.equals("1") && cwMove.equals("1") && fgMove.equals("1")&& zjlMove.equals("1")) {
-            map.put("flowAssignId", destName + "|" + uId);
-            willDoPresenter.getWillDo(map);
-        } else {
-            if (!mycomments.equals("同意")&&!mycomments.equals("不同意")){
-                map.clear();
-                Toast.makeText(AdverBudgeWillActivity.this, "意见请填写同意或不同意", Toast.LENGTH_SHORT).show();
-            }else {
+        if (qgMove.equals("1") && cwMove.equals("1") && fgMove.equals("1") && zjlMove.equals("1")) {
+            if (imLeader2.getDrawable() != null) {
+                tag = "2";
+                mapqz.clear();
+                mapqz.put("userId", userId);
+                mapqz.put("fullname", fullname);
+                mapqz.put("runId", runId);
+                mapqz.put("picString", bitmapToBase64(((BitmapDrawable) ((ImageView) imLeader2).getDrawable()).getBitmap()));
+                mapqz.put("activityName", activityName);
+                mapqz.put("fieldName", "zjlqz");
+                qzlrpresenter.getQZLR(mapqz);
+            } else {
+                setData(tag);
                 map.put("flowAssignId", destName + "|" + uId);
                 willDoPresenter.getWillDo(map);
+            }
+        } else {
+            if (imLeader2.getDrawable() != null) {
+                tag = "2";
+                mapqz.clear();
+                mapqz.put("userId", userId);
+                mapqz.put("fullname", fullname);
+                mapqz.put("runId", runId);
+                mapqz.put("picString", bitmapToBase64(((BitmapDrawable) ((ImageView) imLeader2).getDrawable()).getBitmap()));
+                mapqz.put("activityName", activityName);
+                mapqz.put("fieldName", "zjlqz");
+                qzlrpresenter.getQZLR(mapqz);
+            } else {
+                setData(tag);
+                if (!mycomments.equals("同意") && !mycomments.equals("不同意")) {
+                    map.clear();
+                    Toast.makeText(AdverBudgeWillActivity.this, "意见请填写同意或不同意", Toast.LENGTH_SHORT).show();
+                } else {
+                    map.put("flowAssignId", destName + "|" + uId);
+                    willDoPresenter.getWillDo(map);
+                }
             }
         }
     }
@@ -1526,7 +1639,7 @@ public class AdverBudgeWillActivity extends BaseActivity implements DepartBudget
     @Override
     public void setWillDoMessage(String s) {
         Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
-        if (s.equals("失败了----->发起人无法驳回!")){
+        if (s.equals("失败了----->发起人无法驳回!")) {
             finish();
         }
     }
@@ -1570,19 +1683,43 @@ public class AdverBudgeWillActivity extends BaseActivity implements DepartBudget
                     }
                 }
                 getListData();
-                setData();
-                // 关闭提示框
-                alertDialog3.dismiss();
-                if (qgMove.equals("1") && cwMove.equals("1") && fgMove.equals("1")&& zjlMove.equals("1")) {
+                if (qgMove.equals("1") && cwMove.equals("1") && fgMove.equals("1") && zjlMove.equals("1")) {
                     map.put("flowAssignId", destName + "|" + uId);
-                    willDoPresenter.getWillDo(map);
-                } else {
-                    if (!mycomments.equals("同意")&&!mycomments.equals("不同意")){
-                        map.clear();
-                        Toast.makeText(AdverBudgeWillActivity.this, "意见请填写同意或不同意", Toast.LENGTH_SHORT).show();
-                    }else {
+                    if (imLeader2.getDrawable() != null) {
+                        tag = "2";
+                        mapqz.clear();
+                        mapqz.put("userId", userId);
+                        mapqz.put("fullname", fullname);
+                        mapqz.put("runId", runId);
+                        mapqz.put("picString", bitmapToBase64(((BitmapDrawable) ((ImageView) imLeader2).getDrawable()).getBitmap()));
+                        mapqz.put("activityName", activityName);
+                        mapqz.put("fieldName", "zjlqz");
+                        qzlrpresenter.getQZLR(mapqz);
+                    } else {
+                        setData(tag);
                         map.put("flowAssignId", destName + "|" + uId);
                         willDoPresenter.getWillDo(map);
+                    }
+                } else {
+                    if (imLeader2.getDrawable() != null) {
+                        tag = "2";
+                        mapqz.clear();
+                        mapqz.put("userId", userId);
+                        mapqz.put("fullname", fullname);
+                        mapqz.put("runId", runId);
+                        mapqz.put("picString", bitmapToBase64(((BitmapDrawable) ((ImageView) imLeader2).getDrawable()).getBitmap()));
+                        mapqz.put("activityName", activityName);
+                        mapqz.put("fieldName", "zjlqz");
+                        qzlrpresenter.getQZLR(mapqz);
+                    } else {
+                        setData(tag);
+                        map.put("flowAssignId", destName + "|" + uId);
+                        if (!mycomments.equals("同意") && !mycomments.equals("不同意")) {
+                            map.clear();
+                            Toast.makeText(AdverBudgeWillActivity.this, "意见请填写同意或不同意", Toast.LENGTH_SHORT).show();
+                        } else {
+                            willDoPresenter.getWillDo(map);
+                        }
                     }
                 }
             }
@@ -1628,5 +1765,111 @@ public class AdverBudgeWillActivity extends BaseActivity implements DepartBudget
     @Override
     public void setDepartBudgetWillCheckTypeMessage(String s) {
         Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
+    }
+
+    private void drawBitmaps(Bitmap bitmap) {
+        if (zjlMove.equals("3")) {
+            tvLeader2.setVisibility(View.GONE);
+            etLeader2.setVisibility(View.VISIBLE);
+            llLeader22.setVisibility(View.VISIBLE);
+            imLeader2.setImageBitmap(bitmap);
+        }
+    }
+
+    /**
+     * 签章录入
+     *
+     * @param s
+     */
+    @Override
+    public void setQZLR(QZLR s) {
+        if (s.isSuccess()) {
+            qzList = s.getPicId();
+        }
+        setData(tag);
+        map.put("flowAssignId", destName + "|" + uId);
+        willDoPresenter.getWillDo(map);
+//        if (tag.equals("")){
+//            setData(tag);
+//            map.put("flowAssignId", destName + "|" + uId);
+//        }else if (tag.equals("1")){
+//            setData(tag);
+//            map.put("flowAssignId", destName + "|" + uId);
+//        }else if (tag.equals("2")){
+//            setData(tag);
+//            map.put("flowAssignId", destName + "|" + uId);
+//        }
+    }
+
+    @Override
+    public void setQZLRMessage(String s) {
+        Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * 获取签章
+     *
+     * @param s
+     */
+    @Override
+    public void setQZHQ(QZHQ s) {
+        if (s.isSuccess()) {
+            for (int i = 0; i < s.getData().size(); i++) {
+                if (s.getData().get(i).getFieldName().equals("zjlqz")
+                        && s.getData().get(i).getPicString() != null
+                        && !s.getData().get(i).getPicString().equals("")) {
+                    imLeader2.setImageBitmap(base64ToBitmap(s.getData().get(i).getPicString()));
+                    llLeader22.setVisibility(View.VISIBLE);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void setQZHQMessage(String s) {
+        Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * bitmap转base64
+     */
+    private static String bitmapToBase64(Bitmap bitmap) {
+        String result = null;
+        ByteArrayOutputStream baos = null;
+        try {
+            if (bitmap != null) {
+                baos = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 80, baos);
+
+                baos.flush();
+                baos.close();
+
+                byte[] bitmapBytes = baos.toByteArray();
+                result = Base64.encodeToString(bitmapBytes, Base64.DEFAULT);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (baos != null) {
+                    baos.flush();
+                    baos.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
+
+    /**
+     * base64转为bitmap
+     *
+     * @param base64Data
+     * @return
+     */
+    public static Bitmap base64ToBitmap(String base64Data) {
+        byte[] bytes = Base64.decode(base64Data, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
     }
 }
